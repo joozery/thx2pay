@@ -1,0 +1,24 @@
+/* UID top-up steps, matching sec1.png. */
+.uid-benefits{margin-top:64px;padding:0;background:transparent;border-radius:0}
+.uid-benefits .center-heading{margin:0 0 2px;text-align:center}
+.uid-benefits .center-heading h2{font-size:34px;line-height:1.4;letter-spacing:-.6px}
+.uid-benefits .center-heading p{font-size:14px;color:#aaabb5;line-height:1.6;margin-top:14px}
+.uid-benefits .benefit-grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:16px}
+.uid-benefits .feature-card{min-height:0;height:298px;background:#252525;border-radius:22px;padding:32px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:0}
+.uid-benefits .feature-card h3{font-size:23px;line-height:1.25;font-weight:750}
+.uid-benefits .support-card{height:385px;min-height:0;border:0;border-radius:22px;background:#2baaf2;padding:32px;display:flex;flex-direction:column;align-items:flex-start;grid-column:auto;grid-row:auto;color:#072c44}
+.uid-benefits .support-portrait{top:-10px;right:-12px;width:150px;max-width:40%;border:5px solid white;border-radius:50%;transform:none}
+.uid-benefits .support-portrait img{object-position:24% center}
+.uid-benefits .person-icon{width:49px;height:49px;border:2px solid #075378;margin:0 0 28px;color:#08324b;flex-shrink:0}
+.uid-benefits .person-icon svg{width:23px;height:23px}
+.uid-benefits .support-card h3{font-size:25px;line-height:1.18;font-weight:750;position:relative}
+.uid-benefits .support-card p{font-size:14px;color:#094568;line-height:1.65;margin:36px 0 0;max-width:310px}
+.uid-guide-trigger{display:inline-flex;align-items:center;gap:6px;background:transparent;color:#062c43;padding:5px 0;font-size:14px;font-weight:750;margin-top:auto}
+.uid-guide-trigger svg{width:16px;height:16px;transition:transform .2s}
+.uid-guide-trigger:hover svg{transform:translateX(3px)}
+.payment-icon{display:grid;place-items:center;width:45px;height:45px;background:#2baaf2;border-radius:50%;color:#07344d;font-size:25px;font-weight:500}
+.uid-guide-dialog ol{padding-left:22px;margin:0 0 25px;color:#c4c5c7;font-size:14px;line-height:1.8;list-style:decimal}
+.uid-guide-dialog li+li{margin-top:10px}
+@media(max-width:1100px){.uid-benefits{padding:0}.uid-benefits .feature-card,.uid-benefits .support-card{padding:26px}.uid-benefits .feature-card h3{font-size:21px}.uid-benefits .support-card h3{font-size:23px}.uid-benefits .support-portrait{width:125px}.uid-benefits .support-card p{font-size:13px}}
+@media(max-width:760px){.uid-benefits{margin-top:40px;padding:0;border-radius:0}.uid-benefits .center-heading{margin-bottom:22px}.uid-benefits .center-heading h2{font-size:25px}.uid-benefits .center-heading p{font-size:12px;margin-top:10px}.uid-benefits .benefit-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.uid-benefits .support-card{grid-column:1/-1;grid-row:1;height:330px;padding:26px}.uid-benefits .support-portrait{width:140px;max-width:38%}.uid-benefits .support-card h3{font-size:25px}.uid-benefits .support-card p{margin-top:25px;font-size:14px;max-width:85%}.uid-benefits .person-icon{margin-bottom:22px}.uid-benefits .feature-card{height:200px;padding:22px 18px;border-radius:18px}.uid-benefits .feature-card h3{font-size:19px}.uid-benefits .payment-icon{width:39px;height:39px;font-size:22px}}
+

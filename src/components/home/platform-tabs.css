@@ -1,0 +1,8 @@
+.platforms.platform-tabs{border:0;gap:12px;max-width:680px}
+.platforms.platform-tabs button{border:0;border-radius:12px;padding:14px 18px;gap:10px;white-space:nowrap}
+.platforms.platform-tabs button.selected{border:0;background:#12aef112;color:var(--blue)}
+.platforms.platform-tabs button:hover{background:#ffffff08}
+.platforms.platform-tabs button.selected:hover{background:#12aef11c}
+.platforms.platform-tabs svg{width:25px;height:25px;flex-shrink:0}
+@media(max-width:760px){.platforms.platform-tabs{gap:4px}.platforms.platform-tabs button{padding:12px 7px;font-size:11px;gap:6px}.platforms.platform-tabs svg{width:21px;height:21px}}
+@media(max-width:480px){.platforms.platform-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%}.platforms.platform-tabs button{min-width:0;flex-direction:column;justify-content:center;padding:12px 4px;gap:7px;font-size:11px}.platforms.platform-tabs svg{width:22px;height:22px}}

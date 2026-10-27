@@ -1,0 +1,94 @@
+/* Hide scrollbar chrome while preserving native wheel, touch and keyboard scrolling. */
+html,body,.search-results,.dialog,.search-dialog,.mobile-navigation{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar,.search-results::-webkit-scrollbar,.dialog::-webkit-scrollbar,.search-dialog::-webkit-scrollbar,.mobile-navigation::-webkit-scrollbar{display:none;width:0;height:0}
+.follow-toggle-mobile{display:none}
+@media(max-width:1100px) and (min-width:761px){.site-header .nav-wrap{width:calc(100% - 48px);gap:16px}.site-header nav{gap:16px;font-size:12px}.site-header .nav-actions{gap:10px}.site-header .navbar-logo img{width:112px}.site-header .nav-actions .pill{padding:6px 13px;font-size:12px}}
+@media(max-width:760px){
+ html{scroll-padding-top:72px}
+ .container{width:calc(100% - 32px)}
+ .site-header .nav-wrap{width:calc(100% - 32px);gap:10px}
+ .site-header .nav-actions{gap:8px}
+ .mobile-navigation.open{padding:14px 16px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;border-bottom:1px solid #ffffff14;max-height:calc(100dvh - 50px);overflow-y:auto}
+ .mobile-navigation a{padding:12px 14px;border-radius:10px;background:#ffffff04;font-size:14px}
+ .hero{margin-top:20px}
+ .hero>.hero-visual{aspect-ratio:1.35!important}
+ .hero .hero-copy{padding:14% 10% 0}
+ .hero h1{font-size:clamp(28px,6.5vw,46px);line-height:1.25}
+ .hero .hero-copy p{font-size:12px;line-height:1.7;max-width:90%;margin-top:18px}
+ .hero .hero-arrow{width:34px;height:34px}
+ .hero .quick-links{height:58px}
+ .platforms.platform-tabs{margin:20px auto 32px}
+ .categories .section-heading{gap:12px;align-items:flex-start}
+ .categories .section-heading h2{font-size:clamp(23px,5.5vw,29px);letter-spacing:-.5px}
+ .categories .section-heading p{font-size:12px}
+ .categories .arrows{gap:6px;padding-top:2px;flex-shrink:0}
+ .categories .arrows button{width:36px;height:36px}
+ .category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 16px}
+ .category-grid article{min-width:0}
+ .category-caption{gap:10px}
+ .category-caption h3{font-size:18px}
+ .category-caption .small{font-size:12px;padding:8px 12px;min-height:36px}
+ .category-filter{flex-wrap:wrap;gap:6px 14px}
+ .uid-benefits{margin-top:40px;padding:0}
+ .uid-benefits .support-card{height:auto;min-height:330px}
+ .uid-benefits .uid-guide-trigger{min-height:44px;margin-top:auto}
+ .uid-benefits .feature-card{padding:22px 18px}
+ .about-faq{padding:24px 20px;margin-top:32px}
+ .about h2{font-size:23px;line-height:1.45}
+ .about p{font-size:13px;line-height:1.9}
+ .faq details{padding:16px 0;font-size:13px}
+ .faq summary{line-height:1.65;gap:9px;min-height:24px}
+ .faq details p{font-size:13px}
+ .footer-top{display:grid;grid-template-columns:1fr;gap:25px}
+ .footer-top p,.contact a{font-size:13px}
+ .contact h3{margin-bottom:10px}
+ .footer-bottom{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;padding-top:20px}
+ .footer-bottom>small{width:100%;font-size:11px}
+ .footer-bottom>button{min-height:36px;font-size:12px}
+ footer .payments{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:4px}
+ footer .payments .payment-badge{width:100%;height:42px}
+ footer .socials{gap:10px}footer .socials button{width:38px;height:38px}
+ .dialog{width:calc(100% - 32px);padding:28px 22px;max-height:calc(100dvh - 40px);overflow-y:auto}
+ .dialog h2{font-size:23px}.dialog p{font-size:14px}
+ .follow-rail,.follow-rail.collapsed{top:auto;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));padding:6px;border:1px solid #ffffff18;border-radius:25px;gap:9px}
+ .follow-rail .follow-toggle-desktop{display:none}
+ .follow-rail .follow-toggle-mobile{display:grid;width:38px;height:38px;margin:0;transform:none}
+ .follow-rail:not([data-mobile-open="true"])>strong,.follow-rail:not([data-mobile-open="true"])>.follow-link{display:none}
+ .follow-rail[data-mobile-open="true"] .follow-link{width:38px;height:38px}
+ .follow-rail[data-mobile-open="true"] .follow-toggle-mobile{transform:rotate(180deg)}
+ html[data-theme="light"] .mobile-navigation a{background:#f3f7fb}
+}
+@media(max-width:600px){
+ .category-grid{grid-template-columns:1fr;gap:24px}
+ .category-caption{flex-wrap:nowrap;margin-top:12px}
+ .category-caption h3{font-size:20px}
+ .category-caption .small{padding:9px 16px;min-height:38px}
+ .partner{grid-template-columns:1fr;gap:24px;margin:36px 0}
+ .partner .mascot-card{width:min(100%,280px);justify-self:center;padding:12px;border-radius:20px}
+ .partner .mascot-card .pill{font-size:13px;padding:9px 18px}
+ .partner-copy{text-align:center}
+ .partner h2{font-size:32px;line-height:1.2}
+ .partner p{font-size:13px;margin:16px auto;max-width:330px;line-height:1.8}
+ .partner .wide{font-size:14px;min-height:46px;padding:12px 16px}
+}
+@media(max-width:480px){
+ .site-header .nav-wrap{gap:7px}
+ .site-header .nav-actions{gap:5px}
+ .site-header .navbar-logo img{width:98px}
+ .site-header .nav-actions .pill{font-size:11px;padding:6px 10px}
+ .hero .hero-copy p{font-size:11px}
+ .hero .eyebrow{font-size:10px;padding:6px 10px}
+ .hero .quick-links a,.hero .quick-links button{font-size:13px;padding:0 12px}
+ .uid-benefits .center-heading h2{font-size:23px}
+ .uid-benefits .feature-card{padding:20px 15px;height:180px}
+ .uid-benefits .feature-card h3{font-size:18px}
+ .uid-benefits .support-card{padding:24px;min-height:320px}
+ .uid-benefits .support-card p{max-width:100%;font-size:13px}
+ .uid-benefits .support-portrait{width:125px;max-width:40%}
+ .search-dialog{width:calc(100% - 24px);padding:20px 16px;top:3dvh;max-height:94dvh}
+ .search-dialog-heading h2{font-size:20px}
+}
+@media(max-width:350px){.site-header .navbar-logo img{width:88px}.site-header .nav-actions .pill{padding:6px 8px}.site-header .nav-wrap{gap:5px}.hero h1{font-size:26px}.hero .hero-copy p{font-size:10px}.uid-benefits .center-heading h2{font-size:20px}.uid-benefits .feature-card h3{font-size:16px}}
+html .search-results,html .dialog,html .search-dialog,html .mobile-navigation{scrollbar-width:none}
+@media(max-width:760px){body footer .payments{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;width:100%}body footer .payments .payment-badge{width:100%;height:42px}}
+@media(min-width:761px) and (max-width:1000px){.site-header .desktop-navigation{display:none}.site-header .mobile-menu{display:flex;margin-left:auto}.site-header .mobile-navigation.open{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));position:absolute;top:54px;left:0;right:0;height:auto;padding:16px 24px;gap:8px;background:#191b1e;border-bottom:1px solid #ffffff14}.site-header .mobile-navigation a{padding:12px;border-radius:10px;background:#ffffff04}html[data-theme="light"] .site-header .mobile-navigation{background:#fff}html[data-theme="light"] .site-header .mobile-navigation a{background:#f3f7fb}}
