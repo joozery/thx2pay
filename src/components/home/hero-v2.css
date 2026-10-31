@@ -1,0 +1,43 @@
+.hx{position:relative;margin-top:40px;color:#fff}
+.hx-banner{position:relative;isolation:isolate;overflow:hidden;border-radius:28px;min-height:clamp(300px,30vw,400px);background:#11102a;border:1px solid #ffffff14;display:flex;align-items:center}
+.hx-media{position:absolute;inset:0;z-index:-2}
+.hx-media img{object-fit:cover;object-position:right center}
+.hx-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#070a1ff0 0%,#070a1fb8 38%,#070a1f33 68%,transparent 100%),linear-gradient(0deg,#070a1f99,transparent 35%)}
+.hx-copy{padding:clamp(24px,3.5vw,44px) clamp(24px,4vw,52px) clamp(72px,7vw,88px);max-width:min(560px,100%)}
+.hx-eyebrow{display:inline-flex;font-size:clamp(11px,1vw,14px);font-weight:700;padding:8px 16px;border-radius:999px;background:#ffffff1f;border:1px solid #ffffff2b;backdrop-filter:blur(10px)}
+.hx h1{font-size:clamp(24px,2.9vw,40px);line-height:1.22;letter-spacing:-.8px;margin-top:14px;text-shadow:0 4px 24px #0008}
+.hx-copy p{color:#d8dcef;font-size:clamp(13px,1.1vw,16px);margin-top:10px}
+.hx-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.hx-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:10px 22px;border-radius:999px;font-size:14px;font-weight:800;white-space:nowrap;border:1px solid transparent}
+.hx-btn.primary{background:var(--blue);color:#06121a;border-color:#5bc9f3}
+.hx-btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px #25adf566}
+.hx-btn.ghost{background:#ffffff1a;border-color:#ffffff33;color:#fff;backdrop-filter:blur(10px)}
+.hx-btn.ghost:hover{background:#ffffff2e}
+.hx-controls{position:absolute;left:clamp(24px,5vw,64px);right:clamp(20px,3vw,40px);bottom:clamp(18px,2.4vw,28px);display:flex;align-items:center;justify-content:space-between;pointer-events:none}
+.hx-controls>*{pointer-events:auto}
+.hx-dots{display:flex;gap:6px}
+.hx-dots button{width:24px;height:24px;padding:0;background:transparent;display:grid;place-items:center}
+.hx-dots button::after{content:"";width:18px;height:4px;border-radius:2px;background:#ffffff66;transition:width .25s,background .25s}
+.hx-dots button.selected::after{width:34px;background:#fff}
+.hx-arrows{display:flex;gap:10px}
+.hx-arrows button{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#ffffff1f;border:1px solid #ffffff3a;color:#fff;backdrop-filter:blur(10px)}
+.hx-arrows svg{width:20px;height:20px}
+@media(max-width:900px){@media(max-width:760px){
+  .hx{margin-top:24px}
+  .hx-banner{border-radius:22px;min-height:340px;align-items:flex-start}
+  .hx-media img{object-position:65% center}
+  .hx-shade{background:linear-gradient(180deg,#070a1fe6 0%,#070a1f99 55%,#070a1fcc 100%)}
+  .hx-copy{padding:22px 20px 72px}
+  .hx-btn{padding:12px 20px;font-size:14px}
+  .hx-cta .primary{flex:1 1 100%}
+  .hx-cta .ghost{flex:1}
+  .hx-controls{left:14px;right:14px}
+  .hx-arrows button{width:36px;height:36px}
+  }
+@media(prefers-reduced-motion:reduce){.hx-btn,/* Inner-page hero (topup, cards, promotions, partner, help) */
+.hx-page{margin-top:0}
+.hx-page .hx-banner{min-height:clamp(220px,20vw,270px)}
+.hx-page .hx-copy{padding-bottom:clamp(24px,3.5vw,44px)}
+.hx-page h1{font-size:clamp(24px,2.5vw,34px)}
+.hx-page h1>span{color:#4bcaff}
+@media(max-width:760px){.hx-page .hx-banner{min-height:250px}.hx-page .hx-copy{padding-bottom:28px}}

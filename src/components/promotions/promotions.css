@@ -1,0 +1,22 @@
+/* Shares tokens and section styles with the partner page (partner.css). */
+.promos-offer{display:grid;grid-template-columns:260px minmax(0,1fr);gap:28px;align-items:center;padding:22px;border-radius:16px;background:var(--p-surface);border:1px solid var(--p-border)}
+.promos-offer-art{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:#dff1fb}
+.promos-offer-art img{object-fit:cover}
+.promos-status{display:inline-block;font-size:12px;font-weight:700;color:#1b8a4b;background:#1b8a4b1a;padding:4px 11px;border-radius:999px}
+.promos-offer-body h3{font-size:22px;margin-top:12px}
+.promos-offer-body p{font-size:14px;line-height:1.75;color:var(--p-muted);margin-top:8px;max-width:600px}
+.promos-offer-actions{display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-top:20px}
+.promos-offer-actions .pill{color:#fff}
+.promos-link{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--blue);white-space:nowrap}
+.promos-link svg{width:15px;height:15px}
+.promos-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.promos-empty{font-size:14px;color:var(--p-muted);margin:-8px 0 20px;max-width:620px}
+.promos-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}
+.promos-grid .gc{--topup-surface:var(--p-surface);--topup-border:var(--p-border);--topup-muted:var(--p-muted)}
+.promos-page .partner-fit{grid-template-columns:1fr auto}
+.promos-channels{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.promos-channels button{padding:10px 20px;border-radius:999px;background:transparent;border:1px solid var(--p-border);color:var(--foreground);font-size:14px;font-weight:700}
+.promos-channels button:hover{border-color:var(--blue);color:var(--blue);filter:none}
+@media(max-width:1100px){.promos-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:900px){.promos-page .partner-fit{grid-template-columns:1fr}.promos-channels{justify-content:flex-start}}
+@media(max-width:760px){.promos-offer{grid-template-columns:1fr;gap:18px;padding:16px}.promos-offer-art{aspect-ratio:16/10}.promos-offer-body h3{font-size:19px}.promos-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.promos-head{flex-direction:column;align-items:flex-start;gap:8px}}

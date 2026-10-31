@@ -2,6 +2,7 @@
 
 import { useI18n } from "@/i18n/useI18n";
 
+import Link from "next/link";
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "motion/react";
 import "./hero-motion.css";
@@ -78,9 +79,9 @@ export default function HeroSection({ slide, onSlideChange, onSelectGiftCards }:
         {banners.map((_, i) => <button aria-label={t("โปรโมชั่น {{number}}", { number: i + 1 })} aria-pressed={slide === i} className={slide === i ? "selected" : ""} onClick={() => changeSlide(i, i > slide ? 1 : -1)} key={i} />)}
       </div>
       <div className="quick-links">
-        <a href="#categories">{t("เติมเงิน")}{" "}<span>
+        <Link href="/wallet/topup">{t("เติมเงิน")}{" "}<span>
           <ChevronRightIcon />
-        </span></a>
+        </span></Link>
         <button onClick={() => { onSelectGiftCards(); }}>{t("ซื้อพรีเมียม")}{" "}<span>
           <ChevronRightIcon />
         </span></button>

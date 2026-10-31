@@ -2,6 +2,7 @@
 
 import { useI18n } from "@/i18n/useI18n";
 
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import "./footer.css";
 import BrandLogo from "./BrandLogo";
@@ -38,7 +39,7 @@ export default function Footer({ onOpenDialog }: { onOpenDialog: DialogHandler }
             <div className="socials">
               {socialIcons.map(({ name, file }) => (
                 <button key={file} type="button" aria-label={t("ติดต่อผ่าน {{name}}", { name })} onClick={() => onOpenDialog(`ติดต่อเรา · ${name}`)}>
-                  <Image src={`/icons/social/${file}.svg`} alt="" aria-hidden="true" width={20} height={20} unoptimized className="footer-social-icon" />
+                  <span aria-hidden="true" className="footer-social-icon" style={{ "--icon": `url(/icons/social-mono/${file}.svg)` } as CSSProperties} />
                 </button>
               ))}
             </div>

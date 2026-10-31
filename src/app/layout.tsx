@@ -5,6 +5,10 @@ import "./theme.css";
 import "./responsive.css";
 import "flag-icons/css/flag-icons.min.css";
 import I18nProvider from "@/i18n/I18nProvider";
+import AuthProvider from "@/auth/AuthProvider";
+import AccountSheet from "@/auth/AccountSheet";
+import MobileTabBar from "@/auth/MobileTabBar";
+import GlobalSocialRail from "@/components/home/GlobalSocialRail";
 
 const notoSansThai = Noto_Sans_Thai({
   variable: "--font-noto-sans-thai",
@@ -34,7 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{document.documentElement.dataset.theme=localStorage.getItem("thx2pay-theme")==="light"?"light":"dark"}catch(e){}})();` }} />
       </head>
-      <body className={`${notoSansThai.className} min-h-screen`}><I18nProvider>{children}</I18nProvider></body>
+      <body className={`${notoSansThai.className} min-h-screen`}><I18nProvider><AuthProvider>{children}<MobileTabBar /><AccountSheet /><GlobalSocialRail /></AuthProvider></I18nProvider></body>
     </html>
   );
 }

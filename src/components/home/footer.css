@@ -1,6 +1,6 @@
-footer .socials .footer-social-icon{display:block;width:20px;height:20px;object-fit:contain}
-footer .socials button{background:#fff;border-color:#ffffff50}
-footer .socials button:hover{background:#e8f7ff;border-color:var(--blue)}
+footer .socials .footer-social-icon{display:block;width:20px;height:20px;background-color:currentColor;-webkit-mask:var(--icon) center/contain no-repeat;mask:var(--icon) center/contain no-repeat}
+footer .socials button{background:transparent;color:var(--blue);border-color:currentColor}
+footer .socials button:hover{background:var(--blue);color:var(--background);border-color:var(--blue)}
 
 footer .payments{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 footer .payments .payment-badge{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:72px;height:40px;padding:3px 5px;background:#fff;border:1px solid #e9edf0;border-radius:5px;overflow:hidden}

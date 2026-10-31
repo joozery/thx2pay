@@ -2,6 +2,7 @@
 
 import { useI18n } from "@/i18n/useI18n";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import "./category-carousel.css";
 import RevealSection from "./RevealSection";
@@ -13,6 +14,13 @@ import { platforms, type Platform, type DialogHandler } from "./types";
 
 export default function CategorySection({ tab, query, onTabChange, onQueryChange, onOpenDialog }: { tab: Platform; query: string; onTabChange: (platform: Platform) => void; onQueryChange: (value: string) => void; onOpenDialog: DialogHandler }) {
   const { t } = useI18n();
+  const router = useRouter();
+
+  function openCategory(label: string) {
+    if (label === "เติมเกม") router.push("/topup");
+    else if (tab === "Gift Card") router.push("/cards");
+    else onOpenDialog(`${label} · ${tab}`);
+  }
   const reduceMotion = useReducedMotion();
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -59,14 +67,14 @@ export default function CategorySection({ tab, query, onTabChange, onQueryChange
             whileTap={reduceMotion ? undefined : { scale: 0.985 }}
             transition={{ duration: reduceMotion ? 0 : 0.4, delay: reduceMotion ? 0 : index * 0.09, ease: "easeOut", layout: { duration: reduceMotion ? 0 : 0.3, delay: 0 } }}
           >
-            <button className="category-image" onClick={() => onOpenDialog(`${label} · ${tab}`)}>
+            <button className="category-image" onClick={() => openCategory(label)}>
               <Artwork src={image} sizes="(max-width: 760px) 82vw, 33vw" w={16} h={9} label={`${t(label)} ${tab}`} />
             </button>
             <div className="category-caption">
               <h3>
                 {t(label)}
               </h3>
-              <motion.button whileHover={reduceMotion ? undefined : { scale: 1.04 }} whileTap={{ scale: 0.96 }} className="pill small" onClick={() => onOpenDialog(`${label} · ${tab}`)}>{t("➜ ดูทั้งหมด")}</motion.button>
+              <motion.button whileHover={reduceMotion ? undefined : { scale: 1.04 }} whileTap={{ scale: 0.96 }} className="pill small" onClick={() => openCategory(label)}>{t("➜ ดูทั้งหมด")}</motion.button>
             </div>
           </motion.article>;
         })}

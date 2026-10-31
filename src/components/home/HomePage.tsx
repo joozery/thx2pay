@@ -1,22 +1,24 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { MotionConfig } from "motion/react";
 import Navbar from "./Navbar";
 import SearchDialog from "./SearchDialog";
 import type { Category } from "./categories";
 import HeroSection from "./HeroSection";
-import SocialFollowRail from "./SocialFollowRail";
 import PlatformTabs from "./PlatformTabs";
 import CategorySection from "./CategorySection";
+import HomeShowcase from "./HomeShowcase";
 import BenefitsSection from "./BenefitsSection";
 import PartnerSection from "./PartnerSection";
 import FAQSection from "./FAQSection";
 import Footer from "./Footer";
 import ContactDialog from "./ContactDialog";
-import type { Platform, NavTarget } from "./types";
+import type { Platform } from "./types";
 
 export default function HomePage() {
+  const router = useRouter();
   const [slide, setSlide] = useState(1);
   const [tab, setTab] = useState<Platform>("Mobile");
   const [search, setSearch] = useState(false);
@@ -24,23 +26,7 @@ export default function HomePage() {
   const [modal, setModal] = useState("");
 
   function selectGiftCards() {
-    setQuery("");
-    setTab("Gift Card");
-    document.getElementById("categories")?.scrollIntoView({ behavior: "smooth" });
-  }
-
-  function navigate(target: NavTarget) {
-    setSearch(false);
-    setQuery("");
-    if (target === "home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-    if (target === "games") setTab("Mobile");
-    if (target === "cards") setTab("Gift Card");
-    if (target === "promotions") setSlide(0);
-    const section = target === "games" || target === "cards" ? "categories" : target === "help" ? "about" : target;
-    document.getElementById(section)?.scrollIntoView({ behavior: "smooth" });
+    router.push("/cards");
   }
 
   function toggleSearch() {
@@ -48,6 +34,8 @@ export default function HomePage() {
   }
 
   function selectSearchResult(category: Category) {
+    if (category.platform === "Gift Card") { setSearch(false); router.push("/cards"); return; }
+    if (category.label === "เติมเกม") { setSearch(false); router.push("/topup"); return; }
     setTab(category.platform);
     setQuery(category.label);
     setSearch(false);
@@ -61,21 +49,22 @@ export default function HomePage() {
 
   return (
     <MotionConfig reducedMotion="user" transition={{ duration: 0.25, ease: "easeOut" }}>
-      <Navbar onOpenDialog={setModal} onToggleSearch={toggleSearch} onNavigate={navigate} searchOpen={search} />
+      <Navbar onToggleSearch={toggleSearch} searchOpen={search} />
       <main id="top" className="container">
 
 
         <HeroSection slide={slide} onSlideChange={setSlide} onSelectGiftCards={selectGiftCards} />
 
-        <SocialFollowRail onOpenDialog={setModal} />
 
         <PlatformTabs tab={tab} onTabChange={selectPlatform} />
 
         <CategorySection tab={tab} query={query} onTabChange={selectPlatform} onQueryChange={setQuery} onOpenDialog={setModal} />
 
+        <HomeShowcase />
+
         <BenefitsSection />
 
-        <PartnerSection onOpenDialog={setModal} />
+        <PartnerSection />
 
         <FAQSection />
 

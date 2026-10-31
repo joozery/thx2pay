@@ -1,0 +1,22 @@
+.app-tab-bar{display:none}
+@media(max-width:760px){
+  body{padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+  .follow-rail,.follow-rail.collapsed{bottom:calc(112px + env(safe-area-inset-bottom))}
+  .app-tab-bar{position:fixed;z-index:40;top:auto;left:10px;right:10px;bottom:calc(9px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;gap:0;height:auto;min-height:68px;padding:5px;border:1px solid #ffffff25;border-radius:24px;background:#171f29f2;box-shadow:0 15px 40px #0007;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+  .app-tab-bar>a,.app-tab-bar>button{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;min-width:0;min-height:58px;padding:5px 2px;border:0;border-radius:17px;background:transparent;color:#a7b5c3;font-size:10px;font-weight:700;text-align:center;line-height:1.2}
+  .app-tab-bar .app-tab-icon{display:grid;place-items:center;width:34px;height:31px;border-radius:11px;transition:background .2s,color .2s,transform .2s}
+  .app-tab-bar svg{width:22px;height:22px;stroke-width:1.8}
+  .app-tab-bar .app-tab-label{display:block;white-space:nowrap}
+  .app-tab-bar>a.active,.app-tab-bar>button.active{color:#6bd1ff}
+  .app-tab-bar .active .app-tab-icon{background:#25adf52d;color:#72d4ff;transform:translateY(-1px)}
+  .app-tab-bar>a[href="/topup"] .app-tab-icon{background:#0a8fce;color:#fff;box-shadow:0 4px 13px #149cdd55}
+  .app-tab-bar>a[href="/topup"].active .app-tab-icon{background:#25adf5;color:#06121a}
+  .app-tab-bar>a:focus-visible,.app-tab-bar>button:focus-visible{outline:2px solid #6bd1ff;outline-offset:-2px}
+  .app-tab-bar .avatar{width:23px!important;height:23px!important;font-size:10px}
+  html[data-theme="light"] .app-tab-bar{background:#fffffff2;border-color:#d5e2ec;box-shadow:0 12px 34px #193c622e}
+  html[data-theme="light"] .app-tab-bar>a,html[data-theme="light"] .app-tab-bar>button{color:#627386}
+  html[data-theme="light"] .app-tab-bar>a.active,html[data-theme="light"] .app-tab-bar>button.active{color:#087cad}
+  html[data-theme="light"] .app-tab-bar .active .app-tab-icon{background:#d8f0fc;color:#087cad}
+  html[data-theme="light"] .app-tab-bar>a[href="/topup"] .app-tab-icon{background:#0a8fce;color:#fff}
+}
+@media(max-width:360px){.app-tab-bar{left:6px;right:6px;padding:4px}.app-tab-bar>a,.app-tab-bar>button{font-size:9px}}

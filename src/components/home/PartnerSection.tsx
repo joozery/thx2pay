@@ -5,10 +5,10 @@ import { useI18n } from "@/i18n/useI18n";
 import RevealSection from "./RevealSection";
 
 import { ArrowRightIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 import Artwork from "./Artwork";
-import type { DialogHandler } from "./types";
 
-export default function PartnerSection({ onOpenDialog }: { onOpenDialog: DialogHandler }) {
+export default function PartnerSection() {
   const { t } = useI18n();
 
   return (
@@ -20,7 +20,7 @@ export default function PartnerSection({ onOpenDialog }: { onOpenDialog: DialogH
       <div className="partner-copy">
         <h2>{t("ปลดล็อกความสนุก")}<br />{t("กับ THX2PAY &")}<br />{t("เติมปลอดภัย")}<br />{t("ทุกออเดอร์")}</h2>
         <p>{t("สมัครเป็นตัวแทนกับเราวันนี้ รับส่วนลดพิเศษ และสิทธิประโยชน์มากมาย")}</p>
-        <button className="pill wide" onClick={() => onOpenDialog("สมัครตัวแทนจำหน่าย")}>{t("สมัครตัวแทนจำหน่าย")}{" "}<ArrowRightIcon /></button>
+        <Link className="pill wide" href="/partner/apply">{t("สมัครตัวแทนจำหน่าย")}{" "}<ArrowRightIcon /></Link>
       </div>
     </RevealSection>
   );

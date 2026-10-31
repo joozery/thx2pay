@@ -1,0 +1,6 @@
+.flow-intro{background:#101929;color:#fff}
+.flow-intro-image{object-fit:cover;object-position:center}
+.flow-intro::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#08122388,transparent 78%),linear-gradient(180deg,#0812236b,transparent 60%);pointer-events:none}
+.flow-intro-copy{position:relative;z-index:1}
+.flow-intro p,html[data-theme="light"] .flow-intro p{color:#d9e6f4;max-width:360px}
+@media(max-width:760px){.flow-intro p,html[data-theme="light"] .flow-intro p{max-width:230px}}
