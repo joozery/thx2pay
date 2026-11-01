@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 import SearchDialog from "./SearchDialog";
 import type { Category } from "./categories";
 import HeroSection from "./HeroSection";
+import PromotionBanners from "./PromotionBanners";
 import PlatformTabs from "./PlatformTabs";
 import CategorySection from "./CategorySection";
 import HomeShowcase from "./HomeShowcase";
@@ -55,6 +56,8 @@ export default function HomePage() {
 
         <HeroSection slide={slide} onSlideChange={setSlide} onSelectGiftCards={selectGiftCards} />
 
+
+        <PromotionBanners />
 
         <PlatformTabs tab={tab} onTabChange={selectPlatform} />
 
