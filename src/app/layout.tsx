@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Noto_Sans_Thai, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./theme.css";
@@ -32,13 +33,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="th"
       data-theme="dark"
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${notoSansThai.variable} ${geistMono.variable} antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{document.documentElement.dataset.theme=localStorage.getItem("thx2pay-theme")==="light"?"light":"dark"}catch(e){}})();` }} />
       </head>
-      <body className={`${notoSansThai.className} min-h-screen`}><I18nProvider><AuthProvider>{children}<MobileTabBar /><AccountSheet /><GlobalSocialRail /></AuthProvider></I18nProvider></body>
+      <body className={`${notoSansThai.className} min-h-screen`}><I18nProvider><AuthProvider>{children}<Suspense fallback={null}><MobileTabBar /></Suspense><AccountSheet /><GlobalSocialRail /></AuthProvider></I18nProvider></body>
     </html>
   );
 }

@@ -3,11 +3,11 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useSyncExternalStore, type ReactNode } from "react";
 
 export type User = { name: string; email: string };
-type AuthValue = { user: User | null; ready: boolean; login: (email: string) => void; logout: () => void };
+type AuthValue = { user: User | null; ready: boolean; login: (email: string) => void; logout: () => void; updateName: (name: string) => void };
 
 const storageKey = "thx2pay-user";
 const authEvent = "thx2pay-auth-change";
-const AuthContext = createContext<AuthValue>({ user: null, ready: false, login: () => {}, logout: () => {} });
+const AuthContext = createContext<AuthValue>({ user: null, ready: false, login: () => {}, logout: () => {}, updateName: () => {} });
 
 function subscribe(onChange: () => void) {
   window.addEventListener(authEvent, onChange);
@@ -34,12 +34,18 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     window.dispatchEvent(new Event(authEvent));
   }, []);
 
+  const updateName = useCallback((name: string) => {
+    if (!user || !name.trim()) throw new Error("Invalid profile");
+    localStorage.setItem(storageKey, JSON.stringify({ ...user, name: name.trim() }));
+    window.dispatchEvent(new Event(authEvent));
+  }, [user]);
+
   const logout = useCallback(() => {
     try { localStorage.removeItem(storageKey); } catch { /* Nothing to clear. */ }
     window.dispatchEvent(new Event(authEvent));
   }, []);
 
-  const value = useMemo(() => ({ user, ready, login, logout }), [user, ready, login, logout]);
+  const value = useMemo(() => ({ user, ready, login, logout, updateName }), [user, ready, login, logout, updateName]);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 

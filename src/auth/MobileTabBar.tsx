@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { DashboardIcon, HomeIcon, IdCardIcon, StarIcon, PersonIcon } from "@radix-ui/react-icons";
 import { useI18n } from "@/i18n/useI18n";
@@ -16,10 +17,18 @@ const tabs = [
   { label: "โปรโมชั่น", href: "/promotions", icon: <StarIcon /> },
 ];
 
+const subscribeToHydration = () => () => {};
+const clientHydrated = () => true;
+const serverHydrated = () => false;
+
 export default function MobileTabBar() {
   const { t } = useI18n();
   const pathname = usePathname();
-  const { user } = useAuth();
+  const auth = useAuth();
+  // This Suspense boundary may hydrate after the provider has loaded browser storage.
+  // Keep its initial auth UI identical to the server's signed-out markup.
+  const hydrated = useSyncExternalStore(subscribeToHydration, clientHydrated, serverHydrated);
+  const user = hydrated ? auth.user : null;
   const accountActive = pathname === "/account" || pathname.startsWith("/account/") || pathname === "/login";
   return <nav className="app-tab-bar" aria-label={t("เมนูล่างบนมือถือ")}>
     {tabs.map(tab => {
