@@ -27,7 +27,7 @@ export default function HomePage() {
   const [modal, setModal] = useState("");
 
   function selectGiftCards() {
-    router.push("/cards");
+    router.push("/premium");
   }
 
   function toggleSearch() {

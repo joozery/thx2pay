@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/i18n/pageMeta";
 import PartnerPage from "@/components/partner/PartnerPage";
 
-export const metadata: Metadata = { title: "พาร์ทเนอร์ | THX2PAY", description: "ร่วมเป็นตัวแทนจำหน่ายและพาร์ทเนอร์กับ THX2PAY" };
+export const metadata = pageMetadata("/partner");
 export default function Page() { return <PartnerPage />; }

@@ -6,3 +6,14 @@ footer .payments{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 footer .payments .payment-badge{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:72px;height:40px;padding:3px 5px;background:#fff;border:1px solid #e9edf0;border-radius:5px;overflow:hidden}
 footer .payments .payment-logo{display:block;width:100%;height:100%;object-fit:contain}
 @media(max-width:760px){footer .payments{gap:5px}footer .payments .payment-badge{width:62px;height:35px;padding:3px 4px}}
+.footer-links{display:flex;flex-wrap:wrap;align-items:center;gap:6px 22px;height:auto;font-size:11px;font-weight:400}
+.footer-links a{display:inline-flex;align-items:center;min-height:32px;color:#ddd;white-space:nowrap}
+.footer-links a:hover{color:var(--blue)}
+.footer-links a.active::after,.footer-links a::after{display:none}
+html[data-theme="light"] .footer-links a{color:#52657c}
+@media(max-width:760px){.footer-links{width:100%;gap:4px 18px}.footer-links a{font-size:12px;min-height:36px}}
+nav.footer-links{position:static;display:flex;top:auto;padding:0;background:none;box-shadow:none;z-index:auto}
+.footer-links .footer-cookie-settings{min-height:32px;padding:0;background:transparent;color:#ddd;font-size:inherit;white-space:nowrap}
+.footer-links .footer-cookie-settings:hover{color:var(--blue);filter:none}
+html[data-theme="light"] .footer-links .footer-cookie-settings{color:#52657c}
+@media(max-width:760px){.footer-links .footer-cookie-settings{font-size:12px;min-height:36px}}

@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/i18n/pageMeta";
 import AccountPage from "@/auth/AccountPage";
 
-export const metadata: Metadata = { title: "บัญชีของฉัน | THX2PAY" };
+export const metadata = pageMetadata("/account");
 export default function Page() { return <AccountPage />; }

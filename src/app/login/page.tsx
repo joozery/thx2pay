@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/i18n/pageMeta";
 import LoginFlow from "@/components/flows/LoginFlow";
 
-export const metadata: Metadata = { title: "เข้าสู่ระบบ | THX2PAY" };
+export const metadata = pageMetadata("/login");
 export default function Page() { return <LoginFlow />; }

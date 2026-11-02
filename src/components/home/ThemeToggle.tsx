@@ -26,13 +26,10 @@ function getSnapshot() {
   return document.documentElement.dataset.theme === "light";
 }
 
-export default function ThemeToggle() {
-  const { t } = useI18n();
+// Shared theme state: used by the toggle button (account settings) and the navbar display menu.
+export function useTheme() {
   const isLight = useSyncExternalStore(subscribe, getSnapshot, () => false);
-  const label = isLight ? "เปลี่ยนเป็นธีมมืด" : "เปลี่ยนเป็นธีมสว่าง";
-
-  function toggleTheme() {
-    const theme = isLight ? "dark" : "light";
+  function setTheme(theme: "light" | "dark") {
     document.documentElement.dataset.theme = theme;
     try {
       localStorage.setItem(storageKey, theme);
@@ -41,9 +38,15 @@ export default function ThemeToggle() {
     }
     window.dispatchEvent(new Event(themeEvent));
   }
+  return { isLight, setTheme };
+}
 
+export default function ThemeToggle() {
+  const { t } = useI18n();
+  const { isLight, setTheme } = useTheme();
+  const label = isLight ? "เปลี่ยนเป็นธีมมืด" : "เปลี่ยนเป็นธีมสว่าง";
   return (
-    <button type="button" className="icon-button theme-toggle" aria-label={t(label)} title={t(label)} aria-pressed={isLight} onClick={toggleTheme}>
+    <button type="button" className="icon-button theme-toggle" aria-label={t(label)} title={t(label)} aria-pressed={isLight} onClick={() => setTheme(isLight ? "dark" : "light")}>
       {isLight ? <MoonIcon aria-hidden="true" /> : <SunIcon aria-hidden="true" />}
     </button>
   );

@@ -1,0 +1,69 @@
+/* Game catalog search + filters: one liquid-glass panel (matches the site's glass, no strokes). */
+.topup-finder{display:grid;gap:14px;padding:14px;margin:4px 0 26px;border-radius:24px;background:var(--lg-surface);box-shadow:var(--lg-shadow),var(--lg-highlight)}
+
+.topup-finder-search{display:flex;align-items:center;gap:12px;height:54px;padding:0 10px 0 18px;border-radius:17px;background:var(--lg-soft);transition:box-shadow .2s,background .2s}
+.topup-finder-search:focus-within{background:var(--lg-surface-strong);box-shadow:0 0 0 3px rgb(18 174 241 / .3)}
+.topup-finder-search>svg{width:19px;height:19px;flex-shrink:0;color:var(--topup-muted,#94a3b6)}
+.topup-finder-search input{flex:1;min-width:0;height:100%;border:0;background:transparent;color:var(--foreground);font-size:15px;outline:none}
+.topup-finder-search input::placeholder{color:var(--topup-muted,#94a3b6)}
+.topup-finder-search input::-webkit-search-cancel-button{display:none}
+.topup-finder-clear{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--lg-soft);color:var(--foreground)}
+.topup-finder-clear svg{width:14px;height:14px}
+
+.topup-finder-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* Segmented control: a glass track with a sliding "drop" behind the selected option. */
+.topup-segment{display:flex;gap:2px;padding:4px;border-radius:16px;background:var(--lg-soft)}
+.topup-segment button{position:relative;display:flex;align-items:center;height:38px;padding:0 16px;border:0;border-radius:12px;background:transparent;color:var(--topup-muted,#94a3b6);font-size:13px;font-weight:700;white-space:nowrap;transition:color .2s}
+.topup-segment button:hover{filter:none;color:var(--foreground)}
+.topup-segment button.selected{color:var(--foreground)}
+.topup-segment-thumb{position:absolute;inset:0;border-radius:12px;background:var(--lg-surface-strong);box-shadow:0 4px 14px rgb(0 0 0 / .22),inset 0 1px 0 rgb(255 255 255 / .1)}
+.topup-segment-label{position:relative;display:flex;align-items:center;gap:7px}
+.topup-segment-label svg{width:15px;height:15px}
+
+/* Filter chips wrapping native selects (keeps keyboard + mobile pickers). */
+.topup-finder-selects{display:flex;gap:8px}
+.topup-chip-select{position:relative;display:flex;align-items:center;gap:6px;height:46px;padding:0 34px 0 14px;border-radius:14px;background:var(--lg-soft);cursor:pointer;transition:background .2s}
+.topup-chip-select:hover{background:var(--lg-surface-strong)}
+.topup-chip-select:focus-within{box-shadow:0 0 0 3px rgb(18 174 241 / .3)}
+.topup-chip-select>span{font-size:12px;color:var(--topup-muted,#94a3b6);white-space:nowrap}
+.topup-chip-select select{appearance:none;-webkit-appearance:none;border:0;background:transparent!important;box-shadow:none!important;padding:0;color:var(--foreground);font-size:13px;font-weight:700;cursor:pointer;outline:none}
+.topup-chip-select select option{color:#14202b}
+.topup-chip-select>svg{position:absolute;right:12px;width:15px;height:15px;color:var(--topup-muted,#94a3b6);pointer-events:none}
+.topup-chip-select.is-set select{color:var(--blue)}
+
+.topup-segment-thumb{background:rgb(255 255 255 / .13)}
+html[data-theme="light"] .topup-segment-thumb{background:#fff;box-shadow:0 4px 14px rgb(16 40 64 / .1),inset 0 1px 0 #fff}
+
+/* Heading count: quiet text, not a bordered chip. */
+.topup-catalog-heading .topup-game-count{background:transparent!important;box-shadow:none!important;padding:0;font-size:13px;color:var(--topup-muted,#94a3b6)}
+
+@media(max-width:760px){
+  .topup-finder{padding:10px;gap:10px;border-radius:20px;margin-bottom:20px}
+  .topup-finder-search{height:48px;padding-left:14px;border-radius:14px}
+  .topup-finder-search input{font-size:16px}
+  .topup-finder-row{flex-direction:column;align-items:stretch;flex-wrap:nowrap}
+  .topup-segment{overflow-x:auto;scrollbar-width:none}
+  .topup-segment::-webkit-scrollbar{display:none}
+  .topup-segment button{flex:1 0 auto;justify-content:center;padding:0 12px;font-size:12px}
+  .topup-segment-label{justify-content:center}
+  .topup-finder-selects{display:grid;grid-template-columns:1fr 1fr}
+  .topup-chip-select{height:44px;min-width:0}
+  .topup-chip-select select{min-width:0;flex:1;text-overflow:ellipsis}
+}
+/* Keep every row inside the panel; the platform row scrolls instead of stretching it. */
+.topup-finder{grid-template-columns:minmax(0,1fr)}
+.topup-finder-row>*{min-width:0}
+@media(max-width:760px){.topup-finder-selects{grid-template-columns:repeat(2,minmax(0,1fr))}.topup-chip-select>span{display:none}}
+@media(max-width:760px){.topup-segment button{flex:1 1 0;padding:0 6px}.topup-segment-label svg{display:none}}
+
+/* Active filters sit right under the search panel (not at the bottom of the results). */
+.topup-active-filters{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:-12px 0 22px}
+.topup-active-count{margin-right:4px;font-size:13px;font-weight:700;color:var(--foreground)}
+.topup-filter-chip{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 10px 0 13px;border-radius:999px;background:rgb(37 173 245 / .12);color:var(--blue);font-size:12px;font-weight:700;max-width:220px}
+.topup-filter-chip svg{width:13px;height:13px;flex-shrink:0;opacity:.8}
+.topup-filter-chip:hover{background:rgb(37 173 245 / .2);filter:none}
+.topup-filter-clear-all{height:32px;padding:0 12px;border-radius:999px;background:transparent;color:var(--topup-muted,#94a3b6);font-size:12px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.topup-filter-clear-all:hover{color:var(--foreground);filter:none}
+.topup-empty{border:0!important;background:var(--lg-surface)!important;box-shadow:var(--lg-shadow),var(--lg-highlight)}
+@media(max-width:760px){.topup-active-filters{margin:-8px 0 16px}}

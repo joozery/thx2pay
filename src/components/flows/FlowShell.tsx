@@ -6,16 +6,17 @@ import Navbar from "@/components/home/Navbar";
 import Footer from "@/components/home/Footer";
 import ContactDialog from "@/components/home/ContactDialog";
 import SearchDialog from "@/components/home/SearchDialog";
+import type { NavTarget } from "@/components/home/types";
 import "./flows.css";
 import "./flow-fixes.css";
 
-export default function FlowShell({ children }: { children: ReactNode }) {
+export default function FlowShell({ children, activePage = null }: { children: ReactNode; activePage?: NavTarget | null }) {
   const router = useRouter();
   const [modal, setModal] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
 
   return <>
-    <Navbar activePage={null} onToggleSearch={() => setSearchOpen(value => !value)} searchOpen={searchOpen} />
+    <Navbar activePage={activePage} onToggleSearch={() => setSearchOpen(value => !value)} searchOpen={searchOpen} />
     <main className="container flow-page">{children}</main>
     <Footer onOpenDialog={setModal} />
     <ContactDialog title={modal} onClose={() => setModal("")} />

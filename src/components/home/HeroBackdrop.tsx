@@ -1,19 +1,24 @@
-"use client";
+import type { CSSProperties } from "react";
+import "./hero-backdrop.css";
 
-import { motion, useReducedMotion } from "motion/react";
+// Hero background: rows of logos in a staggered (brick) layout.
+// Each row drifts sideways in the opposite direction of its neighbours, and its logos
+// gently grow/shrink with a per-row delay, so a soft wave runs down the rows. Pure CSS (GPU transforms).
+const ROWS = 9;
+const TILES_PER_HALF = 16; // each row holds two identical halves so the drift loops seamlessly
 
 export default function HeroBackdrop() {
-  const reduceMotion = useReducedMotion();
   return (
     <div className="hero-backdrop" aria-hidden="true">
-      <motion.div className="hero-logo-grid" animate={reduceMotion ? { x: 0, y: 0 } : { x: [0, 128], y: [0, 96] }} transition={{ duration: 32, ease: "linear", repeat: Infinity }}>
-        {Array.from({ length: 288 }, (_, index) => (
-          <span
-            key={index}
-            className={`hero-logo-tile ${(Math.floor(index / 24) + index % 24) % 2 === 0 ? "blue-logo" : "white-logo"}`}
-          />
+      <div className="hero-logo-rows">
+        {Array.from({ length: ROWS }, (_, row) => (
+          <div key={row} className={row % 2 ? "hero-logo-row reverse offset" : "hero-logo-row"} style={{ "--row": row } as CSSProperties}>
+            {Array.from({ length: TILES_PER_HALF * 2 }, (_, index) => (
+              <span key={index} className={`hero-logo-tile ${(row + index) % 2 === 0 ? "blue-logo" : "white-logo"}`} />
+            ))}
+          </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }

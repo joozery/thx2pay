@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Dialog } from "radix-ui";
 import { ArrowLeftIcon, ArrowRightIcon, BackpackIcon, CheckIcon, ChevronRightIcon, ClockIcon, Cross2Icon, CubeIcon, CardStackIcon, HomeIcon, PlusIcon, QuestionMarkCircledIcon, ReaderIcon } from "@radix-ui/react-icons";
 import { useI18n } from "@/i18n/useI18n";
-import FlowShell from "./FlowShell";
+import AccountShell from "@/auth/AccountShell";
 import "./wallet.css";
 
 const amounts = [50, 100, 300, 500, 1000];
@@ -25,7 +25,7 @@ function MethodIcon({ method }: { method: Method }) {
 }
 
 export default function WalletTopupFlow() {
-  const { t, language } = useI18n();
+  const { t, locale } = useI18n();
   const [amount, setAmount] = useState(300);
   const [custom, setCustom] = useState(false);
   const [customAmount, setCustomAmount] = useState("");
@@ -36,7 +36,7 @@ export default function WalletTopupFlow() {
   const [showExamples, setShowExamples] = useState(false);
   const selectedAmount = custom ? Number(customAmount) : amount;
   const validAmount = Number.isInteger(selectedAmount) && selectedAmount >= 20 && selectedAmount <= 50000;
-  const money = (value: number) => value.toLocaleString(language === "th" ? "th-TH" : "en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const money = (value: number) => value.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   function review(event: FormEvent) {
     event.preventDefault();
@@ -46,7 +46,7 @@ export default function WalletTopupFlow() {
     setCompletedAt("");
   }
 
-  return <FlowShell><div className="wallet-page">
+  return <AccountShell active="wallet"><div className="wallet-page">
     <section className="wallet-hero" aria-labelledby="wallet-page-title"><div><div className="wallet-breadcrumb" role="navigation" aria-label={t("เส้นทางหน้าเว็บ")}><Link href="/">{t("หน้าแรก")}</Link><ChevronRightIcon /><span>{t("กระเป๋าเงิน")}</span></div><span className="wallet-eyebrow">THX2PAY WALLET</span><h1 id="wallet-page-title">{t("กระเป๋าเงิน")}</h1><p>{t("เติมเงินเพื่อใช้ในการซื้อเกม ไอดีเกม และสินค้าดิจิทัล")}</p></div><Image src="/images/banners/partner-v1.webp" alt="" fill sizes="(max-width: 760px) 250px, 500px" /></section>
     <div className="wallet-layout">
       <div className="wallet-column">
@@ -68,7 +68,7 @@ export default function WalletTopupFlow() {
         <section className="wallet-perks"><Image src="/images/banners/offers-v1.webp" alt="" fill sizes="(max-width: 1100px) 90vw, 45vw" /><div><span className="wallet-perks-badge"><CubeIcon />{t("เติมคุ้มกว่า")}</span><h2>{t("เติมแล้วได้อะไรมากกว่า")}</h2><p>{t("รวมความสนุกและสิทธิพิเศษสำหรับคุณ")}</p><ul><li><CheckIcon />{t("เลือกเกมได้หลากหลาย")}</li><li><CheckIcon />{t("ดูแลทุกการเติม")}</li></ul><Link href="/promotions">{t("ดูสิทธิพิเศษ")}<ArrowRightIcon /></Link></div></section>
         <section className="wallet-card wallet-transactions" id="wallet-transactions" aria-labelledby="wallet-history-title"><div className="wallet-card-head"><span className="wallet-small-icon rose"><ClockIcon /></span><div><h2 id="wallet-history-title">{t("ประวัติการใช้งาน")}</h2></div><button type="button" onClick={() => setShowExamples(value => !value)}>{t(showExamples ? "ซ่อนตัวอย่าง" : "ดูตัวอย่างรายการ")}<ArrowRightIcon /></button></div>
           {showExamples && <p className="wallet-example-note">{t("รายการด้านล่างเป็นตัวอย่าง ไม่ใช่ธุรกรรมจริง")}</p>}
-          <div className="wallet-table-scroll"><table><thead><tr><th>#</th><th>{t("วันที่ / เวลา")}</th><th>{t("รายการ")}</th><th>{t("จำนวนเงิน")}</th><th>{t("สถานะ")}</th></tr></thead><tbody>{showExamples ? [{amount:300,method:"PromptPay"},{amount:100,method:"TrueMoney"},{amount:500,method:"ธนาคารไทย"}].map((item,index) => <tr key={item.method}><td>{index+1}</td><td>{t("ตัวอย่างรายการ")}</td><td><span className="wallet-table-method"><BackpackIcon />{t(item.method)}</span></td><td className="wallet-credit">+฿{money(item.amount)}</td><td><span className="wallet-status"><CheckIcon />{t("ตัวอย่าง")}</span></td></tr>) : <tr><td colSpan={5}><div className="wallet-empty"><span><ReaderIcon /></span><h3>{t("ยังไม่มีประวัติการเติม")}</h3><p>{t("รายการเติมเงินและการใช้จ่ายจะแสดงที่นี่")}</p></div></td></tr>}</tbody></table></div><div className="wallet-transactions-footer"><span>{t("ทั้งหมด")} {showExamples ? 3 : 0} {t("รายการ")}</span><Link href="/account/history">{t("ประวัติการเติม")}<ArrowRightIcon /></Link></div>
+          <div className="wallet-table-scroll"><table><thead><tr><th>#</th><th>{t("วันที่ / เวลา")}</th><th>{t("รายการ")}</th><th>{t("จำนวนเงิน")}</th><th>{t("สถานะ")}</th></tr></thead><tbody>{showExamples ? [{amount:300,method:"PromptPay"},{amount:100,method:"TrueMoney"},{amount:500,method:"ธนาคารไทย"}].map((item,index) => <tr key={item.method}><td>{index+1}</td><td>{t("ตัวอย่างรายการ")}</td><td><span className="wallet-table-method"><BackpackIcon />{t(item.method)}</span></td><td className="wallet-credit">+฿{money(item.amount)}</td><td><span className="wallet-status"><CheckIcon />{t("ตัวอย่าง")}</span></td></tr>) : <tr><td colSpan={5}><div className="wallet-empty"><span><ReaderIcon /></span><h3>{t("ยังไม่มีประวัติการเติม")}</h3><p>{t("รายการเติมเงินและการใช้จ่ายจะแสดงที่นี่")}</p></div></td></tr>}</tbody></table></div><div className="wallet-transactions-footer"><span>{t("ทั้งหมด")} {showExamples ? 3 : 0} {t("รายการ")}</span><Link href="/account/orders">{t("ประวัติการเติม")}<ArrowRightIcon /></Link></div>
         </section>
         <aside className="wallet-help"><span className="wallet-small-icon blue"><QuestionMarkCircledIcon /></span><div><h2>{t("มีปัญหาการเติมเงิน?")}</h2><p>{t("หากเติมเงินแล้วไม่ขึ้น สามารถติดต่อทีมงานได้ทันที")}</p></div><Link href="/help">{t("ติดต่อทีมงาน")}<ArrowRightIcon /></Link></aside>
       </div>
@@ -81,8 +81,8 @@ export default function WalletTopupFlow() {
       {step === "payment" && <div className="wallet-payment-preview"><MethodIcon method={topup?.method ?? methods[0]} /><div><b>{t(topup?.method.label ?? "")}</b><p>{t("ยังไม่เปิดรับชำระเงิน")}</p></div><p>{t("ไม่มี QR บัญชีรับโอน หรือลิงก์ชำระเงินจริงในโหมดทดสอบ")}</p></div>}
       {topup && <dl className="wallet-review"><div><dt>{t("ช่องทาง")}</dt><dd>{t(topup.method.label)}</dd></div><div><dt>{t("จำนวนเงิน")}</dt><dd>฿{money(topup.amount)}</dd></div><div><dt>{t("สถานะ")}</dt><dd>{t(step === "success" ? "สำเร็จ (ตัวอย่าง)" : step === "payment" ? "รอจำลองการชำระเงิน" : "รอตรวจสอบ")}</dd></div>{completedAt && <div><dt>{t("เวลา")}</dt><dd>{completedAt}</dd></div>}</dl>}
       {step === "review" && <button className="wallet-primary" onClick={() => setStep("payment")}>{t("ดำเนินการต่อ")}<ArrowRightIcon /></button>}
-      {step === "payment" && <div className="wallet-modal-actions"><button onClick={() => setStep("review")}><ArrowLeftIcon />{t("ย้อนกลับ")}</button><button className="wallet-primary" onClick={() => {setCompletedAt(new Date().toLocaleString(language === "th" ? "th-TH" : "en-US"));setStep("success");}}>{t("จำลองการชำระสำเร็จ")}</button></div>}
+      {step === "payment" && <div className="wallet-modal-actions"><button onClick={() => setStep("review")}><ArrowLeftIcon />{t("ย้อนกลับ")}</button><button className="wallet-primary" onClick={() => {setCompletedAt(new Date().toLocaleString(locale));setStep("success");}}>{t("จำลองการชำระสำเร็จ")}</button></div>}
       {step === "success" && <Dialog.Close className="wallet-primary">{t("กลับไปหน้ากระเป๋าเงิน")}</Dialog.Close>}
     </Dialog.Content></Dialog.Portal></Dialog.Root>
-  </div></FlowShell>;
+  </div></AccountShell>;
 }

@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/i18n/pageMeta";
 import PartnerApplyFlow from "@/components/flows/PartnerApplyFlow";
 
-export const metadata: Metadata = { title: "สมัครตัวแทนจำหน่าย | THX2PAY" };
+export const metadata = pageMetadata("/partner/apply");
 export default function Page() { return <PartnerApplyFlow />; }

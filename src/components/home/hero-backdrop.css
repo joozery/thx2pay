@@ -1,0 +1,20 @@
+/* Staggered, drifting logo rows behind the home hero (replaces the old diagonal grid). */
+.hero-logo-rows{position:absolute;inset:-48px 0;display:flex;flex-direction:column;justify-content:space-between;gap:0;opacity:.14;--tile:128px;--row-h:88px}
+.hero-logo-row{display:flex;width:max-content;height:var(--row-h);flex-shrink:0;animation:hero-row-drift 46s linear infinite;animation-delay:calc(var(--row) * -3.7s);will-change:transform}
+.hero-logo-row.reverse{animation-direction:reverse}
+/* Brick offset: every other row starts half a tile to the left. */
+.hero-logo-row.offset{margin-left:calc(var(--tile) / -2)}
+.hero-logo-rows .hero-logo-tile{flex:0 0 var(--tile);height:var(--row-h);background-position:center;background-repeat:no-repeat;background-size:34px auto;
+  animation:hero-logo-breathe 5.2s ease-in-out infinite;animation-delay:calc(var(--row) * -.65s);will-change:transform}
+.hero-logo-rows .hero-logo-tile.white-logo{animation-delay:calc(var(--row) * -.65s - 2.6s)}
+
+@keyframes hero-row-drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@keyframes hero-logo-breathe{0%,100%{transform:scale(.78)}50%{transform:scale(1.14)}}
+
+@media(max-width:760px){
+  .hero-logo-rows{--tile:96px;--row-h:66px;opacity:.10;inset:-24px 0}
+  .hero-logo-rows .hero-logo-tile{background-size:26px auto}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-logo-row,.hero-logo-rows .hero-logo-tile{animation:none;will-change:auto}
+}

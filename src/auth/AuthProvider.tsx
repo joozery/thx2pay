@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useSyncExternalStore, type ReactNode } from "react";
 
 export type User = { name: string; email: string };
-type AuthValue = { user: User | null; ready: boolean; login: (email: string) => void; logout: () => void; updateName: (name: string) => void };
+type AuthValue = { user: User | null; ready: boolean; login: (email: string, name?: string) => void; logout: () => void; updateName: (name: string) => void };
 
 const storageKey = "thx2pay-user";
 const authEvent = "thx2pay-auth-change";
@@ -29,8 +29,8 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     document.documentElement.dataset.auth = user ? "in" : "out";
   }, [user]);
 
-  const login = useCallback((email: string) => {
-    try { localStorage.setItem(storageKey, JSON.stringify({ email, name: email.split("@")[0] || "member" })); } catch { /* Sign-in needs storage in this prototype. */ }
+  const login = useCallback((email: string, name?: string) => {
+    try { localStorage.setItem(storageKey, JSON.stringify({ email, name: name?.trim() || email.split("@")[0] || "member" })); } catch { /* Sign-in needs storage in this prototype. */ }
     window.dispatchEvent(new Event(authEvent));
   }, []);
 

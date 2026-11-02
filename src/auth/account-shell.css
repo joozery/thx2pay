@@ -1,0 +1,185 @@
+/* ===== Account area layout: sidebar + content (liquid glass, no strokes) ===== */
+.acct-shell{display:grid;grid-template-columns:260px minmax(0,1fr);gap:26px;align-items:start;padding:18px 0 70px}
+.acct-shell.no-user{grid-template-columns:minmax(0,1fr)}
+.acct-main{min-width:0;display:grid;gap:18px;align-content:start}
+
+.acct-side{position:sticky;top:84px;display:grid;gap:14px;padding:14px;border-radius:24px;background:var(--lg-surface);box-shadow:var(--lg-shadow),var(--lg-highlight)}
+.acct-side-user{display:flex;align-items:center;gap:12px;padding:8px;border-radius:16px;color:inherit}
+.acct-side-user:hover{background:var(--lg-soft)}
+.acct-side-user>span:last-child{min-width:0;display:grid}
+.acct-side-user strong{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acct-side-user small{font-size:12px;color:var(--a-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.acct-side-nav{display:grid;gap:2px}
+.acct-side-nav a{display:flex;align-items:center;gap:12px;padding:10px;border-radius:14px;color:inherit;transition:background .15s}
+.acct-side-nav a:hover{background:var(--lg-soft)}
+.acct-side-icon{display:grid;place-items:center;flex-shrink:0;width:36px;height:36px;border-radius:11px;background:var(--lg-soft);color:var(--a-muted)}
+.acct-side-icon svg{width:17px;height:17px}
+.acct-side-text{min-width:0;display:grid;gap:1px}
+.acct-side-text b{font-size:14px}
+.acct-side-text small{font-size:11.5px;color:var(--a-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Blue = where you are */
+.acct-side-nav a.active{background:rgb(37 173 245 / .12)}
+.acct-side-nav a.active b{color:var(--blue)}
+.acct-side-nav a.active .acct-side-icon{background:var(--blue);color:#fff;box-shadow:0 6px 16px rgb(18 174 241 / .3)}
+
+.acct-side-extra{display:grid;gap:2px;padding-top:10px;box-shadow:inset 0 1px 0 rgb(127 140 156 / .14)}
+.acct-side-extra a,.acct-side-logout{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:12px;background:transparent;color:var(--a-muted);font-size:13px;font-weight:600;text-align:left}
+.acct-side-extra a:hover{background:var(--lg-soft);color:var(--foreground)}
+.acct-side-extra svg{width:15px;height:15px}
+.acct-side-logout{color:#e5677f}
+.acct-side-logout:hover{background:rgb(229 103 127 / .1);filter:none}
+
+/* Page title inside the account area */
+.acct-page-head h1{font-size:28px;letter-spacing:-.4px}
+.acct-page-head p{margin-top:4px;font-size:14px;color:var(--a-muted)}
+
+/* ===== Overview ===== */
+.ov-head{display:flex;align-items:center;gap:16px}
+.ov-head-text{flex:1;min-width:0}
+.ov-kicker{font-size:10.5px;font-weight:800;letter-spacing:2px;color:var(--blue)}
+.ov-head h1{margin-top:2px;font-size:28px;letter-spacing:-.4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ov-head p{margin:2px 0 0;font-size:13px;color:var(--a-muted)}
+.ov-edit{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 14px;border-radius:999px;background:var(--lg-soft);color:var(--foreground);font-size:13px;font-weight:700;flex-shrink:0}
+.ov-edit:hover{background:var(--lg-surface-strong)}
+.ov-edit svg{width:14px;height:14px}
+
+.ov-top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px}
+.ov-wallet{display:grid;gap:10px;padding:22px 24px;border-radius:24px;color:#fff;background:linear-gradient(135deg,#1aa9ef,#0d6fc4);box-shadow:0 16px 36px rgb(18 120 200 / .3),inset 0 1px 0 rgb(255 255 255 / .3)}
+.ov-wallet-row{display:flex;align-items:center;gap:10px}
+.ov-wallet-icon{display:grid;place-items:center;width:34px;height:34px;border-radius:11px;background:rgb(255 255 255 / .2)}
+.ov-wallet-icon svg{width:17px;height:17px}
+.ov-wallet h2{font-size:14px;font-weight:700;letter-spacing:0;color:rgb(255 255 255 / .9)}
+.ov-balance{font-size:38px;line-height:1.1;font-weight:800;letter-spacing:-.5px}
+.ov-balance span{font-size:22px;opacity:.8}
+.ov-wallet-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ov-wallet .member-button{background:#fff;color:#0b5fa8;box-shadow:none}
+.ov-wallet .member-button svg{width:14px;height:14px}
+.ov-ghost{display:inline-flex;align-items:center;height:38px;padding:0 14px;border-radius:12px;background:rgb(255 255 255 / .16);color:#fff;font-size:13px;font-weight:700}
+.ov-ghost:hover{background:rgb(255 255 255 / .26)}
+
+.ov-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ov-actions a{display:flex;flex-direction:column;justify-content:center;gap:10px;padding:16px;border-radius:20px;background:var(--lg-surface);box-shadow:var(--lg-shadow),var(--lg-highlight);color:inherit;font-size:13.5px;font-weight:700;transition:transform .15s}
+.ov-actions a:hover{transform:translateY(-2px)}
+.ov-actions a>span{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--lg-soft);color:var(--foreground)}
+.ov-actions svg{width:18px;height:18px}
+
+.ov-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px;align-items:start}
+.ov-card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.ov-card-head h2{font-size:18px;letter-spacing:-.2px}
+.ov-card-head a{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:700;color:var(--blue)}
+.ov-card-head a svg{width:14px;height:14px}
+.ov-uids{display:grid;gap:6px;margin:8px 0 0;padding:0;list-style:none}
+.ov-uids li{display:flex;align-items:center;gap:10px;padding:8px;border-radius:14px;background:var(--lg-soft)}
+.ov-uids img{border-radius:10px;flex-shrink:0}
+.ov-uids li>div{flex:1;min-width:0;display:grid}
+.ov-uids strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ov-uids span{font-size:12px;color:var(--a-muted);font-family:ui-monospace,monospace}
+.ov-uid-go{height:30px;display:inline-flex;align-items:center;padding:0 12px;border-radius:999px;background:rgb(37 173 245 / .14);color:var(--blue);font-size:12px;font-weight:800}
+.ov-uid-empty{display:grid;justify-items:start;gap:12px;padding:10px 2px}
+.ov-uid-empty p{margin:0;font-size:13px;color:var(--a-muted)}
+.ov-uid-empty svg,.uids-form svg{width:14px;height:14px}
+
+/* ===== Orders ===== */
+.orders-toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.orders-tabs{display:flex;gap:2px;padding:4px;border-radius:16px;background:var(--lg-soft);overflow-x:auto;scrollbar-width:none;max-width:100%}
+.orders-tabs::-webkit-scrollbar{display:none}
+.orders-tabs button{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 13px;border-radius:12px;background:transparent;color:var(--a-muted);font-size:13px;font-weight:700;white-space:nowrap}
+.orders-tabs button span{min-width:20px;padding:1px 6px;border-radius:999px;background:var(--lg-soft);font-size:11px;text-align:center}
+.orders-tabs button[aria-pressed="true"]{background:var(--lg-surface-strong);color:var(--foreground);box-shadow:0 4px 12px rgb(0 0 0 / .14),inset 0 1px 0 rgb(255 255 255 / .1)}
+.orders-tabs button[aria-pressed="true"] span{background:var(--blue);color:#fff}
+.orders-search{display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:14px;background:var(--lg-soft);min-width:240px;flex:1;max-width:340px}
+.orders-search svg{width:16px;height:16px;color:var(--a-muted)}
+.orders-search input{flex:1;min-width:0;border:0;background:transparent!important;box-shadow:none!important;color:var(--foreground);font-size:14px;outline:none}
+.orders-search:focus-within{box-shadow:0 0 0 3px rgb(18 174 241 / .3)}
+.orders-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-top:12px;font-size:12.5px;color:var(--a-muted)}
+.orders-foot a{color:var(--blue);font-weight:700}
+
+/* ===== UIDs ===== */
+.uids-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px;align-items:start}
+.uids-title{display:flex;align-items:center;gap:8px;font-size:18px;letter-spacing:-.2px;margin-bottom:14px}
+.uids-count{min-width:22px;padding:1px 7px;border-radius:999px;background:var(--lg-soft);font-size:12px;color:var(--a-muted);text-align:center}
+.uids-form{display:grid;gap:12px}
+.uids-form .pill{margin:0;justify-content:center}
+.uids-status{min-height:18px;margin:8px 0 0;font-size:12.5px;color:#22b38c}
+.uids-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.uids-list li{display:flex;align-items:center;gap:12px;padding:10px;border-radius:16px;background:var(--lg-soft)}
+.uids-list img{border-radius:12px;flex-shrink:0}
+.uids-list li>div{flex:1;min-width:0;display:grid}
+.uids-list strong{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uids-list span{font-size:12.5px;color:var(--a-muted);font-family:ui-monospace,monospace;overflow-wrap:anywhere}
+.uids-list .member-button{height:34px;padding:0 12px;font-size:12px;flex-shrink:0}
+.uids-delete{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:transparent;color:var(--a-muted);flex-shrink:0}
+.uids-delete:hover{background:rgb(229 103 127 / .12);color:#e5677f;filter:none}
+.uids-delete svg{width:16px;height:16px}
+
+/* ===== Settings (one page, jump links) ===== */
+.settings-jump{position:sticky;top:76px;z-index:5;display:flex;gap:4px;padding:5px;border-radius:18px;width:max-content;max-width:100%;overflow-x:auto;scrollbar-width:none;background:var(--lg-surface-strong);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);box-shadow:var(--lg-shadow),var(--lg-highlight)}
+.settings-jump::-webkit-scrollbar{display:none}
+.settings-jump a{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 13px;border-radius:13px;color:var(--a-muted);font-size:13px;font-weight:700;white-space:nowrap}
+.settings-jump a svg{width:15px;height:15px}
+.settings-jump a:hover{color:var(--foreground)}
+.settings-jump a.active{background:rgb(37 173 245 / .14);color:var(--blue)}
+.settings-stack{display:grid;gap:16px}
+.settings-block,.settings-anchor{scroll-margin-top:140px}
+.settings-block>h2{font-size:18px;letter-spacing:-.2px;margin-bottom:14px}
+.member-card>.acct-form.settings-profile{display:grid!important;grid-template-columns:64px minmax(0,1fr);align-items:start;gap:20px}
+.settings-profile>.avatar{grid-column:1;grid-row:1}
+.settings-fields{flex:1;min-width:0;display:grid;gap:14px}
+.settings-fields small{font-size:12px;font-weight:400;color:var(--a-muted)}
+.settings-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.settings-actions .member-button:disabled{opacity:.45;cursor:default}
+.settings-saved{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:#22b38c}
+.settings-saved svg{width:14px;height:14px}
+
+/* Menu items that are secondary (help, partner) */
+.account-item.subtle{color:var(--a-muted,#94a3b6);font-weight:600}
+
+/* ===== Wallet inside the account layout ===== */
+@media(max-width:1320px){.acct-shell .wallet-layout{grid-template-columns:minmax(0,1fr)}}
+.acct-shell .wallet-page{padding-top:0}
+
+/* ===== Tablet ===== */
+@media(max-width:1100px){
+  .acct-shell{grid-template-columns:220px minmax(0,1fr);gap:18px}
+  .acct-side-text small{display:none}
+  .ov-top,.ov-grid,.uids-layout{grid-template-columns:minmax(0,1fr)}
+}
+
+/* ===== Phone: sidebar becomes a sticky swipeable tab row ===== */
+@media(max-width:760px){
+  .acct-shell{grid-template-columns:minmax(0,1fr);gap:14px;padding-top:6px}
+  .acct-side{position:sticky;top:58px;z-index:20;display:block;padding:5px;margin:0 -16px;border-radius:0;background:var(--lg-surface-strong);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);box-shadow:0 8px 20px rgb(0 0 0 / .12)}
+  .acct-side-user,.acct-side-extra{display:none}
+  .acct-side-nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:0 11px;scroll-snap-type:x proximity}
+  .acct-side-nav::-webkit-scrollbar{display:none}
+  .acct-side-nav a{flex-shrink:0;gap:7px;padding:7px 12px 7px 8px;border-radius:999px;scroll-snap-align:start}
+  .acct-side-icon{width:28px;height:28px;border-radius:50%}
+  .acct-side-icon svg{width:14px;height:14px}
+  .acct-side-text b{font-size:13px;white-space:nowrap}
+  .acct-side-text small{display:none}
+  .acct-page-head h1,.ov-head h1{font-size:23px}
+  .ov-head{gap:12px}
+  .ov-head .avatar{width:52px!important;height:52px!important;font-size:22px!important}
+  .ov-edit{width:38px;padding:0;justify-content:center;font-size:0;gap:0}
+  .ov-edit svg{width:16px;height:16px}
+  .ov-balance{font-size:32px}
+  .ov-actions{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+  .ov-actions a{align-items:center;text-align:center;gap:7px;padding:12px 4px;font-size:11.5px;border-radius:16px}
+  .orders-search{max-width:none;min-width:0}
+  .settings-jump{top:118px;width:auto}
+  .member-card>.acct-form.settings-profile{grid-template-columns:minmax(0,1fr)}
+  .uids-list li{flex-wrap:wrap}
+}
+/* White button on the blue wallet card keeps blue text in both themes. */
+html .acct-shell .ov-wallet .member-button{background:#fff!important;color:#0b5fa8!important}
+html .acct-shell .ov-wallet .member-button svg{color:#0b5fa8!important}
+html .wallet-balance-card .wallet-total p{color:rgb(255 255 255 / .88)!important}
+/* Reset the site-wide mobile `nav{}` rules (absolute, dark, wrapping) for the account menus. */
+nav.acct-side-nav,nav.settings-jump,nav.ov-actions{position:static;top:auto;left:auto;right:auto;z-index:auto;height:auto;flex-wrap:nowrap;font-size:inherit;font-weight:inherit}
+nav.acct-side-nav,nav.ov-actions{background:none;box-shadow:none;padding:0}
+@media(max-width:760px){
+  nav.acct-side-nav{display:flex;padding:0 11px}
+  nav.ov-actions{display:grid}
+  nav.settings-jump{display:flex;position:sticky;top:118px;z-index:5;padding:5px}
+}

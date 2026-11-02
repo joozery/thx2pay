@@ -17,3 +17,7 @@ html[data-theme="light"] .locale-option[data-state="checked"]{background:#e7f6fd
 @media(max-width:350px){.site-header .navbar-logo img{width:78px}.site-header .nav-actions .pill{font-size:10px;padding:6px 7px}.site-header .nav-wrap{gap:5px}}
 @media(prefers-reduced-motion:reduce){.locale-menu{animation:none}}
 @media(max-width:480px){html:lang(en) .hero .hero-copy{padding-left:14%;padding-right:14%}html:lang(en) .hero h1{font-size:clamp(22px,6.1vw,32px)}html:lang(en) .categories .section-heading h2{font-size:21px}html:lang(en) .hero .quick-links a,html:lang(en) .hero .quick-links button{white-space:nowrap;font-size:12px;gap:6px;padding:0 10px}}
+.locale-sep{height:1px;margin:6px 4px;background:rgb(127 140 156 / .16)}
+.locale-theme-icon{width:18px;height:18px;flex-shrink:0;color:var(--blue)}
+.locale-menu{width:220px;max-height:min(520px,calc(100dvh - 90px));overflow-y:auto}
+.locale-option [dir="rtl"]{text-align:start}

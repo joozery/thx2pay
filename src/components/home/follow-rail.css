@@ -1,0 +1,14 @@
+/* Floating social rail: motion-driven open/close (see SocialFollowRail.tsx). */
+.follow-rail{transition:padding .3s cubic-bezier(.22,1,.36,1),border-radius .3s;overflow:hidden}
+.follow-items{display:flex;flex-direction:column;align-items:center;gap:inherit;overflow:hidden;padding:2px}
+.follow-rail .follow-toggle{transform:none!important;margin-bottom:0;flex-shrink:0}
+.follow-toggle-icon{display:grid;place-items:center}
+.follow-toggle-icon svg{width:15px;height:15px}
+.follow-rail[data-open="true"] .follow-toggle{margin-bottom:2px}
+.follow-link{flex-shrink:0}
+/* The old desktop/mobile toggle pair is replaced by one toggle. */
+.follow-rail .follow-toggle-desktop,.follow-rail .follow-toggle-mobile{display:none}
+@media(max-width:760px){
+  .follow-rail .follow-toggle{width:38px;height:38px}
+  .follow-rail[data-open="true"] .follow-link{width:38px;height:38px}
+}

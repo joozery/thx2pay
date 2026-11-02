@@ -1,0 +1,13 @@
+/* Desktop header tools: language, theme and search sit as one compact group, then a divider, then the account/login button. */
+@media(min-width:761px){
+  header.site-header .nav-actions{gap:2px}
+  header.site-header .nav-actions .locale-trigger,
+  header.site-header .nav-actions .icon-button{height:34px;min-width:34px;padding:0 8px;border-radius:10px;border:0;background:transparent;gap:6px}
+  header.site-header .nav-actions .icon-button{width:34px;padding:0}
+  header.site-header .nav-actions .locale-trigger>svg{display:none}
+  header.site-header .nav-actions .locale-trigger>.fi{width:20px;height:15px}
+  header.site-header .nav-actions .icon-button svg{width:18px;height:18px}
+  header.site-header .nav-actions .locale-trigger:hover,header.site-header .nav-actions .locale-trigger[data-state="open"],header.site-header .nav-actions .icon-button:hover{background:#ffffff10;filter:none}
+  html[data-theme="light"] header.site-header .nav-actions .locale-trigger:hover,html[data-theme="light"] header.site-header .nav-actions .locale-trigger[data-state="open"],html[data-theme="light"] header.site-header .nav-actions .icon-button:hover{background:#edf3f8}
+  header.site-header .nav-actions>.pill,header.site-header .nav-actions .user-trigger-desktop{position:relative;margin-left:12px}
+}

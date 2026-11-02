@@ -6,7 +6,7 @@ import { DropdownMenu } from "radix-ui";
 import { ChevronDownIcon, ChevronRightIcon, ExitIcon } from "@radix-ui/react-icons";
 import { useI18n } from "@/i18n/useI18n";
 import { useAuth } from "./AuthProvider";
-import { accountGroups } from "./accountMenu";
+import { accountExtras, accountNav } from "./accountMenu";
 import AccountIcon from "./AccountIcon";
 import "./account.css";
 
@@ -29,12 +29,15 @@ export default function UserMenu() {
   if (!user) return null;
   return <>
     <button type="button" className="user-trigger user-trigger-mobile" aria-label={t("บัญชีของฉัน")} onClick={() => window.dispatchEvent(new Event("thx2pay-open-account"))}><Avatar name={user.name} /></button>
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger className="user-trigger user-trigger-desktop" aria-label={t("เมนูบัญชี")}><Avatar name={user.name} /><ChevronDownIcon /></DropdownMenu.Trigger>
+    <DropdownMenu.Root modal={false}>
+      <DropdownMenu.Trigger className="user-trigger user-trigger-desktop" aria-label={t("เมนูบัญชี")}><Avatar name={user.name} size={32} /><span className="user-trigger-name">{user.name}</span><ChevronDownIcon /></DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content className="account-dropdown" align="end" sideOffset={10} collisionPadding={16}>
           <AccountSummary name={user.name} email={user.email} />
-          {accountGroups.map((group, index) => <div key={index}><DropdownMenu.Separator className="account-sep" />{group.map(item => <DropdownMenu.Item key={item.label} asChild><Link href={item.href} className="account-item"><span className="account-icon"><AccountIcon name={item.icon} /></span>{t(item.label)}<ChevronRightIcon /></Link></DropdownMenu.Item>)}</div>)}
+          <DropdownMenu.Separator className="account-sep" />
+          {accountNav.map(item => <DropdownMenu.Item key={item.key} asChild><Link href={item.href} className="account-item"><span className="account-icon"><AccountIcon name={item.icon} /></span>{t(item.label)}<ChevronRightIcon /></Link></DropdownMenu.Item>)}
+          <DropdownMenu.Separator className="account-sep" />
+          {accountExtras.map(item => <DropdownMenu.Item key={item.key} asChild><Link href={item.href} className="account-item subtle"><span className="account-icon"><AccountIcon name={item.icon} /></span>{t(item.label)}<ChevronRightIcon /></Link></DropdownMenu.Item>)}
           <DropdownMenu.Separator className="account-sep" />
           <DropdownMenu.Item className="account-item danger" onSelect={() => { logout(); router.push("/"); }}><span className="account-icon"><ExitIcon /></span>{t("ออกจากระบบ")}</DropdownMenu.Item>
         </DropdownMenu.Content>

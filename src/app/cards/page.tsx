@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/i18n/pageMeta";
 import CardsPage from "@/components/cards/CardsPage";
 
-export const metadata: Metadata = { title: "บัตรเติมเงิน | THX2PAY", description: "บัตรเติมเงิน บัตรของขวัญ และโค้ดเกมจาก THX2PAY" };
+export const metadata = pageMetadata("/cards");
 export default function Page() { return <CardsPage />; }

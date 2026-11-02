@@ -2,62 +2,68 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRightIcon, CheckIcon, ClockIcon, Cross2Icon, Pencil1Icon, ReaderIcon, BackpackIcon, PersonIcon, QuestionMarkCircledIcon } from "@radix-ui/react-icons";
+import { ArrowRightIcon, CheckIcon, ClockIcon, Cross2Icon, Pencil1Icon, ReaderIcon, BackpackIcon, DashboardIcon, IdCardIcon, PlusIcon } from "@radix-ui/react-icons";
 import { useI18n } from "@/i18n/useI18n";
+import { games } from "@/components/topup/games";
 import { Avatar } from "./UserMenu";
 import type { User } from "./AuthProvider";
+import { sampleOrders, statusLabels, useSavedUIDs, type Order } from "./accountData";
 
-export function AccountEmpty({ title, text, href, action }: { title: string; text: string; href?: string; action?: string }) {
+export function AccountEmpty({ title, text, href, action, level = 3 }: { title: string; text: string; href?: string; action?: string; level?: 2 | 3 }) {
   const { t } = useI18n();
-  return <div className="member-empty"><span><ReaderIcon /></span><h3>{t(title)}</h3><p>{t(text)}</p>{href && action && <Link className="member-button" href={href}>{t(action)}<ArrowRightIcon /></Link>}</div>;
+  const Heading = level === 2 ? "h2" : "h3";
+  return <div className="member-empty"><span><ReaderIcon /></span><Heading>{t(title)}</Heading><p>{t(text)}</p>{href && action && <Link className="member-button" href={href}>{t(action)}<ArrowRightIcon /></Link>}</div>;
 }
 
-export function AccountStats({ sample = false }: { sample?: boolean }) {
-  const { t } = useI18n();
-  return <ul className="member-stats">{[
-    { label: "คำสั่งซื้อทั้งหมด", Icon: ReaderIcon, tone: "blue", count: sample ? recentExamples.length : 0 },
-    { label: "สำเร็จแล้ว", Icon: CheckIcon, tone: "green", count: sample ? recentExamples.filter(order => order.tone === "complete").length : 0 },
-    { label: "กำลังดำเนินการ", Icon: ClockIcon, tone: "amber", count: sample ? recentExamples.filter(order => order.tone === "pending").length : 0 },
-    { label: "ยกเลิก", Icon: Cross2Icon, tone: "rose", count: sample ? recentExamples.filter(order => order.tone === "cancelled").length : 0 },
-  ].map(({ label, Icon, tone, count }) => <li key={label}><span className={`member-icon ${tone}`}><Icon /></span><div><p>{t(label)}</p><b>{count} <small>{t("รายการ")}</small></b></div><ArrowRightIcon /></li>)}</ul>;
-}
-
-
-const recentExamples = [
-  { id: "DEMO-1004", game: "Garena RoV", item: "คูปอง 325 คูปอง", image: "/images/games/icons/rov.jpg", amount: 300, date: "02/11/2026 · 14:32", status: "สำเร็จแล้ว", tone: "complete" },
-  { id: "DEMO-1003", game: "Free Fire", item: "เพชร 310 เพชร", image: "/images/games/icons/free-fire.png", amount: 100, date: "02/11/2026 · 12:15", status: "กำลังดำเนินการ", tone: "pending" },
-  { id: "DEMO-1002", game: "Genshin Impact", item: "Genesis Crystals 300 + 30", image: "/images/games/icons/genshin-impact.png", amount: 179, date: "01/11/2026 · 19:40", status: "สำเร็จแล้ว", tone: "complete" },
-  { id: "DEMO-1001", game: "PUBG MOBILE", item: "UC 325 UC", image: "/images/games/icons/pubg-mobile.png", amount: 150, date: "01/11/2026 · 10:08", status: "ยกเลิก", tone: "cancelled" },
-];
-
-function RecentOrderExamples() {
-  const { t, language } = useI18n();
-  return <><p className="member-recent-note">{t("รายการด้านล่างเป็นตัวอย่าง ไม่ใช่ธุรกรรมจริง")}</p><ul className="member-recent-list">{recentExamples.map(order => <li key={order.id}>
+export function OrderList({ orders }: { orders: Order[] }) {
+  const { t, locale } = useI18n();
+  return <ul className="member-recent-list">{orders.map(order => <li key={order.id}>
     <div className="member-recent-art"><Image src={order.image} alt="" fill sizes="48px" /></div>
     <div className="member-recent-info"><h3>{order.game}</h3><p>{t(order.item)}</p><small>{order.id} · {order.date}</small></div>
-    <div className="member-recent-result"><strong>฿{order.amount.toLocaleString(language === "th" ? "th-TH" : "en-US", { minimumFractionDigits: 2 })}</strong><span className={`member-recent-status ${order.tone}`}>{order.tone === "complete" ? <CheckIcon /> : order.tone === "pending" ? <ClockIcon /> : <Cross2Icon />}{t(order.status)}</span></div>
-  </li>)}</ul></>;
+    <div className="member-recent-result"><strong>฿{order.amount.toLocaleString(locale, { minimumFractionDigits: 2 })}</strong><span className={`member-recent-status ${order.status}`}>{order.status === "complete" ? <CheckIcon /> : order.status === "pending" ? <ClockIcon /> : <Cross2Icon />}{t(statusLabels[order.status])}</span></div>
+  </li>)}</ul>;
 }
 
+const quickActions = [
+  { href: "/topup", label: "เติมเกม", Icon: DashboardIcon },
+  { href: "/wallet/topup", label: "เติมเงิน", Icon: BackpackIcon },
+  { href: "/cards", label: "บัตรเติมเงิน", Icon: IdCardIcon },
+  { href: "/account/orders", label: "คำสั่งซื้อ", Icon: ReaderIcon },
+];
+
+// Overview: the few things customers check most, in priority order.
 export default function AccountDashboard({ user }: { user: User }) {
-  const { t, language } = useI18n();
-  const spending = recentExamples.filter(order => order.tone === "complete").reduce((total, order) => total + order.amount, 0);
+  const { t } = useI18n();
+  const { items: uids } = useSavedUIDs(user.email);
   return <>
-    <section className="member-profile-hero" aria-label={t("ข้อมูลสมาชิก")}>
-      <div className="member-profile-identity"><div className="member-profile-main"><Avatar name={user.name} size={88} /><div><span className="member-badge"><PersonIcon />{t("สมาชิก THX2PAY")}</span><h2>{user.name}</h2><p>{user.email}</p></div><Link className="member-edit-link" href="/account/edit"><Pencil1Icon />{t("แก้ไขโปรไฟล์")}</Link></div><div className="member-profile-meta"><span><CheckIcon />{t("พร้อมดูแลทุกการเติมเกม")}</span><span>{t("บัญชีตัวอย่าง")}</span></div></div>
-      <Image className="member-hero-mascot" src="/images/banners/partner-v1.webp" alt="" fill sizes="400px" />
-      <div className="member-level"><span>{t("ข้อมูลบัญชี")}</span><h3>{t("สมาชิกทั่วไป")}</h3><dl><div><dt>{t("ยอดใช้จ่ายสะสม (ตัวอย่าง)")}</dt><dd>฿{spending.toLocaleString(language === "th" ? "th-TH" : "en-US", { minimumFractionDigits: 2 })}</dd></div></dl><Link href="/account/settings">{t("จัดการบัญชี")}<ArrowRightIcon /></Link></div>
-    </section>
-    <p className="member-profile-sample-note">{t("ยอดเงินและสถิติด้านล่างเป็นข้อมูลตัวอย่างสำหรับแสดงหน้าบัญชี")}</p>
-    <AccountStats sample />
-    <div className="member-dashboard-grid">
-      <div className="member-main-column"><Link className="member-promo" href="/promotions"><Image src="/images/banners/offers-v1.webp" alt="" fill sizes="(max-width: 900px) 90vw, 60vw" /><div><span>THX2PAY SPECIAL OFFERS</span><h2>{t("เติมความสนุกให้เกมโปรด")}</h2><p>{t("รวมโปรโมชั่นและสิทธิพิเศษไว้ที่เดียว")}</p><span className="member-button">{t("ดูโปรโมชั่น")}<ArrowRightIcon /></span></div></Link>
-        <section className="member-card"><div className="member-card-head"><span className="member-icon blue"><ReaderIcon /></span><div><h2>{t("รายการล่าสุด")}</h2><p>{t("ติดตามรายการเติมเกมของคุณ")}</p></div><Link href="/account/history">{t("ดูทั้งหมด")}<ArrowRightIcon /></Link></div><RecentOrderExamples /></section>
-      </div>
-      <div className="member-side-column"><section className="member-card member-wallet"><div className="member-card-head"><span className="member-icon blue"><BackpackIcon /></span><h2>{t("กระเป๋าเงินของฉัน")}</h2></div><p>{t("ยอดเงินคงเหลือ (ตัวอย่าง)")}</p><div className="member-wallet-balance"><b>฿1,250<span>.00</span></b><Link className="member-button" href="/wallet/topup">+ {t("เติมเงิน")}</Link></div><div className="member-wallet-shortcuts">{[{ href: "/wallet/topup", label: "เติมเงิน", Icon: BackpackIcon }, { href: "/account/history", label: "ประวัติ", Icon: ClockIcon }, { href: "/account/uids", label: "UID", Icon: ReaderIcon }, { href: "/account/settings", label: "ตั้งค่า", Icon: PersonIcon }].map(({href,label,Icon}) => <Link key={href} href={href}><span><Icon /></span>{t(label)}</Link>)}</div></section>
-        <section className="member-card member-benefits"><span className="member-badge">THX2PAY PARTNER</span><h2>{t("เติมมากกว่า คุ้มกว่า")}</h2><p>{t("สมัครตัวแทน รับส่วนลดพิเศษ")}</p><Link href="/partner">{t("ดูสิทธิพิเศษ")}<ArrowRightIcon /></Link></section>
-        <section className="member-card"><div className="member-card-head"><span className="member-icon rose"><QuestionMarkCircledIcon /></span><div><h2>{t("ช่องทางติดต่อ")}</h2><p>{t("หากมีคำถามหรือพบปัญหา")}</p></div></div><div className="member-contact-links"><Link href="/help">{t("ศูนย์ช่วยเหลือ")}</Link><a href="mailto:support@thx2pay.com">{t("ติดต่อเรา")}</a></div></section>
-      </div>
+    <div className="ov-head">
+      <Avatar name={user.name} size={64} />
+      <div className="ov-head-text"><span className="ov-kicker">MY THX2PAY</span><h1>{t("สวัสดี")}, {user.name}</h1><p>{user.email}</p></div>
+      <Link className="ov-edit" href="/account/settings#profile"><Pencil1Icon />{t("แก้ไขโปรไฟล์")}</Link>
+    </div>
+
+    <div className="ov-top">
+      <section className="ov-wallet" aria-labelledby="ov-wallet-title">
+        <div className="ov-wallet-row"><span className="ov-wallet-icon"><BackpackIcon /></span><h2 id="ov-wallet-title">{t("ยอดเงินคงเหลือ")}</h2></div>
+        <b className="ov-balance">฿0<span>.00</span></b>
+        <div className="ov-wallet-actions"><Link className="member-button" href="/wallet/topup"><PlusIcon />{t("เติมเงิน")}</Link><Link className="ov-ghost" href="/wallet/topup#wallet-transactions">{t("ดูรายการ")}</Link></div>
+      </section>
+      <nav className="ov-actions" aria-label={t("ทางลัด")}>
+        {quickActions.map(({ href, label, Icon }) => <Link key={href} href={href}><span><Icon /></span>{t(label)}</Link>)}
+      </nav>
+    </div>
+
+    <div className="ov-grid">
+      <section className="member-card" aria-labelledby="ov-orders-title">
+        <div className="ov-card-head"><h2 id="ov-orders-title">{t("คำสั่งซื้อล่าสุด")}</h2><Link href="/account/orders">{t("ดูทั้งหมด")}<ArrowRightIcon /></Link></div>
+        <p className="member-recent-note">{t("รายการด้านล่างเป็นตัวอย่าง ไม่ใช่ธุรกรรมจริง")}</p>
+        <OrderList orders={sampleOrders.slice(0, 3)} />
+      </section>
+      <section className="member-card" aria-labelledby="ov-uids-title">
+        <div className="ov-card-head"><h2 id="ov-uids-title">{t("UID ของฉัน")}</h2><Link href="/account/uids">{t("จัดการ")}<ArrowRightIcon /></Link></div>
+        {uids.length ? <ul className="ov-uids">{uids.slice(0, 4).map(item => { const game = games.find(entry => entry.id === item.game); return <li key={item.id}>{game && <Image src={game.icon} alt="" width={36} height={36} />}<div><strong>{game?.name ?? item.game}</strong><span>{item.uid}</span></div><Link href={`/topup?game=${item.game}`} className="ov-uid-go">{t("เติม")}</Link></li>; })}</ul>
+          : <div className="ov-uid-empty"><p>{t("บันทึก UID ไว้ ครั้งหน้าไม่ต้องพิมพ์ใหม่")}</p><Link className="member-button" href="/account/uids"><PlusIcon />{t("เพิ่ม UID")}</Link></div>}
+      </section>
     </div>
   </>;
 }

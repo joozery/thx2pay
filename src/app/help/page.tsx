@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/i18n/pageMeta";
 import HelpPage from "@/components/help/HelpPage";
 
-export const metadata: Metadata = { title: "ช่วยเหลือ | THX2PAY", description: "คำถามที่พบบ่อยและช่องทางติดต่อทีมงาน THX2PAY" };
+export const metadata = pageMetadata("/help");
 export default function Page() { return <HelpPage />; }

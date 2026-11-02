@@ -11,6 +11,7 @@ import {
   PersonIcon,
   QuestionMarkCircledIcon,
   RocketIcon,
+  ClockIcon,
 } from "@radix-ui/react-icons";
 import { useI18n } from "@/i18n/useI18n";
 import Navbar from "@/components/home/Navbar";
@@ -19,7 +20,10 @@ import ContactDialog from "@/components/home/ContactDialog";
 import PageHero from "@/components/home/PageHero";
 import SearchDialog from "@/components/home/SearchDialog";
 import type { Category } from "@/components/home/categories";
+import { contactChannels, serviceHours } from "@/components/home/contactChannels";
+import ChannelIcon from "@/components/home/ChannelIcon";
 import "./help.css";
+import "./help-channels.css";
 
 const topics = [
   {
@@ -117,6 +121,25 @@ export default function HelpPage() {
           <label className="help-question-search"><MagnifyingGlassIcon /><span className="sr-only">{t("ค้นหาคำถาม")}</span><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder={t("ค้นหาคำถาม เช่น UID, ชำระเงิน, บัญชี")} /></label>
           <div className="help-question-list">{visibleQuestions.length ? visibleQuestions.map(item => <details id={item.id} key={item.id} className="help-question"><summary><span>{t(item.question)}</span><ChevronDownIcon /></summary><p>{t(item.answer)}</p></details>) : <div className="help-no-results"><strong>{t("ไม่พบคำตอบที่ค้นหา")}</strong><p>{t("ลองใช้คำค้นอื่น หรือส่งคำถามถึงทีมงาน")}</p></div>}</div>
         </div>
+      </section>
+
+      <section className="help-channels" id="help-contact" aria-labelledby="help-channels-title">
+        <div className="help-section-heading"><span className="help-section-kicker">03 / {t("ติดต่อเรา")}</span><h2 id="help-channels-title">{t("ช่องทางติดต่ออื่น ๆ")}</h2><p>{t("เลือกช่องทางที่สะดวก ทีมงานพร้อมช่วยเหลือ")} · <ClockIcon aria-hidden="true" className="help-hours-icon" />{t(serviceHours)}</p></div>
+        <ul className="help-channel-grid">{contactChannels.map(channel => {
+          const ready = Boolean(channel.href);
+          const body = <>
+            <ChannelIcon channel={channel} />
+            <span className="help-channel-copy">
+              <h3>{t(channel.name)}{channel.badge && <span className="help-channel-badge">{t(channel.badge)}</span>}</h3>
+              <span className="help-channel-handle">{channel.handle}</span>
+              <span className="help-channel-desc">{t(channel.description)}</span>
+            </span>
+            <span className={`help-channel-action${ready ? "" : " soon"}`}>{t(ready ? channel.action : "เร็ว ๆ นี้")}{ready && <ArrowRightIcon aria-hidden="true" />}</span>
+          </>;
+          return <li key={channel.id} className={`help-channel${channel.id === "line" ? " featured" : ""}`} style={{ "--channel": channel.color } as React.CSSProperties}>
+            {ready ? <a href={channel.href!} target={channel.href!.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">{body}</a> : <div aria-disabled="true">{body}</div>}
+          </li>;
+        })}</ul>
       </section>
     </main>
     <Footer onOpenDialog={setModal} />

@@ -1,19 +1,27 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { Suspense, useEffect, useState, type ReactNode } from "react";
 import { createInstance } from "i18next";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 import th from "./locales/th.json";
 import en from "./locales/en.json";
+import zh from "./locales/zh.json";
+import id from "./locales/id.json";
+import fil from "./locales/fil.json";
+import ko from "./locales/ko.json";
+import ar from "./locales/ar.json";
+import { isLanguage, languageCodes, languageInfo, type Language } from "./languages";
+import DocumentMeta from "./DocumentMeta";
 
 export default function I18nProvider({ children }: { children: ReactNode }) {
   const [instance] = useState(() => {
     const i18n = createInstance().use(initReactI18next);
     void i18n.init({
-      resources: { th: { translation: th }, en: { translation: en } },
+      resources: { th: { translation: th }, en: { translation: en }, zh: { translation: zh }, id: { translation: id }, fil: { translation: fil }, ko: { translation: ko }, ar: { translation: ar } },
       lng: "th",
-      fallbackLng: "th",
-      supportedLngs: ["th", "en"],
+      // Missing strings fall back to English first (more widely understood than Thai), then Thai.
+      fallbackLng: { th: [], en: ["th"], default: ["en", "th"] },
+      supportedLngs: languageCodes,
       initAsync: false,
       keySeparator: false,
       nsSeparator: false,
@@ -25,18 +33,18 @@ export default function I18nProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     function syncLanguage(language: string) {
-      const locale = language === "en" ? "en" : "th";
+      const locale: Language = isLanguage(language) ? language : "th";
       document.documentElement.lang = locale;
-      document.title = locale === "en" ? "THX2PAY | Fast, secure game top-ups" : "THX2PAY | เติมเกมออนไลน์ รวดเร็ว ปลอดภัย";
+      document.documentElement.dir = languageInfo(locale).dir;
       try { localStorage.setItem("thx2pay-language", locale); } catch { /* Language switching works without storage. */ }
     }
     function handleStorage(event: StorageEvent) {
       if (event.key !== "thx2pay-language" && event.key !== null) return;
-      const locale = event.newValue === "en" ? "en" : "th";
+      const locale: Language = isLanguage(event.newValue) ? event.newValue : "th";
       if (instance.resolvedLanguage !== locale) void instance.changeLanguage(locale);
     }
-    let locale = "th";
-    try { locale = localStorage.getItem("thx2pay-language") === "en" ? "en" : "th"; } catch { /* Keep the default language. */ }
+    let locale: Language = "th";
+    try { const saved = localStorage.getItem("thx2pay-language"); if (isLanguage(saved)) locale = saved; } catch { /* Keep the default language. */ }
     instance.on("languageChanged", syncLanguage);
     if (instance.resolvedLanguage !== locale) void instance.changeLanguage(locale);
     else syncLanguage(locale);
@@ -47,5 +55,5 @@ export default function I18nProvider({ children }: { children: ReactNode }) {
     };
   }, [instance]);
 
-  return <I18nextProvider i18n={instance}>{children}</I18nextProvider>;
+  return <I18nextProvider i18n={instance}><Suspense fallback={null}><DocumentMeta /></Suspense>{children}</I18nextProvider>;
 }

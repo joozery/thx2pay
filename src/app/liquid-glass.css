@@ -1,0 +1,147 @@
+/*
+  Liquid glass + minimal strokes (site-wide override, loaded last from layout.tsx).
+  1. Surfaces become translucent "glass" instead of flat fills.
+  2. Outline strokes (borders) are removed; depth comes from soft shadows,
+     a light top highlight and blur. Radio marks and switches keep their rings
+     because they need them to read as controls.
+*/
+
+:root{
+  --lg-surface:rgb(34 39 46 / .52);
+  --lg-surface-strong:rgb(26 30 36 / .74);
+  --lg-soft:rgb(255 255 255 / .05);
+  --lg-highlight:inset 0 1px 0 rgb(255 255 255 / .07);
+  --lg-shadow:0 10px 30px rgb(0 0 0 / .28);
+  --lg-shadow-float:0 22px 60px rgb(0 0 0 / .45);
+  --lg-blur:blur(22px) saturate(170%);
+}
+html[data-theme="light"]{
+  --lg-surface:rgb(255 255 255 / .62);
+  --lg-surface-strong:rgb(255 255 255 / .8);
+  --lg-soft:rgb(16 40 64 / .04);
+  --lg-highlight:inset 0 1px 0 rgb(255 255 255 / .95);
+  --lg-shadow:0 8px 28px rgb(16 40 64 / .07);
+  --lg-shadow-float:0 22px 56px rgb(16 40 64 / .16);
+}
+
+/* Soft colour fields behind the page so the glass has something to refract. */
+body{background-attachment:fixed}
+html[data-theme="light"] body{background:radial-gradient(60vw 50vh at 85% 0%,#d6ecfb 0%,transparent 70%),radial-gradient(50vw 45vh at 0% 45%,#e6f1fb 0%,transparent 70%),radial-gradient(55vw 45vh at 90% 95%,#e3f4fd 0%,transparent 70%),#f5f8fc;background-attachment:fixed}
+
+/* ---------- 1. Surface tokens used by page components ---------- */
+*{
+  --topup-surface:var(--lg-surface)!important;
+  --a-surface:var(--lg-surface)!important;
+  --w-surface:var(--lg-surface)!important;
+  --p-surface:var(--lg-surface)!important;
+  --topup-border:transparent!important;
+  --a-border:transparent!important;
+  --w-border:transparent!important;
+  --p-border:transparent!important;
+  --banner-border:transparent!important;
+}
+
+/* ---------- 2. Remove outline strokes ---------- */
+:is(
+  header,.site-header,.footer-bottom,
+  .gc,.feature-card,.support-card,.support-portrait,.mascot-card .artwork,.about-faq,.faq,.faq details,
+  .platforms,.platforms button,.search-bar,.slider-arrow,.hero-arrow,.promotion-banner,.promotion-banners-arrows button,
+  .hx-banner,.hx-btn,.hx-eyebrow,.hx-arrows button,.pill,.person-icon,.feature-icon,.theme-toggle,.user-trigger,
+  .follow-rail,.follow-rail.collapsed,footer .socials button,footer .payments .payment-badge,
+  .dialog,.search-dialog,.search-dialog-form,.search-dialog-hint,.search-platforms button,
+  .language-options,.locale-menu,.nav-dropdown,.account-dropdown,.account-card,.account-badge,.account-sheet,.tab-bar,.app-tab-bar,
+  .mobile-navigation.open,.site-header .mobile-navigation.open,.site-header .app-menu-grid a,
+  .topup-intro,.topup-search,.topup-help,.topup-empty,.topup-game-card,.topup-game-count,.topup-game-platform,.topup-featured-game,
+  .topup-platform-filters button,.topup-selects select,.topup-game-tag.new,.topup-game-tag.recommended,
+  .cards-game,.cards-search,.cards-selection,.cards-selection li,.cards-dialog-total,.cards-price-options label,.cards-dialog form input,
+  .section-card,.section-cta,.section-faq details,
+  .partner-benefits article,.partner-fit,.partner-steps li,
+  .promos-card,.promos-coupon,.promos-coupon::before,.promos-coupon::after,.promos-coupon-code,.promos-filters button,.promos-partner,.promos-preview-note,
+  .help-contact,.help-contact-icon,.help-question+.help-question,.help-question-list,.help-question-search,.help-topic-card,
+  .flow-panel,.flow-aside,.flow-notice,.flow-panel-footer,.flow-summary div,.flow-steps span,.flow-amount-grid button,.flow-methods label,
+  .flow-form input,.flow-form select,.flow-form textarea,
+  .acct-balance,.acct-detail,.acct-item,.acct-profile,.acct-settings>div,.acct-uid-list li,.acct-form input,.acct-form select,
+  .member-card,.member-badge,.member-benefits>a,.member-button,.member-demo-note,.member-edit-link,.member-form-foot,
+  .member-game-select,.member-game-select-menu,.member-history-filters input,.member-history-tabs,.member-level,.member-level>a,
+  .member-logout,.member-notification-rows>div,.member-password-actions>button:first-child,.member-password-demo,.member-password-dialog,
+  .member-password-review dl,.member-password-steps li>span,.member-profile-hero,.member-profile-main .avatar,.member-promo,
+  .member-recent-list>li,.member-section-hero,.member-security-row,.member-session,.member-stats>li,.member-status,
+  .member-table-footer,.member-tabs,.member-wallet-shortcuts,.member-card>.acct-settings .theme-toggle,
+  .wallet-amount-grid>button,.wallet-balance-breakdown>div,.wallet-balance-card,.wallet-card,.wallet-custom-input input,
+  .wallet-dialog-steps li>span,.wallet-help,.wallet-help a,.wallet-hero,.wallet-method-grid>button,.wallet-modal,
+  .wallet-modal-actions>button:first-child,.wallet-payment-preview,.wallet-perks,.wallet-primary,.wallet-transactions td,.wallet-transactions-footer
+){border-color:transparent!important}
+
+/* Selection states that used to rely on a border now use a tint + soft ring shadow instead. */
+.platforms button.selected{background:rgb(18 174 241 / .12)}
+:is(.wallet-method-grid>button,.wallet-amount-grid>button)[aria-pressed="true"],
+:is(.flow-amount-grid button,.flow-methods label,.cards-price-options label).selected,
+.acct-item[aria-current="page"]{box-shadow:0 0 0 2px rgb(18 174 241 / .55)!important}
+
+/* Inputs: filled glass fields, focus shows a soft ring instead of a stroke. */
+:is(.flow-form,.acct-form) :is(input,select,textarea),.cards-dialog form input,.wallet-custom-input input,
+.member-history-filters input,.topup-selects select{background:var(--lg-soft)!important}
+:is(input,select,textarea):focus-visible{outline:none}
+:is(.flow-form,.acct-form) :is(input,select,textarea):focus,.cards-dialog form input:focus,.wallet-custom-input input:focus,
+.member-history-filters input:focus,.topup-selects select:focus{box-shadow:0 0 0 3px rgb(18 174 241 / .35)!important}
+:is(.topup-search,.cards-search,.help-question-search,.search-dialog-form,.search-bar):focus-within{box-shadow:0 0 0 3px rgb(18 174 241 / .3)!important}
+
+/* ---------- 3. Glass on cards and panels ---------- */
+:is(.gc,.feature-card,.topup-game-card,.topup-featured-game,.cards-game,.section-card,.partner-benefits article,.partner-steps li,
+  .promos-card,.help-topic-card,.flow-panel,.flow-aside,.member-card,.wallet-card,.wallet-balance-card,.acct-profile,.acct-detail,
+  .about-faq,.topup-help,.help-contact,.promos-partner,.mascot-card,.account-card){
+  box-shadow:var(--lg-shadow),var(--lg-highlight);
+}
+:is(.gc,.topup-game-card,.topup-featured-game,.cards-game,.promos-card,.help-topic-card):hover{box-shadow:0 16px 40px rgb(0 0 0 / .3),var(--lg-highlight)}
+html[data-theme="light"] :is(.gc,.topup-game-card,.topup-featured-game,.cards-game,.promos-card,.help-topic-card):hover{box-shadow:0 16px 40px rgb(16 40 64 / .12),var(--lg-highlight)}
+.gc{transition:transform .2s,box-shadow .2s}
+.gc:hover{transform:translateY(-3px)}
+html[data-theme="light"] :is(.feature-card,.about-faq,.mascot-card){background:var(--lg-surface)!important}
+
+/* ---------- 4. Floating layers: strong glass with blur ---------- */
+/* Blur lives on a pseudo-element: backdrop-filter on the header itself would trap the fixed mobile menu inside it. */
+.site-header{background:transparent!important;box-shadow:0 1px 0 rgb(255 255 255 / .04)}
+.site-header::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:rgb(16 17 17 / .62);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur)}
+html[data-theme="light"] .site-header{box-shadow:0 4px 24px rgb(16 40 64 / .05)}
+html[data-theme="light"] .site-header::before{background:rgb(255 255 255 / .62)}
+
+:is(.nav-dropdown,.account-dropdown,.language-options,.locale-menu,.dialog,.search-dialog,.member-password-dialog,.wallet-modal,
+  .member-game-select-menu,.site-header .mobile-navigation.open,.mobile-navigation.open,.account-sheet){
+  background:var(--lg-surface-strong)!important;
+  -webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);
+  box-shadow:var(--lg-shadow-float),var(--lg-highlight)!important;
+}
+
+:is(.tab-bar,.app-tab-bar,.follow-rail,.follow-rail.collapsed){
+  background:var(--lg-surface-strong)!important;
+  -webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);
+  box-shadow:var(--lg-shadow-float),var(--lg-highlight)!important;
+}
+
+/* Small round controls floating over images. */
+:is(.hero-arrow,.slider-arrow,.promotion-banners-arrows button,.hx-arrows button){
+  background:rgb(255 255 255 / .16)!important;color:#fff;
+  -webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);
+  box-shadow:0 8px 24px rgb(0 0 0 / .22),inset 0 1px 0 rgb(255 255 255 / .25)!important;
+}
+:is(.slider-arrow,.promotion-banners-arrows button){background:var(--lg-surface-strong)!important;color:var(--foreground)}
+
+/* Hero quick links: frosted tiles. */
+.hero .quick-links :is(a,button){background:var(--lg-surface-strong)!important;-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);box-shadow:var(--lg-shadow),var(--lg-highlight)!important}
+
+/* Buttons and chips: soft glass instead of outlines. */
+:is(.platforms button,.topup-platform-filters button,.promos-filters button,.search-platforms button,.member-history-tabs,.member-tabs){background:var(--lg-soft)}
+.pill,.hx-btn.primary,.wallet-primary,.member-button{box-shadow:0 8px 22px rgb(18 174 241 / .28),inset 0 1px 0 rgb(255 255 255 / .35)}
+
+/* Icon rings that were drawn with strokes become filled glass chips. */
+:is(.person-icon,.feature-icon,.member-password-steps li>span,.wallet-dialog-steps li>span,.flow-steps span,.help-contact-icon){background:var(--lg-soft)}
+.uid-benefits .support-card .person-icon{background:rgb(255 255 255 / .2)}
+
+/* Separators drawn as 1px lines fade out; spacing does the grouping. */
+.account-sep{background:transparent!important}
+
+/* Popups (Radix dialogs/menus/selects) lock scrolling with overflow:hidden on <body>.
+   That turns <body> into the scroll container and the sticky navbar jumps away (it "disappears").
+   Lock on <html> instead so the header stays put. */
+html body[data-scroll-locked]{overflow:visible!important}
+html:has(body[data-scroll-locked]){overflow:hidden}

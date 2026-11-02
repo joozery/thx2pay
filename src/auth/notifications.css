@@ -1,0 +1,49 @@
+/* Notification bell + panel + inbox list (liquid glass). */
+.ntf-bell{position:relative}
+.ntf-badge{position:absolute;top:3px;right:2px;display:grid;place-items:center;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:#ef4a64;color:#fff;font-size:10px;font-weight:800;line-height:1;box-shadow:0 0 0 2px var(--background,#101111)}
+html[data-theme="light"] .ntf-badge{box-shadow:0 0 0 2px #fff}
+
+.ntf-panel{z-index:70;width:min(380px,calc(100vw - 24px));padding:14px;border-radius:22px;color:var(--foreground);background:var(--lg-surface-strong);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);box-shadow:var(--lg-shadow-float),var(--lg-highlight);animation:ntf-in .16s ease-out;--ntf-muted:#94a3b6}
+html[data-theme="light"] .ntf-panel,html[data-theme="light"] .ntf-page{--ntf-muted:#65768b}
+@keyframes ntf-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.ntf-panel{animation:none}}
+.ntf-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:2px 4px 10px}
+.ntf-head h2{font-size:17px;letter-spacing:0}
+.ntf-text-btn{padding:0;background:transparent;color:var(--blue);font-size:12.5px;font-weight:700}
+.ntf-text-btn:disabled{color:var(--ntf-muted);opacity:.6;cursor:default}
+.ntf-filter{display:flex;gap:2px;padding:3px;margin-bottom:8px;border-radius:13px;background:var(--lg-soft);width:max-content}
+.ntf-filter button{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:10px;background:transparent;color:var(--ntf-muted);font-size:12.5px;font-weight:700}
+.ntf-filter button span{min-width:18px;padding:0 5px;border-radius:999px;background:#ef4a64;color:#fff;font-size:10.5px;text-align:center}
+.ntf-filter button[aria-pressed="true"]{background:var(--lg-surface-strong);color:var(--foreground);box-shadow:0 3px 10px rgb(0 0 0 / .12)}
+
+.ntf-list{display:grid;gap:2px;margin:0;padding:0;list-style:none;max-height:min(380px,60dvh);overflow-y:auto;overscroll-behavior:contain}
+.ntf-item{position:relative;display:flex;align-items:flex-start;gap:12px;padding:10px;border-radius:14px;color:inherit;transition:background .12s}
+.ntf-item:hover{background:var(--lg-soft)}
+.ntf-item.unread{background:rgb(37 173 245 / .07)}
+.ntf-item.unread:hover{background:rgb(37 173 245 / .12)}
+.ntf-icon{display:grid;place-items:center;flex-shrink:0;width:36px;height:36px;border-radius:11px;background:var(--lg-soft);color:var(--ntf-muted)}
+.ntf-icon svg{width:17px;height:17px}
+.ntf-item.order .ntf-icon{color:#22b38c;background:rgb(34 179 140 / .12)}
+.ntf-item.promo .ntf-icon{color:#e8a321;background:rgb(244 183 60 / .14)}
+.ntf-copy{flex:1;min-width:0;display:grid;gap:2px}
+.ntf-copy strong{font-size:13.5px;line-height:1.4}
+.ntf-item:not(.unread) .ntf-copy strong{font-weight:600}
+.ntf-copy>span{font-size:12.5px;line-height:1.5;color:var(--ntf-muted)}
+.ntf-copy small{font-size:11px;color:var(--ntf-muted)}
+.ntf-dot{flex-shrink:0;width:9px;height:9px;margin-top:6px;border-radius:50%;background:var(--blue)}
+.ntf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.ntf-empty{padding:26px 10px;text-align:center;font-size:13px;color:var(--ntf-muted)}
+.ntf-sample{margin:8px 4px 0;font-size:11px;color:#c98a12}
+.ntf-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;padding:10px 4px 0;box-shadow:inset 0 1px 0 rgb(127 140 156 / .14)}
+.ntf-foot a{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--ntf-muted)}
+.ntf-foot a svg{width:14px;height:14px}
+.ntf-foot a:hover{color:var(--foreground)}
+.ntf-foot .ntf-all{color:var(--blue)}
+
+/* Inbox page */
+.ntf-page .ntf-list{max-height:none}
+.ntf-page-tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.acct-side-badge{margin-left:auto;min-width:20px;padding:1px 6px;border-radius:999px;background:#ef4a64;color:#fff;font-size:11px;font-weight:800;text-align:center;flex-shrink:0}
+@media(max-width:760px){.ntf-panel{width:calc(100vw - 24px)}.acct-side-badge{margin-left:2px}}
+.ntf-item.order.pending .ntf-icon{color:#e8a321;background:rgb(244 183 60 / .14)}
+.ntf-item.order.cancelled .ntf-icon{color:#e5677f;background:rgb(229 103 127 / .12)}

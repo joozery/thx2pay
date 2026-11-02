@@ -41,7 +41,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.search-results::-webkit-scrollb
  .faq details p{font-size:13px}
  .footer-top{display:grid;grid-template-columns:1fr;gap:25px}
  .footer-top p,.contact a{font-size:13px}
- .contact h3{margin-bottom:10px}
+ .contact :is(h2,h3){margin-bottom:10px}
  .footer-bottom{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;padding-top:20px}
  .footer-bottom>small{width:100%;font-size:11px}
  .footer-bottom>button{min-height:36px;font-size:12px}
@@ -92,3 +92,10 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.search-results::-webkit-scrollb
 html .search-results,html .dialog,html .search-dialog,html .mobile-navigation{scrollbar-width:none}
 @media(max-width:760px){body footer .payments{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;width:100%}body footer .payments .payment-badge{width:100%;height:42px}}
 @media(min-width:761px) and (max-width:1000px){.site-header .desktop-navigation{display:none}.site-header .mobile-menu{display:flex;margin-left:auto}.site-header .mobile-navigation.open{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));position:absolute;top:54px;left:0;right:0;height:auto;padding:16px 24px;gap:8px;background:#191b1e;border-bottom:1px solid #ffffff14}.site-header .mobile-navigation a{padding:12px;border-radius:10px;background:#ffffff04}html[data-theme="light"] .site-header .mobile-navigation{background:#fff}html[data-theme="light"] .site-header .mobile-navigation a{background:#f3f7fb}}
+
+/* Mobile: hero background glow reaches exactly to the screen edges, never past them (it caused sideways scrolling). */
+@media(max-width:760px){.hero:before{inset:0 calc((100% - 100vw)/2)}}
+/* Mobile gutter is 16px, so edge-to-edge rails bleed by 16px (24px pushed past the screen). */
+@media(max-width:760px){.topup-page .topup-featured-list{margin-right:-16px;padding-right:16px}}
+/* All widths: the hero glow may bleed past the container but never past the screen edge (scrollbar-safe). */
+main .hero:before{left:max(-120px,calc((100% - 100vw) / 2 + 8px));right:max(-120px,calc((100% - 100vw) / 2 + 8px))}

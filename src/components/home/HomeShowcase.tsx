@@ -13,6 +13,8 @@ import "./home-showcase.css";
 
 const limit = 12;
 const recommended = games.filter(game => game.tag === "recommended").slice(0, limit);
+// Home "เกมแนะนำ" row: tagged picks first, then other games so the slider always has more than fits on screen.
+const recommendedRow = [...recommended, ...games.filter(game => game.tag !== "recommended")].slice(0, limit);
 const newest = games.filter(game => game.tag === "new").slice(0, limit);
 
 // Example price, same placeholder as the cards page until the real catalog is connected.
@@ -66,7 +68,7 @@ function GameGrid({ items, href, kind, label }: { items: Game[]; href: string; k
 function PremiumGrid() {
   const { t } = useI18n();
   return <Slider label="แอพพรีเมียม">
-    {premiumApps.map(app => <div className="gc" key={app.id}><Link href="/cards" className="gc-button" aria-label={`${t("ซื้อพรีเมียม")} ${app.name}`}>
+    {premiumApps.map(app => <div className="gc" key={app.id}><Link href="/premium" className="gc-button" aria-label={`${t("ซื้อพรีเมียม")} ${app.name}`}>
       <span className="gc-art gc-logo" style={{ background: app.color }} aria-hidden="true"><Image src={app.logo} alt="" width={72} height={72} unoptimized /></span>
       <span className="gc-info"><span className="gc-text"><b>{app.name}</b><small>{t(app.category)}</small></span><ChevronRightIcon aria-hidden="true" /></span>
     </Link></div>)}
@@ -77,7 +79,7 @@ export default function HomeShowcase() {
   return <>
     <RevealSection id="home-games" className="showcase" aria-labelledby="home-recommended-title">
       <SectionHead id="home-recommended-title" label="RECOMMENDED" title="เกมแนะนำ" text="เกมยอดนิยมที่เติมกันมากที่สุด" href="/topup" />
-      <GameGrid items={recommended} href="/topup" kind="topup" label="เกมแนะนำ" />
+      <GameGrid items={recommendedRow} href="/topup" kind="topup" label="เกมแนะนำ" />
     </RevealSection>
 
     <RevealSection id="home-new" className="showcase" aria-labelledby="home-new-title">
@@ -86,7 +88,7 @@ export default function HomeShowcase() {
     </RevealSection>
 
     <RevealSection id="home-premium" className="showcase" aria-labelledby="home-premium-title">
-      <SectionHead id="home-premium-title" label="PREMIUM APPS" title="แอพพรีเมียม" text="แอพยอดนิยมสำหรับดูหนัง ฟังเพลง และทำงาน" href="/cards" />
+      <SectionHead id="home-premium-title" label="PREMIUM APPS" title="แอพพรีเมียม" text="แอพยอดนิยมสำหรับดูหนัง ฟังเพลง และทำงาน" href="/premium" />
       <PremiumGrid />
     </RevealSection>
 

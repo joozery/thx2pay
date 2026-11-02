@@ -7,7 +7,7 @@ import { Dialog } from "radix-ui";
 import { ChevronRightIcon, Cross2Icon, ExitIcon } from "@radix-ui/react-icons";
 import { useI18n } from "@/i18n/useI18n";
 import { useAuth } from "./AuthProvider";
-import { accountGroups } from "./accountMenu";
+import { accountExtras, accountNav } from "./accountMenu";
 import AccountIcon from "./AccountIcon";
 import { AccountSummary } from "./UserMenu";
 import "./account.css";
@@ -35,7 +35,10 @@ export default function AccountSheet() {
         <div className="sheet-top"><Dialog.Title>{t("บัญชีของฉัน")}</Dialog.Title><Dialog.Close className="icon-button" aria-label={t("ปิด")}><Cross2Icon /></Dialog.Close></div>
         <div className="sheet-body">
           <AccountSummary name={user.name} email={user.email} />
-          {accountGroups.map((group, index) => <div key={index}><div className="account-sep" />{group.map(item => <Link key={item.label} href={item.href} className="account-item" onClick={() => setOpen(false)}><span className="account-icon"><AccountIcon name={item.icon} /></span>{t(item.label)}<ChevronRightIcon /></Link>)}</div>)}
+          <div className="account-sep" />
+          {accountNav.map(item => <Link key={item.key} href={item.href} className="account-item" onClick={() => setOpen(false)}><span className="account-icon"><AccountIcon name={item.icon} /></span>{t(item.label)}<ChevronRightIcon /></Link>)}
+          <div className="account-sep" />
+          {accountExtras.map(item => <Link key={item.key} href={item.href} className="account-item subtle" onClick={() => setOpen(false)}><span className="account-icon"><AccountIcon name={item.icon} /></span>{t(item.label)}<ChevronRightIcon /></Link>)}
           <div className="account-sep" />
           <button className="account-item danger" onClick={() => { setOpen(false); logout(); router.push("/"); }}><span className="account-icon"><ExitIcon /></span>{t("ออกจากระบบ")}</button>
         </div>

@@ -1,0 +1,5 @@
+.news-empty{display:flex;flex-direction:column;align-items:center;text-align:center;margin:56px auto 80px;max-width:440px}
+.news-empty-icon{display:grid;place-items:center;width:64px;height:64px;border-radius:18px;background:#25adf51f;color:#25adf5;margin-bottom:18px}
+.news-empty-icon svg{width:28px;height:28px}
+.news-empty h2{font-size:22px}
+.news-empty p{font-size:14px;margin:8px 0 22px}
