@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Dialog } from "radix-ui";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { MagnifyingGlassIcon, Cross2Icon, ArrowRightIcon, CounterClockwiseClockIcon, DashboardIcon, IdCardIcon, BackpackIcon, LightningBoltIcon, StarIcon, PersonIcon, QuestionMarkCircledIcon, ReaderIcon, EnvelopeClosedIcon, ClockIcon, AvatarIcon } from "@radix-ui/react-icons";
+import { MagnifyingGlassIcon, Cross2Icon, ArrowRightIcon, CounterClockwiseClockIcon, DashboardIcon, IdCardIcon, BackpackIcon, LightningBoltIcon, StarIcon, PersonIcon, QuestionMarkCircledIcon, ReaderIcon, EnvelopeClosedIcon, ClockIcon, AvatarIcon, CubeIcon } from "@radix-ui/react-icons";
 import type { Category } from "./categories";
 import { clearRecent, groupLabels, groupOrder, popularGames, pushRecent, readRecent, searchItems, shortcuts, type PageIcon, type SearchItem } from "./search/searchIndex";
 import "./search-dialog.css";
@@ -31,7 +31,7 @@ type SearchDialogProps = {
   onSelect?: (category: Category) => void;
 };
 
-const pageIcons: Record<PageIcon, typeof DashboardIcon> = { topup: DashboardIcon, card: IdCardIcon, wallet: BackpackIcon, partner: PersonIcon, premium: LightningBoltIcon, promo: StarIcon, news: ReaderIcon, help: QuestionMarkCircledIcon, uid: IdCardIcon, contact: EnvelopeClosedIcon, history: ClockIcon, account: AvatarIcon };
+const pageIcons: Record<PageIcon, typeof DashboardIcon> = { topup: DashboardIcon, card: IdCardIcon, wallet: BackpackIcon, partner: PersonIcon, premium: LightningBoltIcon, promo: StarIcon, news: ReaderIcon, help: QuestionMarkCircledIcon, uid: IdCardIcon, contact: EnvelopeClosedIcon, history: ClockIcon, account: AvatarIcon, accounts: AvatarIcon, boxes: CubeIcon };
 
 function Highlight({ text, query }: { text: string; query: string }) {
   const q = query.trim();

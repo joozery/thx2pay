@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { games } from "@/components/topup/games";
 import { premiumApps } from "@/components/home/premiumApps";
+import { findAccount, accountGame } from "@/components/accounts/accounts";
+import { boxGame, findBox } from "@/components/boxes/boxes";
 
 // Page titles and descriptions, written in Thai (the source language). Each string is also a translation key,
 // so the server renders Thai metadata and <DocumentMeta> swaps in the visitor's language on the client.
@@ -13,6 +15,8 @@ type PageMeta = { name: string; description?: string; values?: Record<string, st
 export const pageMeta = {
   "/about": { name: "เกี่ยวกับเรา", description: "รู้จัก THX2PAY แพลตฟอร์มเติมเกมและสินค้าดิจิทัลที่ง่าย เร็ว และปลอดภัย" },
   "/account": { name: "บัญชีของฉัน" },
+  "/accounts": { name: "ไอดีเกม", description: "ซื้อไอดีเกมคุณภาพ ผ่านการตรวจสอบ พร้อมรับประกันทุกไอดีจาก THX2PAY" },
+  "/boxes": { name: "กล่องสุ่ม", description: "เปิดกล่องสุ่มเกม ลุ้นไอเทมและไอดีเกม พร้อมแสดงอัตราออกรางวัลทุกกล่องจาก THX2PAY" },
   "/cards": { name: "บัตรเติมเงิน", description: "บัตรเติมเงิน บัตรของขวัญ และโค้ดเกมจาก THX2PAY" },
   "/contact": { name: "ติดต่อเรา", description: "ช่องทางติดต่อทีมงาน THX2PAY" },
   "/forgot-password": { name: "ลืมรหัสผ่าน" },
@@ -38,13 +42,17 @@ export function pageMetadata(route: PageRoute): Metadata {
   return { title: meta.name + brandSuffix, ...(meta.description ? { description: meta.description } : {}) };
 }
 
-// Checkout pages (/topup/<game>, /premium/<app>): name and description are keys with a {{name}} value.
+// Product pages (/topup/<game>, /premium/<app>, /accounts/<id>, /boxes/<id>): name and description are keys with a {{name}} value.
 function findProductMeta(pathname: string): PageMeta | undefined {
   const [, section, id] = pathname.replace(/\/+$/, "").split("/");
   const game = section === "topup" ? games.find(item => item.id === id) : undefined;
   if (game) return { name: "เติม {{name}}", description: "เลือกแพ็กเกจ {{name}} กรอก UID และชำระเงินได้ในไม่กี่ขั้นตอนกับ THX2PAY", values: { name: game.name } };
   const app = section === "premium" ? premiumApps.find(item => item.id === id) : undefined;
   if (app) return { name: "ซื้อ {{name}}", description: "เลือกแพ็กเกจ {{name}} และรับรหัสทางอีเมลกับ THX2PAY", values: { name: app.name } };
+  const account = section === "accounts" && id ? findAccount(id) : undefined;
+  if (account) return { name: "ไอดี {{name}}", description: "ไอดี {{name}} ผ่านการตรวจสอบ รับประกันทุกไอดี ส่งข้อมูลทางอีเมลกับ THX2PAY", values: { name: accountGame(account).name } };
+  const box = section === "boxes" && id ? findBox(id) : undefined;
+  if (box) return { name: box.name, description: "เปิดกล่องสุ่ม {{name}} ลุ้นรางวัล พร้อมดูอัตราออกรางวัลกับ THX2PAY", values: { name: boxGame(box).name } };
   return undefined;
 }
 

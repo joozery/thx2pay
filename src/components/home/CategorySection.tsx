@@ -18,6 +18,7 @@ export default function CategorySection({ tab, query, onTabChange, onQueryChange
 
   function openCategory(label: string) {
     if (label === "เติมเกม") router.push("/topup");
+    else if (label === "ไอดีเกม") router.push("/accounts");
     else if (tab === "Gift Card") router.push("/cards");
     else onOpenDialog(`${label} · ${tab}`);
   }

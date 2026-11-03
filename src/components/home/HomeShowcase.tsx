@@ -7,6 +7,10 @@ import { ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/rea
 import { useI18n } from "@/i18n/useI18n";
 import { games, type Game } from "@/components/topup/games";
 import { premiumApps } from "./premiumApps";
+import AccountCard from "@/components/accounts/AccountCard";
+import { gameAccounts } from "@/components/accounts/accounts";
+import BoxCard from "@/components/boxes/BoxCard";
+import { mysteryBoxes } from "@/components/boxes/boxes";
 import RevealSection from "./RevealSection";
 import "@/components/topup/game-card.css";
 import "./home-showcase.css";
@@ -16,6 +20,8 @@ const recommended = games.filter(game => game.tag === "recommended").slice(0, li
 // Home "เกมแนะนำ" row: tagged picks first, then other games so the slider always has more than fits on screen.
 const recommendedRow = [...recommended, ...games.filter(game => game.tag !== "recommended")].slice(0, limit);
 const newest = games.filter(game => game.tag === "new").slice(0, limit);
+// Home "ไอดีเกม" row: best sellers first.
+const featuredAccounts = [...gameAccounts.filter(account => account.tag === "hot"), ...gameAccounts.filter(account => account.tag !== "hot")].slice(0, 8);
 
 // Example price, same placeholder as the cards page until the real catalog is connected.
 const samplePrice = 100;
@@ -85,6 +91,16 @@ export default function HomeShowcase() {
     <RevealSection id="home-new" className="showcase" aria-labelledby="home-new-title">
       <SectionHead id="home-new-title" label="NEW ARRIVALS" title="เกมมาใหม่" text="เกมที่เพิ่งเข้ามาใหม่ เติมได้แล้ววันนี้" href="/topup" />
       <GameGrid items={newest} href="/topup" kind="topup" label="เกมมาใหม่" />
+    </RevealSection>
+
+    <RevealSection id="home-accounts" className="showcase" aria-labelledby="home-accounts-title">
+      <SectionHead id="home-accounts-title" label="GAME ACCOUNTS" title="ไอดีเกมพร้อมเล่น" text="ไอดีคัดคุณภาพ ตรวจสอบแล้ว รับประกันทุกไอดี" href="/accounts" />
+      <Slider label="ไอดีเกม">{featuredAccounts.map(account => <AccountCard key={account.id} account={account} />)}</Slider>
+    </RevealSection>
+
+    <RevealSection id="home-boxes" className="showcase" aria-labelledby="home-boxes-title">
+      <SectionHead id="home-boxes-title" label="MYSTERY BOX" title="กล่องสุ่มเกม" text="เปิดกล่อง ลุ้นไอเทมและไอดีเกม" href="/boxes" />
+      <Slider label="กล่องสุ่ม">{mysteryBoxes.map(box => <BoxCard key={box.id} box={box} />)}</Slider>
     </RevealSection>
 
     <RevealSection id="home-premium" className="showcase" aria-labelledby="home-premium-title">

@@ -13,10 +13,12 @@ export type SearchItem = {
   icon?: PageIcon;
   keywords: string;
 };
-export type PageIcon = "topup" | "card" | "wallet" | "partner" | "premium" | "promo" | "news" | "help" | "uid" | "contact" | "history" | "account";
+export type PageIcon = "topup" | "card" | "wallet" | "partner" | "premium" | "promo" | "news" | "help" | "uid" | "contact" | "history" | "account" | "accounts" | "boxes";
 
 const pages: Omit<SearchItem, "kind" | "keywords">[] = [
   { id: "page-topup", title: "เติมเกม", subtitle: "เติมเกมด้วย UID", href: "/topup", icon: "topup" },
+  { id: "page-accounts", title: "ไอดีเกม", subtitle: "ซื้อไอดีเกมคุณภาพ รับประกันทุกไอดี", href: "/accounts", icon: "accounts" },
+  { id: "page-boxes", title: "กล่องสุ่ม", subtitle: "เปิดกล่อง ลุ้นไอเทมและไอดีเกม", href: "/boxes", icon: "boxes" },
   { id: "page-cards", title: "บัตรเติมเงิน", subtitle: "บัตรเติมเกม บัตรของขวัญ โค้ดเกม", href: "/cards", icon: "card" },
   { id: "page-wallet", title: "เติมเงินเข้ากระเป๋า", subtitle: "เติมยอดเงินไว้ใช้บนเว็บ", href: "/wallet/topup", icon: "wallet" },
   { id: "page-premium", title: "แอพพรีเมียม", subtitle: "Netflix, Spotify, YouTube และอื่น ๆ", href: "/premium", icon: "premium" },
@@ -31,7 +33,7 @@ const pages: Omit<SearchItem, "kind" | "keywords">[] = [
 ];
 
 const pageAliases: Record<string, string> = {
-  "page-topup": "topup game เติม uid", "page-cards": "card gift code บัตร ของขวัญ โค้ด", "page-wallet": "wallet กระเป๋า ยอดเงิน balance",
+  "page-topup": "topup game เติม uid", "page-accounts": "account id ไอดี บัญชีเกม ขายไอดี ซื้อไอดี", "page-boxes": "mystery box loot random gacha กล่อง สุ่ม ลุ้น", "page-cards": "card gift code บัตร ของขวัญ โค้ด", "page-wallet": "wallet กระเป๋า ยอดเงิน balance",
   "page-premium": "premium netflix spotify youtube app แอป", "page-promotions": "promotion promo coupon คูปอง ส่วนลด ดีล",
   "page-partner": "partner reseller ตัวแทน", "page-uid": "uid player id ไอดี", "page-help": "help faq ถาม", "page-history": "history order ออเดอร์ คำสั่งซื้อ ประวัติการเติม",
   "page-account": "account profile โปรไฟล์ บัญชี ตั้งค่า", "page-news": "news ข่าว", "page-contact": "contact email อีเมล ติดต่อ",

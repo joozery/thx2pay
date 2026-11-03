@@ -24,3 +24,8 @@ html[data-theme="light"] .showcase{--topup-surface:#fff;--topup-muted:#65768b;--
 @media(max-width:1100px){#home-games .showcase-grid .gc{flex-basis:calc((100% - 48px)/4.5)}}
 @media(max-width:760px){#home-games .showcase-grid .gc{flex:0 0 40%}}
 #home-games .gc-info>svg{display:none}#home-games .gc-info{padding-left:10px;padding-right:10px}
+
+/* ไอดีเกม: wider account cards, 4 per row */
+.showcase-grid .acc,.showcase-grid .box-card{flex:0 0 calc((100% - 48px)/4);scroll-snap-align:start}
+@media(max-width:1100px){.showcase-grid .acc,.showcase-grid .box-card{flex-basis:calc((100% - 32px)/2.6)}}
+@media(max-width:760px){.showcase-grid .acc,.showcase-grid .box-card{flex:0 0 72%}}

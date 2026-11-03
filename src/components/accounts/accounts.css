@@ -1,0 +1,80 @@
+/* /accounts listing */
+.accounts-trust{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;list-style:none;padding:0;margin:28px 0 0}
+.accounts-trust li{display:flex;align-items:center;gap:12px;padding:16px;border-radius:16px;background:var(--topup-surface);border:1px solid var(--topup-border)}
+.accounts-trust li>span{display:grid;place-items:center;width:42px;height:42px;flex-shrink:0;border-radius:12px;background:color-mix(in srgb,var(--blue) 14%,transparent);color:var(--blue)}
+.accounts-trust svg{width:20px;height:20px}
+.accounts-trust b{display:block;font-size:14px}
+.accounts-trust small{display:block;font-size:11px;color:var(--topup-muted);margin-top:3px;line-height:1.5}
+
+.accounts-games{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px;margin:0 -2px 14px}
+.accounts-games::-webkit-scrollbar{display:none}
+.accounts-games button{display:inline-flex;align-items:center;gap:8px;flex-shrink:0;height:42px;padding:0 14px 0 9px;border-radius:999px;background:var(--topup-surface);border:1px solid var(--topup-border);color:var(--foreground);font-size:13px;font-weight:700;white-space:nowrap}
+.accounts-games button:first-child{padding-left:14px}
+.accounts-games button:hover{border-color:var(--blue);filter:none}
+.accounts-games button[aria-pressed="true"]{border-color:var(--blue);background:color-mix(in srgb,var(--blue) 14%,var(--topup-surface));color:var(--blue)}
+.accounts-games img{border-radius:7px}
+.accounts-games small{min-width:20px;padding:1px 6px;border-radius:999px;background:var(--lg-soft,#ffffff10);color:var(--topup-muted);font-size:10px;text-align:center}
+
+.accounts-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.accounts-note{margin-top:22px;font-size:12px;color:var(--topup-muted);text-align:center}
+.accounts-all{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--blue);white-space:nowrap}
+
+/* /accounts/<id> */
+.account-detail{padding-top:0}
+.acd-layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;align-items:start;gap:22px}
+.acd-hero{overflow:hidden;border-radius:18px;border:1px solid var(--w-border);background:var(--w-surface)}
+.acd-cover{position:relative;aspect-ratio:16/8;background:#11172a;overflow:hidden}
+.acd-cover .acc-cover-icon{width:22%}
+.acd-cover .acc-tag{top:14px;left:14px;font-size:11px}
+.acd-heading{position:relative;padding:20px 24px 22px}
+.acd-heading>.wallet-test-badge{position:absolute;top:20px;right:24px}
+.acd-game{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--blue)}
+.acd-game img{border-radius:8px}
+.acd-heading h1{font-size:26px;letter-spacing:-.4px;margin-top:10px;line-height:1.35}
+.acd-code{font-size:11px;margin-top:6px}
+
+.acd-specs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0}
+.acd-specs>div{padding:13px 14px;border-radius:12px;background:var(--w-soft);min-width:0}
+.acd-specs dt{font-size:11px;color:var(--w-muted)}
+.acd-specs dd{margin:4px 0 0;font-size:16px;font-weight:800;overflow-wrap:anywhere}
+
+.acd-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;list-style:none;padding:0;margin:0}
+.acd-steps li{display:flex;gap:11px;align-items:flex-start}
+.acd-steps li>span{display:grid;place-items:center;width:30px;height:30px;flex-shrink:0;border-radius:50%;background:var(--blue);color:#052333;font-size:13px;font-weight:800}
+.acd-steps b{display:block;font-size:13px}
+.acd-steps small{display:block;font-size:11px;color:var(--w-muted);margin-top:3px;line-height:1.6}
+
+.acd-buy{position:sticky;top:96px;display:grid;gap:14px}
+.acd-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.acd-price strong{font-size:34px;letter-spacing:-1px;color:var(--blue);line-height:1.1}
+.acd-price s{font-size:14px;color:var(--w-muted)}
+.acd-price em{font-style:normal;font-size:11px;font-weight:800;color:#fff;background:#0f9d76;padding:3px 8px;border-radius:6px}
+.acd-perks{display:grid;gap:8px;list-style:none;padding:12px 14px;margin:0;border-radius:12px;background:var(--w-soft)}
+.acd-perks li{display:flex;align-items:center;gap:8px;font-size:12px}
+.acd-perks svg{width:15px;height:15px;color:#32c5a1}
+.acd-buy .checkout-error{margin:-8px 0 -4px!important}
+.acd-methods{display:grid;gap:8px;border:0;padding:0;margin:0;min-width:0}
+.acd-methods legend{font-size:12px;font-weight:700;margin-bottom:8px;padding:0}
+.acd-methods button{display:flex;align-items:center;gap:10px;padding:8px 12px 8px 8px;border-radius:11px;border:1px solid var(--w-border);background:transparent;color:var(--foreground);text-align:left}
+.acd-methods button[aria-pressed="true"]{border-color:var(--blue);background:var(--w-soft)}
+.acd-methods button[aria-pressed="true"] .wallet-radio-mark{background:var(--blue);border-color:var(--blue)}
+.acd-methods .wallet-method-icon{width:34px;height:34px}
+.acd-methods b{flex:1;font-size:12px}
+.acd-buy .wallet-form-note{margin:-4px 0 0}
+.acd-inline-icon{width:13px;height:13px;vertical-align:-2px}
+.acd-more{margin-top:48px}
+
+@media(max-width:1100px){.accounts-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1000px){.acd-layout{grid-template-columns:1fr}.acd-buy{position:static}}
+@media(max-width:760px){
+  .accounts-trust{grid-template-columns:1fr;gap:8px;margin-top:20px}
+  .accounts-trust li{padding:12px}
+  .accounts-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .acd-cover{aspect-ratio:16/10}
+  .acd-heading{padding:16px}
+  .acd-heading>.wallet-test-badge{position:static;margin-top:10px}
+  .acd-heading h1{font-size:21px}
+  .acd-specs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .acd-steps{grid-template-columns:1fr}
+  .acd-price strong{font-size:28px}
+}

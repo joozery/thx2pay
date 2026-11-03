@@ -13,7 +13,7 @@ import UserMenu from "@/auth/UserMenu";
 import NotificationBell from "@/auth/NotificationBell";
 import { useAuth } from "@/auth/AuthProvider";
 import type { NavTarget } from "./types";
-import { afterTopupLinks, homeLink, navIcons, topupLinks, topupTargets, type NavLink } from "./navLinks";
+import { afterTopupLinks, boxesLink, homeLink, navIcons, topupLinks, topupTargets, type NavLink } from "./navLinks";
 import "./mobile-menu.css";
 import "./nav-dropdown.css";
 import "./nav-actions.css";
@@ -21,7 +21,7 @@ import "./nav-capsule.css";
 
 const MotionLink = motion.create(Link);
 
-const mobileLinks: NavLink[] = [homeLink, ...topupLinks, ...afterTopupLinks];
+const mobileLinks: NavLink[] = [homeLink, ...topupLinks, afterTopupLinks[0], boxesLink, ...afterTopupLinks.slice(1)];
 const mobileIcons = navIcons;
 
 export default function Navbar({ onToggleSearch, searchOpen, activePage = "home" }: { activePage?: NavTarget | null; onToggleSearch: () => void; searchOpen: boolean }) {

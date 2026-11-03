@@ -37,6 +37,7 @@ export default function HomePage() {
   function selectSearchResult(category: Category) {
     if (category.platform === "Gift Card") { setSearch(false); router.push("/cards"); return; }
     if (category.label === "เติมเกม") { setSearch(false); router.push("/topup"); return; }
+    if (category.label === "ไอดีเกม") { setSearch(false); router.push("/accounts"); return; }
     setTab(category.platform);
     setQuery(category.label);
     setSearch(false);
