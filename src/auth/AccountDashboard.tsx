@@ -61,7 +61,7 @@ export default function AccountDashboard({ user }: { user: User }) {
       </section>
       <section className="member-card" aria-labelledby="ov-uids-title">
         <div className="ov-card-head"><h2 id="ov-uids-title">{t("UID ของฉัน")}</h2><Link href="/account/uids">{t("จัดการ")}<ArrowRightIcon /></Link></div>
-        {uids.length ? <ul className="ov-uids">{uids.slice(0, 4).map(item => { const game = games.find(entry => entry.id === item.game); return <li key={item.id}>{game && <Image src={game.icon} alt="" width={36} height={36} />}<div><strong>{game?.name ?? item.game}</strong><span>{item.uid}</span></div><Link href={`/topup?game=${item.game}`} className="ov-uid-go">{t("เติม")}</Link></li>; })}</ul>
+        {uids.length ? <ul className="ov-uids">{uids.slice(0, 4).map(item => { const game = games.find(entry => entry.id === item.game); return <li key={item.id}>{game && <Image src={game.icon} alt="" width={36} height={36} />}<div><strong>{game?.name ?? item.game}</strong><span>{item.uid}</span></div><Link href={`/topup/${item.game}?uid=${encodeURIComponent(item.uid)}`} className="ov-uid-go">{t("เติม")}</Link></li>; })}</ul>
           : <div className="ov-uid-empty"><p>{t("บันทึก UID ไว้ ครั้งหน้าไม่ต้องพิมพ์ใหม่")}</p><Link className="member-button" href="/account/uids"><PlusIcon />{t("เพิ่ม UID")}</Link></div>}
       </section>
     </div>

@@ -10,8 +10,8 @@ export default function DocumentMeta() {
   const pathname = usePathname();
   const { t } = useI18n();
   const page = findPageMeta(pathname);
-  const title = page ? t(page.name) + brandSuffix : t(siteTitle);
-  const description = t(page?.description ?? siteDescription);
+  const title = page ? t(page.name, page.values) + brandSuffix : t(siteTitle);
+  const description = t(page?.description ?? siteDescription, page?.values);
 
   useEffect(() => {
     function apply() {

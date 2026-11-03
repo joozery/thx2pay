@@ -11,7 +11,6 @@ export type SearchItem = {
   image?: string;
   color?: string;
   icon?: PageIcon;
-  gameId?: string;
   keywords: string;
 };
 export type PageIcon = "topup" | "card" | "wallet" | "partner" | "premium" | "promo" | "news" | "help" | "uid" | "contact" | "history" | "account";
@@ -39,8 +38,8 @@ const pageAliases: Record<string, string> = {
 };
 
 export const searchIndex: SearchItem[] = [
-  ...games.map(game => ({ id: `game-${game.id}`, kind: "game" as const, title: game.name, subtitle: `${game.genre} · ${game.platforms.join(", ")}`, href: `/topup?game=${game.id}`, image: game.icon, gameId: game.id, keywords: `${game.name} ${game.aliases} ${game.publisher ?? ""} ${game.genre} ${game.platforms.join(" ")}` })),
-  ...premiumApps.map(app => ({ id: `premium-${app.id}`, kind: "premium" as const, title: app.name, subtitle: app.category, href: "/premium", image: app.logo, color: app.color, keywords: `${app.name} ${app.category} premium พรีเมียม` })),
+  ...games.map(game => ({ id: `game-${game.id}`, kind: "game" as const, title: game.name, subtitle: `${game.genre} · ${game.platforms.join(", ")}`, href: `/topup/${game.id}`, image: game.icon, keywords: `${game.name} ${game.aliases} ${game.publisher ?? ""} ${game.genre} ${game.platforms.join(" ")}` })),
+  ...premiumApps.map(app => ({ id: `premium-${app.id}`, kind: "premium" as const, title: app.name, subtitle: app.category, href: `/premium/${app.id}`, image: app.logo, color: app.color, keywords: `${app.name} ${app.category} premium พรีเมียม` })),
   ...pages.map(page => ({ ...page, kind: "page" as const, keywords: `${page.title} ${page.subtitle} ${pageAliases[page.id] ?? ""}` })),
 ];
 
@@ -87,4 +86,3 @@ export function clearRecent() {
   try { localStorage.removeItem(RECENT_KEY); } catch { /* nothing to clear */ }
 }
 
-export const OPEN_GAME_EVENT = "thx2pay-open-game";

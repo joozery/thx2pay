@@ -4,12 +4,12 @@ import { useI18n } from "@/i18n/useI18n";
 
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Dialog } from "radix-ui";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { MagnifyingGlassIcon, Cross2Icon, ArrowRightIcon, CounterClockwiseClockIcon, DashboardIcon, IdCardIcon, BackpackIcon, LightningBoltIcon, StarIcon, PersonIcon, QuestionMarkCircledIcon, ReaderIcon, EnvelopeClosedIcon, ClockIcon, AvatarIcon } from "@radix-ui/react-icons";
 import type { Category } from "./categories";
-import { OPEN_GAME_EVENT, clearRecent, groupLabels, groupOrder, popularGames, pushRecent, readRecent, searchItems, shortcuts, type PageIcon, type SearchItem } from "./search/searchIndex";
+import { clearRecent, groupLabels, groupOrder, popularGames, pushRecent, readRecent, searchItems, shortcuts, type PageIcon, type SearchItem } from "./search/searchIndex";
 import "./search-dialog.css";
 
 /*
@@ -54,7 +54,6 @@ function readVariant(): SearchVariant {
 export default function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
   const { t } = useI18n();
   const router = useRouter();
-  const pathname = usePathname();
   const reduce = useReducedMotion();
   const listId = useId();
   const [query, setQuery] = useState("");
@@ -84,8 +83,7 @@ export default function SearchDialog({ open, onOpenChange }: SearchDialogProps) 
   function choose(item: SearchItem) {
     pushRecent(item);
     changeOpen(false);
-    if (item.gameId && pathname === "/topup") window.dispatchEvent(new CustomEvent(OPEN_GAME_EVENT, { detail: item.gameId }));
-    else router.push(item.href);
+    router.push(item.href);
   }
 
   function onKey(event: KeyboardEvent<HTMLInputElement>) {

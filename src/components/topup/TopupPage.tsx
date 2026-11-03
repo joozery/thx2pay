@@ -13,13 +13,11 @@ import PageHero from "@/components/home/PageHero";
 import SearchDialog from "@/components/home/SearchDialog";
 import PlatformIcon from "@/components/home/PlatformIcon";
 import GameCard from "./GameCard";
-import GameDetailsDialog from "./GameDetailsDialog";
 import FeaturedGames from "./FeaturedGames";
-import { games, genres, type Game, type GamePlatform } from "./games";
+import { games, genres, type GamePlatform } from "./games";
 import "./topup.css";
 import "./topup-v2.css";
 import "./topup-finder.css";
-import { OPEN_GAME_EVENT } from "@/components/home/search/searchIndex";
 
 type PlatformFilter = "all" | GamePlatform;
 
@@ -30,7 +28,6 @@ export default function TopupPage() {
   const [platform, setPlatform] = useState<PlatformFilter>("all");
   const [genre, setGenre] = useState("all");
   const [sort, setSort] = useState("popular");
-  const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   const [modal, setModal] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
   const resultsRef = useRef<HTMLElement>(null);
@@ -42,14 +39,14 @@ export default function TopupPage() {
     document.title = t("เติมเกมออนไลน์ | THX2PAY");
   }, [language]);
 
-  // Search can open a game directly: /topup?game=<id> or an event when already on this page.
+  // Old links (/topup?game=<id>&uid=…) go straight to that game's checkout.
   useEffect(() => {
-    const open = (id: string | null) => { const game = id ? games.find(entry => entry.id === id) : undefined; if (game) setSelectedGame(game); };
-    open(new URLSearchParams(window.location.search).get("game"));
-    const onEvent = (event: Event) => open((event as CustomEvent<string>).detail);
-    window.addEventListener(OPEN_GAME_EVENT, onEvent);
-    return () => window.removeEventListener(OPEN_GAME_EVENT, onEvent);
-  }, []);
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("game");
+    if (!id || !games.some(game => game.id === id)) return;
+    params.delete("game");
+    router.replace(`/topup/${id}${params.size ? `?${params}` : ""}`);
+  }, [router]);
   const hasFilters = Boolean(query.trim()) || platform !== "all" || genre !== "all";
   function clearFilters() { setQuery(""); setPlatform("all"); setGenre("all"); }
 
@@ -59,8 +56,8 @@ export default function TopupPage() {
       <main className="container topup-page" id="top">
         <nav className="topup-breadcrumb" aria-label={t("เส้นทางหน้าเว็บ")}><Link href="/">{t("หน้าแรก")}</Link><ChevronRightIcon /><span>{t("เติมเกม")}</span></nav>
         <PageHero id="topup-title" eyebrow="THX2PAY GAME TOP-UP" title="เติมเกมโปรดของคุณ" accent="ความสนุกเริ่มได้ที่นี่" description="เลือกเกมที่ต้องการ แล้วค้นหาแพ็กเกจที่เหมาะกับคุณ" image="/images/games/free-fire-official-hd.jpg" imageAlt="Free Fire" imagePosition="60% center" cta={{ label: "เลือกเกม", href: "#topup-games" }} />
-        <FeaturedGames tag="recommended" games={games.filter(game => game.tag === "recommended")} onSelect={setSelectedGame} />
-        <FeaturedGames tag="new" games={games.filter(game => game.tag === "new")} onSelect={setSelectedGame} />
+        <FeaturedGames tag="recommended" games={games.filter(game => game.tag === "recommended")} />
+        <FeaturedGames tag="new" games={games.filter(game => game.tag === "new")} />
         <section ref={resultsRef} id="topup-games" className="topup-catalog" aria-labelledby="topup-games-title">
           <div className="topup-catalog-heading"><div><span className="topup-section-label">GAME CATALOG</span><h2 id="topup-games-title">{t("เลือกเกมที่ต้องการเติม")}</h2><p>{t("ค้นหาเกมโปรดของคุณได้ในที่เดียว")}</p></div><span className="topup-game-count" role="status" aria-live="polite">{t("พบ {{count}} เกม", { count: filteredGames.length })}</span></div>
           <div className="topup-finder">
@@ -89,12 +86,11 @@ export default function TopupPage() {
             {genre !== "all" && <button type="button" className="topup-filter-chip" onClick={() => setGenre("all")} aria-label={`${t("ลบตัวกรอง")} ${genre}`}>{genre}<Cross2Icon aria-hidden="true" /></button>}
             <button type="button" className="topup-filter-clear-all" onClick={clearFilters}>{t("ล้างตัวกรอง")}</button>
           </div>}
-          <div className="topup-games-grid"><AnimatePresence mode="popLayout">{filteredGames.map(game => <GameCard key={game.id} game={game} onSelect={setSelectedGame} />)}</AnimatePresence></div>
+          <div className="topup-games-grid"><AnimatePresence mode="popLayout">{filteredGames.map(game => <GameCard key={game.id} game={game} />)}</AnimatePresence></div>
           {!filteredGames.length && <div className="topup-empty"><MagnifyingGlassIcon /><h3>{t("ยังไม่พบเกมที่ตรงกับตัวกรอง")}</h3><p>{t("ลองเปลี่ยนคำค้นหาหรือเลือกแพลตฟอร์มอื่น")}</p><button className="pill" onClick={clearFilters}>{t("ล้างตัวกรอง")}</button></div>}
         </section>
       </main>
       <Footer onOpenDialog={setModal} />
-      <GameDetailsDialog game={selectedGame} onClose={() => setSelectedGame(null)} />
       <ContactDialog title={modal} onClose={() => setModal("")} />
       <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} onSelect={category => { setSearchOpen(false); if (category.platform === "Gift Card") { router.push("/cards"); return; } setQuery(""); setPlatform(category.platform); requestAnimationFrame(() => resultsRef.current?.scrollIntoView({ behavior: "smooth" })); }} />
     </MotionConfig>

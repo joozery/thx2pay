@@ -4,25 +4,17 @@ import { useState, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Dialog } from "radix-ui";
-import { ArrowLeftIcon, ArrowRightIcon, BackpackIcon, CheckIcon, ChevronRightIcon, ClockIcon, Cross2Icon, CubeIcon, CardStackIcon, HomeIcon, PlusIcon, QuestionMarkCircledIcon, ReaderIcon } from "@radix-ui/react-icons";
+import { ArrowLeftIcon, ArrowRightIcon, BackpackIcon, CheckIcon, ChevronRightIcon, ClockIcon, Cross2Icon, CubeIcon, PlusIcon, QuestionMarkCircledIcon, ReaderIcon } from "@radix-ui/react-icons";
 import { useI18n } from "@/i18n/useI18n";
 import AccountShell from "@/auth/AccountShell";
+import { MethodIcon, paymentMethods, type PaymentMethod } from "./paymentMethods";
 import "./wallet.css";
 
 const amounts = [50, 100, 300, 500, 1000];
-const methods = [
-  { id: "promptpay", label: "PromptPay QR Code", detail: "สแกนจ่ายผ่านแอปธนาคาร", image: "/icons/payments/promptpay.png" },
-  { id: "truemoney", label: "TrueMoney Wallet", detail: "ชำระสะดวก รวดเร็ว", image: "/icons/payments/truemoney.png" },
-  { id: "bank", label: "ธนาคารไทย", detail: "โอนผ่านบัญชีธนาคาร", image: null },
-  { id: "card", label: "บัตรเครดิต / เดบิต", detail: "Visa, Mastercard, JCB", image: null },
-] as const;
-type Method = typeof methods[number];
+const methods = paymentMethods;
+type Method = PaymentMethod;
 type Topup = { amount: number; method: Method };
 type Step = "review" | "payment" | "success";
-
-function MethodIcon({ method }: { method: Method }) {
-  return <span className={`wallet-method-icon ${method.id}`}>{method.image ? <Image src={method.image} alt="" width={44} height={44} /> : method.id === "bank" ? <HomeIcon /> : <CardStackIcon />}</span>;
-}
 
 export default function WalletTopupFlow() {
   const { t, locale } = useI18n();

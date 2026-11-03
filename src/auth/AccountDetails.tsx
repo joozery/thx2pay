@@ -106,7 +106,7 @@ function SavedUIDs({ email }: { email: string }) {
         {items.length ? <ul className="uids-list">{items.map(item => { const entry = games.find(g => g.id === item.game); return <li key={item.id}>
           {entry && <Image src={entry.icon} alt="" width={44} height={44} />}
           <div><strong>{entry?.name ?? item.game}</strong><span>{item.uid}</span></div>
-          <Link className="member-button" href={`/topup?game=${item.game}`}>{t("เติมเกม")}</Link>
+          <Link className="member-button" href={`/topup/${item.game}?uid=${encodeURIComponent(item.uid)}`}>{t("เติมเกม")}</Link>
           <button type="button" className="uids-delete" aria-label={`${t("ลบ")} ${entry?.name ?? item.game} ${item.uid}`} onClick={() => { if (save(items.filter(other => other.id !== item.id))) setMessage("ลบแล้ว"); }}><TrashIcon /></button>
         </li>; })}</ul> : <AccountEmpty title="ยังไม่มี UID ที่บันทึกไว้" text="เพิ่ม UID ของเกมที่เล่นบ่อย เพื่อเติมได้เร็วขึ้น" />}
       </section>
