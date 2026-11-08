@@ -15,7 +15,10 @@ export default function DocumentMeta() {
 
   useEffect(() => {
     function apply() {
-      if (document.title !== title) document.title = title;
+      // The 404 page marks itself so the tab says "not found", even under a known prefix like /topup/<unknown>.
+      const notFound = document.querySelector('[data-page="not-found"]');
+      const nextTitle = notFound ? t("ไม่พบหน้า (404)") + brandSuffix : title;
+      if (document.title !== nextTitle) document.title = nextTitle;
       const meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
       if (meta && meta.content !== description) meta.content = description;
     }
@@ -24,7 +27,7 @@ export default function DocumentMeta() {
     const observer = new MutationObserver(apply);
     observer.observe(document.head, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["content"] });
     return () => observer.disconnect();
-  }, [title, description]);
+  }, [title, description, t]);
 
   return null;
 }

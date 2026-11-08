@@ -27,7 +27,7 @@ html[data-theme="light"] .sd-panel{box-shadow:0 30px 70px rgb(16 40 64 / .2),var
 .sd-esc-x{display:none;width:15px;height:15px}
 
 /* Body */
-.sd-body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:6px 10px 10px;scrollbar-width:thin;scrollbar-color:rgb(127 140 156 / .4) transparent;box-shadow:inset 0 1px 0 rgb(127 140 156 / .12)}
+.sd-body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:6px 10px 10px;box-shadow:inset 0 1px 0 rgb(127 140 156 / .12)}
 .sd-group{padding:8px 0 4px}
 .sd-group-head{display:flex;align-items:center;justify-content:space-between;padding:6px 10px 8px;font-size:14px;font-weight:800;letter-spacing:.5px;color:var(--sd-muted)}
 .sd-count{min-width:20px;padding:1px 7px;border-radius:999px;background:var(--lg-soft);text-align:center}

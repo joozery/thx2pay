@@ -5,6 +5,7 @@ import "./globals.css";
 import "./theme.css";
 import "./responsive.css";
 import "./liquid-glass.css";
+import "./scrollbar.css";
 import "flag-icons/css/flag-icons.min.css";
 import I18nProvider from "@/i18n/I18nProvider";
 import { siteDescription, siteTitle } from "@/i18n/pageMeta";

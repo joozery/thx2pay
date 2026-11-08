@@ -4,7 +4,7 @@
 .topup-featured-heading h2{display:flex;align-items:center;gap:10px;margin-top:7px;font-size:27px}
 .topup-featured-heading h2 svg{width:22px;height:22px;color:var(--blue)}
 .topup-featured-heading p{margin-top:5px;color:var(--topup-muted);font-size:14px}
-.topup-featured-list{display:flex;gap:13px;overflow-x:auto;padding:20px 1px 12px;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:#4b87a5 transparent}
+.topup-featured-list{display:flex;gap:13px;overflow-x:auto;padding:20px 1px 12px;scroll-snap-type:x proximity}
 .topup-featured-game{position:relative;isolation:isolate;flex:1 0 123px;max-width:162px;min-width:0;height:176px;display:flex;align-items:flex-end;padding:12px;border:1px solid var(--topup-border);border-radius:18px;background:var(--topup-surface);color:#fff;text-align:left;overflow:hidden;scroll-snap-align:start}
 .topup-featured-game:hover{border-color:#45baf1;transform:translateY(-3px);box-shadow:0 12px 25px #0003}
 .topup-featured-game:focus-visible{outline:2px solid #4ecbff;outline-offset:3px}

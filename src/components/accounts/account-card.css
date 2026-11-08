@@ -1,7 +1,10 @@
 /* Game account card: shared by /accounts, the account detail "more" row and the home page slider. */
 .acc{--acc-surface:var(--topup-surface,#1c2026);--acc-border:var(--topup-border,#ffffff10);--acc-muted:var(--topup-muted,#94a3b6);min-width:0;border-radius:16px;background:var(--acc-surface);border:1px solid var(--acc-border);transition:border-color .15s,transform .2s}
 html[data-theme="light"] .acc{--acc-surface:var(--topup-surface,#fff);--acc-border:var(--topup-border,#dce5ef);--acc-muted:var(--topup-muted,#65768b)}
-.acc:hover,.acc:focus-within{border-color:var(--blue)}
+.acc:hover{border-color:var(--blue)}
+/* Keyboard focus: one ring around the whole card (not the link's own outline plus the card border). */
+.acc-link:focus-visible{outline:none}
+.acc:has(.acc-link:focus-visible){outline:2px solid #4ecbff;outline-offset:3px}
 .acc:hover{transform:translateY(-3px)}
 .acc-link{display:flex;flex-direction:column;height:100%;padding:8px;color:var(--foreground);border-radius:inherit}
 .acc-cover{position:relative;display:block;aspect-ratio:16/10;border-radius:11px;overflow:hidden;background:#11172a}

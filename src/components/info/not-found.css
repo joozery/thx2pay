@@ -1,0 +1,49 @@
+/* 404 page: big "4 [cat] 4" mark, message, actions, then shortcuts to the main sections. */
+.nf-page{padding-top:28px}
+.nf-hero{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;padding:44px 28px 40px;border-radius:30px;background:radial-gradient(90% 70% at 50% 0%,rgb(37 173 245 / .18),transparent 70%),var(--lg-surface);box-shadow:var(--lg-shadow),var(--lg-highlight)}
+.nf-art{display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:18px;line-height:1}
+.nf-digit{font-size:clamp(96px,17vw,168px);font-weight:900;letter-spacing:-6px;color:var(--blue);text-shadow:0 2px 0 rgb(255 255 255 / .06)}
+.nf-cat{display:grid;place-items:center;width:clamp(150px,22vw,230px);margin:0 -6px;animation:nf-bob 3.2s ease-in-out infinite}
+.nf-cat img{width:100%;height:auto}
+@keyframes nf-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media(prefers-reduced-motion:reduce){.nf-cat{animation:none}}
+.nf-hero h1{margin-top:10px;font-size:clamp(24px,3.4vw,34px);letter-spacing:-.5px}
+.nf-hero>p{max-width:520px;margin-top:12px;font-size:15px;line-height:1.85}
+.nf-path{display:inline-block;max-width:100%;margin-top:14px;padding:6px 12px;border-radius:999px;background:var(--lg-soft);color:var(--info-muted);font-family:var(--font-geist-mono),monospace;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nf-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin-top:26px}
+.nf-actions .pill,.nf-actions .info-ghost-button{gap:8px;min-height:44px}
+.nf-actions svg{width:16px;height:16px}
+.nf-back{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;background:transparent;color:var(--info-muted);font-size:14px;font-weight:700}
+.nf-back:hover{color:var(--foreground);filter:none}
+
+.nf-shortcuts{margin-top:36px}
+.nf-shortcuts h2{font-size:18px;letter-spacing:-.2px;margin-bottom:14px}
+.nf-shortcuts>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.nf-shortcut{display:flex;align-items:center;gap:12px;min-width:0;padding:16px;border-radius:18px;background:var(--lg-surface);box-shadow:var(--lg-shadow),var(--lg-highlight);transition:transform .2s,background .2s}
+.nf-shortcut:hover{transform:translateY(-2px);background:var(--lg-surface-strong)}
+.nf-shortcut>span:nth-child(2){flex:1;min-width:0}
+.nf-shortcut b{display:block;font-size:15px}
+.nf-shortcut small{display:block;margin-top:2px;font-size:13px;line-height:1.5;color:var(--info-muted)}
+.nf-shortcut-icon{display:grid;place-items:center;flex-shrink:0;width:42px;height:42px;border-radius:12px;background:rgb(37 173 245 / .14);color:var(--blue)}
+.nf-shortcut-icon svg{width:19px;height:19px}
+.nf-shortcut-arrow{flex-shrink:0;width:16px;height:16px;color:var(--info-muted);transition:transform .2s,color .2s}
+.nf-shortcut:hover .nf-shortcut-arrow{transform:translateX(3px);color:var(--blue)}
+
+.nf-report{margin-top:28px;text-align:center;font-size:14px}
+.nf-report a{color:var(--blue);font-weight:700}
+.nf-report a:hover{text-decoration:underline}
+
+html[data-theme="light"] .nf-page{--info-muted:#65768b}
+html[data-theme="light"] .nf-hero{background:radial-gradient(90% 70% at 50% 0%,rgb(37 173 245 / .14),transparent 70%),#fff}
+html[data-theme="light"] .nf-shortcut{background:#fff}
+
+@media(max-width:900px){.nf-shortcuts>div{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){
+  .nf-hero{padding:32px 18px 30px;border-radius:24px}
+  .nf-digit{letter-spacing:-4px}
+  .nf-cat{margin:0 -10px}
+  .nf-actions{flex-direction:column;align-items:stretch;width:100%}
+  .nf-actions .pill,.nf-actions .info-ghost-button{justify-content:center}
+  .nf-back{justify-content:center}
+  .nf-shortcuts>div{grid-template-columns:1fr}
+}

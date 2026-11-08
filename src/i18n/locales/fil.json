@@ -1093,5 +1093,14 @@
   "เลือกช่องทางชำระเงิน": "Pumili ng paraan ng pagbabayad",
   "กรอกข้อมูลขั้นที่ 1 ให้ครบก่อนชำระเงิน": "Kumpletuhin ang hakbang 1 bago magbayad",
   "ตรวจสอบรายการ แล้วกดชำระเงิน": "Suriin ang order, saka i-tap ang Bayad",
-  "แตะการ์ดเพื่อเลือก 1 แพ็กเกจที่ต้องการ": "I-tap ang card para piliin ang package na gusto mo"
+  "แตะการ์ดเพื่อเลือก 1 แพ็กเกจที่ต้องการ": "I-tap ang card para piliin ang package na gusto mo",
+  "ไม่พบหน้าที่คุณกำลังหา": "Hindi namin mahanap ang page na iyan",
+  "หน้านี้อาจถูกย้าย ลบไปแล้ว หรือลิงก์พิมพ์ไม่ถูกต้อง ลองค้นหาเกมที่ต้องการ หรือกลับไปเริ่มที่หน้าแรก": "Maaaring nailipat, natanggal, o mali ang link. Maghanap ng laro o bumalik sa home page.",
+  "กลับหน้าแรก": "Bumalik sa home",
+  "ค้นหาเกม": "Maghanap ng laro",
+  "หรือไปที่หน้ายอดนิยม": "O pumunta sa sikat na seksyon",
+  "คำถามที่พบบ่อยและติดต่อทีมงาน": "FAQ at kontakin ang team",
+  "คิดว่าเป็นข้อผิดพลาดของเว็บไซต์?": "Sa tingin mo ay error ito ng site?",
+  "แจ้งทีมงาน": "Ipaalam sa amin",
+  "ไม่พบหน้า (404)": "Hindi nahanap ang page (404)"
 }

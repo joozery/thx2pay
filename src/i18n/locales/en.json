@@ -1093,5 +1093,14 @@
   "เลือกช่องทางชำระเงิน": "Choose a payment method",
   "กรอกข้อมูลขั้นที่ 1 ให้ครบก่อนชำระเงิน": "Complete step 1 before paying",
   "ตรวจสอบรายการ แล้วกดชำระเงิน": "Check your order, then tap Pay",
-  "แตะการ์ดเพื่อเลือก 1 แพ็กเกจที่ต้องการ": "Tap a card to pick the package you want"
+  "แตะการ์ดเพื่อเลือก 1 แพ็กเกจที่ต้องการ": "Tap a card to pick the package you want",
+  "ไม่พบหน้าที่คุณกำลังหา": "We couldn't find that page",
+  "หน้านี้อาจถูกย้าย ลบไปแล้ว หรือลิงก์พิมพ์ไม่ถูกต้อง ลองค้นหาเกมที่ต้องการ หรือกลับไปเริ่มที่หน้าแรก": "It may have moved, been removed, or the link has a typo. Search for a game or start again from the home page.",
+  "กลับหน้าแรก": "Back to home",
+  "ค้นหาเกม": "Search games",
+  "หรือไปที่หน้ายอดนิยม": "Or jump to a popular section",
+  "คำถามที่พบบ่อยและติดต่อทีมงาน": "FAQ and contact our team",
+  "คิดว่าเป็นข้อผิดพลาดของเว็บไซต์?": "Think this is a mistake on our side?",
+  "แจ้งทีมงาน": "Let us know",
+  "ไม่พบหน้า (404)": "Page not found (404)"
 }
