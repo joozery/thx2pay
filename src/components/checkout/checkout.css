@@ -85,3 +85,32 @@
 .acd-layout .checkout-product{margin-bottom:0}
 .checkout-buy-account{margin:0}
 .checkout-account-foot .uid-guide-trigger{display:inline-flex;align-items:center;gap:4px;padding:6px 0;background:transparent;color:var(--blue);font-size:14px;font-weight:700}.checkout-account-foot .uid-guide-trigger svg{width:15px;height:15px}
+
+/* Purchase stage tracker: done = green check, current = blue, upcoming = muted. */
+.checkout-stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;list-style:none;padding:0;margin:0}
+.checkout-stages li{position:relative;display:flex;align-items:center;gap:8px;min-width:0;padding:10px 12px;border-radius:12px;border:1px solid var(--w-border);font-size:14px;font-weight:700;color:var(--w-muted);line-height:1.3}
+.checkout-stages li>span{display:grid;place-items:center;flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--w-soft);font-size:13px}
+.checkout-stages li>span svg{width:14px;height:14px}
+.checkout-stages li.done{color:var(--foreground)}
+.checkout-stages li.done>span{background:#32c5a1;color:#04261d}
+.checkout-stages li.current{border-color:var(--blue);color:var(--foreground);background:var(--w-soft)}
+.checkout-stages li.current>span{background:var(--blue);color:#052333}
+
+/* Package picking: check on the chosen card, a recap line and the price disclaimer. */
+.checkout-pack-check{position:absolute;top:7px;right:7px;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#052333}
+.checkout-pack-check svg{width:13px;height:13px}
+.checkout-pack-picked{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--w-soft);font-size:14px}
+.checkout-pack-picked>span{display:inline-flex;align-items:center;gap:6px;color:#32c5a1;font-weight:700}
+.checkout-pack-picked>span svg{width:15px;height:15px}
+.checkout-pack-picked>b{flex:1;min-width:0}
+.checkout-pack-picked>strong{color:var(--blue);font-size:16px}
+.checkout-pack-note{display:flex;align-items:flex-start;gap:6px;margin:10px 0 0;font-size:13px;line-height:1.6;color:var(--w-muted)}
+.checkout-pack-note svg{flex-shrink:0;width:14px;height:14px;margin-top:3px}
+
+/* Numbered steps 3–4 inside the buy panel. */
+.acd-methods legend{display:flex;align-items:center;gap:10px}
+.acd-buy .checkout-step{width:26px;height:26px;font-size:13px}
+.checkout-pay-hint{display:flex;align-items:center;gap:10px;margin:0;font-size:14px;font-weight:700;color:var(--foreground);line-height:1.5}
+@media(max-width:760px){
+  .checkout-stages{grid-template-columns:repeat(2,minmax(0,1fr))}
+}

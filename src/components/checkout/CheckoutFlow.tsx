@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Dialog } from "radix-ui";
-import { ArrowLeftIcon, ArrowRightIcon, CheckCircledIcon, CheckIcon, ChevronDownIcon, ChevronRightIcon, Cross2Icon, LightningBoltIcon, LockClosedIcon, PersonIcon, StarFilledIcon } from "@radix-ui/react-icons";
+import { ArrowLeftIcon, ArrowRightIcon, CheckCircledIcon, CheckIcon, ChevronDownIcon, ChevronRightIcon, Cross2Icon, InfoCircledIcon, LightningBoltIcon, LockClosedIcon, PersonIcon, StarFilledIcon } from "@radix-ui/react-icons";
 import { useI18n } from "@/i18n/useI18n";
 import { useAuth } from "@/auth/AuthProvider";
 import { useSavedUIDs } from "@/auth/accountData";
@@ -67,6 +67,14 @@ export default function CheckoutFlow({ product }: { product: CheckoutProduct }) 
   const accountLabel = field.kind === "uid" ? [value, field.zone && zone.trim() ? `(${zone.trim()})` : "", server ? `· ${server}` : ""].filter(Boolean).join(" ") : value;
   const alreadySaved = savedForGame.some(item => item.uid === value);
   const money = (amount: number) => `฿${amount.toLocaleString(locale)}`;
+  // Purchase stages shown above the form; each turns green once its input is valid, the first open one is "current".
+  const stages = [
+    { label: field.kind === "uid" ? "กรอกบัญชีเกม" : "กรอกอีเมล", done: !accountError },
+    { label: product.kind === "card" ? "เลือกราคาบัตร" : "เลือกแพ็กเกจ", done: true },
+    { label: "เลือกช่องทางชำระ", done: true },
+    { label: "ยืนยันและชำระเงิน", done: false },
+  ];
+  const currentStage = stages.findIndex(stage => !stage.done);
   const packTitle = (item: CheckoutPackage) => item.months ? `${item.label} · ${t("{{count}} เดือน", { count: item.months })}` : item.label;
 
   function selectSearchResult(category: Category) {
@@ -112,6 +120,12 @@ export default function CheckoutFlow({ product }: { product: CheckoutProduct }) 
               <span className="wallet-test-badge">{t("โหมดทดสอบ")}</span>
             </section>
 
+            <ol className="checkout-stages" aria-label={t("ขั้นตอนการสั่งซื้อ")}>
+              {stages.map((stage, index) => <li key={stage.label} className={stage.done ? "done" : index === currentStage ? "current" : ""} aria-current={index === currentStage ? "step" : undefined}>
+                <span>{stage.done ? <CheckIcon /> : index + 1}</span>{t(stage.label)}
+              </li>)}
+            </ol>
+
             <section className="wallet-card" aria-labelledby="checkout-account-title">
               <div className="wallet-card-head"><span className="checkout-step">1</span><div><h2 id="checkout-account-title">{t(field.kind === "uid" ? "ข้อมูลบัญชีเกม" : "ข้อมูลผู้รับ")}</h2><p>{t(field.kind === "uid" ? "กรอกข้อมูลให้ถูกต้อง ไอเทมจะถูกส่งเข้าบัญชีนี้" : "เราจะส่งรหัสหรือลิงก์เปิดใช้งานไปที่อีเมลนี้")}</p></div></div>
               {savedForGame.length > 0 && <div className="checkout-saved" role="group" aria-label={t("UID ที่บันทึกไว้")}><span>{t("UID ที่บันทึกไว้")}</span>{savedForGame.map(item => <button type="button" key={item.id} aria-pressed={item.uid === value} onClick={() => setAccountId(item.uid)}><PersonIcon />{item.uid}</button>)}</div>}
@@ -130,10 +144,11 @@ export default function CheckoutFlow({ product }: { product: CheckoutProduct }) 
             </section>
 
             <section className="wallet-card" aria-labelledby="checkout-package-title">
-              <div className="wallet-card-head"><span className="checkout-step">2</span><div><h2 id="checkout-package-title">{t(product.kind === "game" ? "เลือกแพ็กเกจ" : product.kind === "card" ? "เลือกราคาบัตร" : "เลือกแพ็กเกจสมาชิก")}</h2><p>{t("ราคาตัวอย่าง อาจมีการเปลี่ยนแปลง")}</p></div></div>
+              <div className="wallet-card-head"><span className="checkout-step">2</span><div><h2 id="checkout-package-title">{t(product.kind === "game" ? "เลือกแพ็กเกจ" : product.kind === "card" ? "เลือกราคาบัตร" : "เลือกแพ็กเกจสมาชิก")}</h2><p>{t(product.kind === "game" ? (product.packages.some(item => item.bonus) ? "แตะการ์ดเพื่อเลือก 1 แพ็กเกจ แพ็กใหญ่ได้โบนัสมากกว่า" : "แตะการ์ดเพื่อเลือก 1 แพ็กเกจที่ต้องการ") : product.kind === "card" ? "แตะการ์ดเพื่อเลือกมูลค่าบัตรที่ต้องการ" : "แตะการ์ดเพื่อเลือกระยะเวลาสมาชิก")}</p></div></div>
               <div className={`checkout-packages ${product.kind}`} role="radiogroup" aria-labelledby="checkout-package-title">
                 {product.packages.map(item => <button type="button" role="radio" key={item.id} aria-checked={pack.id === item.id} onClick={() => setPack(item)}>
                   {item.popular && <span className="wallet-popular"><StarFilledIcon />{t("ยอดนิยม")}</span>}
+                  {pack.id === item.id && <span className="checkout-pack-check" aria-hidden="true"><CheckIcon /></span>}
                   {product.kind === "game"
                     ? <><b>{item.amount?.toLocaleString(locale)}</b><small>{product.unit}</small>{item.bonus ? <em>+{item.bonus.toLocaleString(locale)} {t("โบนัส")}</em> : null}</>
                     : product.kind === "card" ? <><b>{item.label}</b><small>{t("บัตรเติมเงิน")}</small></>
@@ -141,6 +156,12 @@ export default function CheckoutFlow({ product }: { product: CheckoutProduct }) 
                   <strong>{money(item.price)}</strong>
                 </button>)}
               </div>
+              <div className="checkout-pack-picked" aria-live="polite">
+                <span><CheckCircledIcon />{t("เลือกแล้ว")}</span>
+                <b>{packTitle(pack)}{pack.bonus ? ` + ${pack.bonus.toLocaleString(locale)} ${t("โบนัส")}` : ""}</b>
+                <strong>{money(pack.price)}</strong>
+              </div>
+              <p className="checkout-pack-note"><InfoCircledIcon />{t("ราคาตัวอย่าง อาจมีการเปลี่ยนแปลง")} · {t("ยอดที่ต้องชำระจริงแสดงก่อนยืนยันคำสั่งซื้อ")}</p>
             </section>
 
           </div>
@@ -158,9 +179,10 @@ export default function CheckoutFlow({ product }: { product: CheckoutProduct }) 
               <li><CheckCircledIcon />{t("ค่าธรรมเนียม")} {money(0)}</li>
             </ul>
             <dl className="wallet-review checkout-buy-account"><div><dt>{t(field.kind === "uid" ? "บัญชีเกม" : "อีเมล")}</dt><dd>{accountLabel || "—"}</dd></div></dl>
-            <fieldset className="acd-methods"><legend>{t("ช่องทางการชำระเงิน")}</legend>
+            <fieldset className="acd-methods"><legend><span className="checkout-step">3</span>{t("เลือกช่องทางชำระเงิน")}</legend>
               {paymentMethods.map(item => <button type="button" key={item.id} aria-pressed={method.id === item.id} onClick={() => setMethod(item)}><MethodIcon method={item} /><b>{t(item.label)}</b><span className="wallet-radio-mark">{method.id === item.id && <CheckIcon />}</span></button>)}
             </fieldset>
+            <p className="checkout-pay-hint"><span className="checkout-step">4</span>{t(accountError ? "กรอกข้อมูลขั้นที่ 1 ให้ครบก่อนชำระเงิน" : "ตรวจสอบรายการ แล้วกดชำระเงิน")}</p>
             <button className="wallet-primary wallet-submit" type="submit">{t("ชำระเงิน")} {money(pack.price)}<ArrowRightIcon /></button>
             <p className="wallet-form-note"><CheckIcon />{t("โหมดทดสอบ — ยังไม่เชื่อมต่อระบบชำระเงินจริง")}</p>
           </aside>

@@ -1080,5 +1080,18 @@
   "โหมดทดสอบ — การเปิดกล่องเป็นการจำลอง ไม่มีการเรียกเก็บเงินหรือส่งของรางวัลจริง": "Test mode — simulated ang pagbukas; walang singil o padala",
   "ในการใช้งานจริง ของรางวัลจะถูกส่งเข้า UID ของคุณ": "Sa totoong gamit, ipapadala ang premyo sa UID mo",
   "ในการใช้งานจริง ข้อมูลไอดีจะถูกส่งไปที่อีเมลของคุณ": "Sa totoong gamit, ipapadala sa email mo ang login ng account",
-  "ไอเทมส่งเข้า UID หรือส่งข้อมูลไอดีทางอีเมล": "Ipapadala ang item sa UID; ang login ng account sa email"
+  "ไอเทมส่งเข้า UID หรือส่งข้อมูลไอดีทางอีเมล": "Ipapadala ang item sa UID; ang login ng account sa email",
+  "ขั้นตอนการสั่งซื้อ": "Mga hakbang sa order",
+  "กรอกบัญชีเกม": "Ilagay ang game account",
+  "กรอกอีเมล": "Ilagay ang email",
+  "เลือกช่องทางชำระ": "Pumili ng bayad",
+  "แตะการ์ดเพื่อเลือก 1 แพ็กเกจ แพ็กใหญ่ได้โบนัสมากกว่า": "I-tap ang card para pumili ng 1 package — mas malaki, mas maraming bonus",
+  "แตะการ์ดเพื่อเลือกมูลค่าบัตรที่ต้องการ": "I-tap ang card para piliin ang halaga",
+  "แตะการ์ดเพื่อเลือกระยะเวลาสมาชิก": "I-tap ang card para piliin ang haba ng membership",
+  "เลือกแล้ว": "Napili",
+  "ยอดที่ต้องชำระจริงแสดงก่อนยืนยันคำสั่งซื้อ": "Makikita ang huling halaga bago kumpirmahin",
+  "เลือกช่องทางชำระเงิน": "Pumili ng paraan ng pagbabayad",
+  "กรอกข้อมูลขั้นที่ 1 ให้ครบก่อนชำระเงิน": "Kumpletuhin ang hakbang 1 bago magbayad",
+  "ตรวจสอบรายการ แล้วกดชำระเงิน": "Suriin ang order, saka i-tap ang Bayad",
+  "แตะการ์ดเพื่อเลือก 1 แพ็กเกจที่ต้องการ": "I-tap ang card para piliin ang package na gusto mo"
 }

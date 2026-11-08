@@ -11,3 +11,8 @@
   html[data-theme="light"] header.site-header .nav-actions .locale-trigger:hover,html[data-theme="light"] header.site-header .nav-actions .locale-trigger[data-state="open"],html[data-theme="light"] header.site-header .nav-actions .icon-button:hover{background:#edf3f8}
   header.site-header .nav-actions>.pill,header.site-header .nav-actions .user-trigger-desktop{position:relative;margin-left:12px}
 }
+
+/* Header tool buttons: no blue focus ring (it lingers after a popover closes); keyboard focus shows a soft tint instead. */
+header.site-header .nav-actions :is(button,a):focus-visible{outline:none;box-shadow:none}
+header.site-header .nav-actions :is(button,a):not(.pill):focus-visible{background:#ffffff14}
+html[data-theme="light"] header.site-header .nav-actions :is(button,a):not(.pill):focus-visible{background:#edf3f8}

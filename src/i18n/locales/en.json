@@ -1080,5 +1080,18 @@
   "โหมดทดสอบ — การเปิดกล่องเป็นการจำลอง ไม่มีการเรียกเก็บเงินหรือส่งของรางวัลจริง": "Test mode — box openings are simulated; nothing is charged or delivered",
   "ในการใช้งานจริง ของรางวัลจะถูกส่งเข้า UID ของคุณ": "For real, the prize is sent to your game UID",
   "ในการใช้งานจริง ข้อมูลไอดีจะถูกส่งไปที่อีเมลของคุณ": "For real, the account login is sent to your email",
-  "ไอเทมส่งเข้า UID หรือส่งข้อมูลไอดีทางอีเมล": "Items go to your UID; account logins are emailed"
+  "ไอเทมส่งเข้า UID หรือส่งข้อมูลไอดีทางอีเมล": "Items go to your UID; account logins are emailed",
+  "ขั้นตอนการสั่งซื้อ": "Order steps",
+  "กรอกบัญชีเกม": "Enter game account",
+  "กรอกอีเมล": "Enter email",
+  "เลือกช่องทางชำระ": "Choose payment",
+  "แตะการ์ดเพื่อเลือก 1 แพ็กเกจ แพ็กใหญ่ได้โบนัสมากกว่า": "Tap a card to pick one package — bigger packs give more bonus",
+  "แตะการ์ดเพื่อเลือกมูลค่าบัตรที่ต้องการ": "Tap a card to pick the card value you want",
+  "แตะการ์ดเพื่อเลือกระยะเวลาสมาชิก": "Tap a card to pick your membership length",
+  "เลือกแล้ว": "Selected",
+  "ยอดที่ต้องชำระจริงแสดงก่อนยืนยันคำสั่งซื้อ": "The final amount is shown before you confirm",
+  "เลือกช่องทางชำระเงิน": "Choose a payment method",
+  "กรอกข้อมูลขั้นที่ 1 ให้ครบก่อนชำระเงิน": "Complete step 1 before paying",
+  "ตรวจสอบรายการ แล้วกดชำระเงิน": "Check your order, then tap Pay",
+  "แตะการ์ดเพื่อเลือก 1 แพ็กเกจที่ต้องการ": "Tap a card to pick the package you want"
 }

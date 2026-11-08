@@ -37,7 +37,7 @@ export default function Footer({ onOpenDialog }: { onOpenDialog: DialogHandler }
       <div className="container">
         <div className="footer-top">
           <div>
-            <BrandLogo />
+            <BrandLogo lightVariant />
             <p>{t("เติมเกมออนไลน์ 24 ชั่วโมง ปลอดภัย ไว้ใจได้ 100%")}<br />{t("พร้อมดูแลคุณตลอดการใช้งาน")}</p>
             <div className="socials">
               {socialIcons.map(({ name, file }) => (

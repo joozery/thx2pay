@@ -112,6 +112,13 @@ html[data-theme="light"] .site-header::before{background:rgb(255 255 255 / .62)}
   box-shadow:var(--lg-shadow-float),var(--lg-highlight)!important;
 }
 
+/* Centered modals sit on a dark overlay: translucent white turns grey there, so light theme gets a solid white sheet.
+   Doubled classes outweigh the glass rule above, whose :is() list includes a 3-class selector. */
+html[data-theme="light"] :is(.dialog.dialog,.member-password-dialog.member-password-dialog,.wallet-modal.wallet-modal){background:#fff!important;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 24px 70px rgb(16 40 64 / .22),0 0 0 1px rgb(16 40 64 / .06)!important}
+/* Modal close buttons get focus on open; show a soft tint instead of the blue ring. */
+:is(.wallet-modal-close,.dialog-close):focus-visible{outline:none;background:var(--lg-soft,#ffffff14)}
+html[data-theme="light"] :is(.wallet-modal-close,.dialog-close):focus-visible{background:#e8eef5}
+
 :is(.tab-bar,.app-tab-bar,.follow-rail,.follow-rail.collapsed){
   background:var(--lg-surface-strong)!important;
   -webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);
@@ -131,7 +138,8 @@ html[data-theme="light"] .site-header::before{background:rgb(255 255 255 / .62)}
 
 /* Buttons and chips: soft glass instead of outlines. */
 :is(.platforms button,.topup-platform-filters button,.promos-filters button,.search-platforms button,.member-history-tabs,.member-tabs){background:var(--lg-soft)}
-.pill,.hx-btn.primary,.wallet-primary,.member-button{box-shadow:0 8px 22px rgb(18 174 241 / .28),inset 0 1px 0 rgb(255 255 255 / .35)}
+/* Solid blue buttons: crisp top highlight only, no blue glow underneath. */
+.pill,.hx-btn.primary,.wallet-primary,.member-button{box-shadow:inset 0 1px 0 rgb(255 255 255 / .35)}
 
 /* Icon rings that were drawn with strokes become filled glass chips. */
 :is(.person-icon,.feature-icon,.member-password-steps li>span,.wallet-dialog-steps li>span,.flow-steps span,.help-contact-icon){background:var(--lg-soft)}

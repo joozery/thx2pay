@@ -57,6 +57,6 @@ html[data-theme="light"] .uid-guide-dialog ol{color:#5c6b7e}
 html[data-theme="light"] .follow-link{background:#1d1d1d;color:#fff}
 
 /* Light theme: white text + icons on blue buttons/badges */
-html[data-theme="light"] :is(.pill,.hx-btn.primary,.member-button,.promos-card-cta,.wallet-primary,.promotion-banner-cta,.promos-coupon-code button,.promos-filters button[aria-pressed="true"],.member-tabs a[aria-current],.hero .quick-links span,.payment-icon,.wallet-radio-mark,.checkout-step,.acc-tag.new,.acd-steps li>span,.box-card-foot span,.promos-coupon button){color:#fff}
+html[data-theme="light"] :is(.pill,.hx-btn.primary,.member-button,.promos-card-cta,.wallet-primary,.promotion-banner-cta,.promos-coupon-code button,.promos-filters button[aria-pressed="true"],.member-tabs a[aria-current],.hero .quick-links span,.payment-icon,.wallet-radio-mark,.checkout-step,.acc-tag.new,.acd-steps li>span,.box-card-foot span,.promos-coupon button,.checkout-stages li.current>span,.checkout-pack-check){color:#fff}
 html[data-theme="light"] :is(.pill,.hx-btn.primary,.member-button,.promos-card-cta,.wallet-primary,.promotion-banner-cta,.promos-coupon-code button,.promos-filters button[aria-pressed="true"],.member-tabs a[aria-current],.hero .quick-links span,.payment-icon,.wallet-radio-mark) :is(svg,span){color:inherit}
 html[data-theme="light"] .member-card>.acct-form .pill,html[data-theme="light"] .cards-dialog form .pill{color:#fff}
