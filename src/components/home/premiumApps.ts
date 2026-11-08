@@ -9,4 +9,6 @@ export const premiumApps: PremiumApp[] = [
   { id: "crunchyroll", name: "Crunchyroll", category: "สตรีมมิงอนิเมะ", logo: "/images/premium/crunchyroll.svg", color: "#f47521" },
   { id: "canva-pro", name: "Canva Pro", category: "ออกแบบ", logo: "/images/premium/canva.svg", color: "#7d2ae8" },
   { id: "chatgpt-plus", name: "ChatGPT Plus", category: "AI ผู้ช่วย", logo: "/images/premium/openai.svg", color: "#10a37f" },
+  { id: "prime-video", name: "Prime Video", category: "สตรีมมิงวิดีโอ", logo: "/images/premium/primevideo.svg", color: "#0f79af" },
+  { id: "apple-music", name: "Apple Music", category: "สตรีมมิงเพลง", logo: "/images/premium/applemusic.svg", color: "#fa243c" },
 ];

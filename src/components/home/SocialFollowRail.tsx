@@ -2,9 +2,9 @@
 
 import { useI18n } from "@/i18n/useI18n";
 
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "motion/react";
-import { ChevronRightIcon, ChatBubbleIcon, InstagramLogoIcon, VideoIcon } from "@radix-ui/react-icons";
+import { ArrowUpIcon, ChevronRightIcon, ChatBubbleIcon, InstagramLogoIcon, VideoIcon } from "@radix-ui/react-icons";
 import type { DialogHandler } from "./types";
 import "./follow-rail.css";
 import { channelById, type ContactChannel } from "./contactChannels";
@@ -26,6 +26,15 @@ export default function SocialFollowRail({ onOpenDialog }: { onOpenDialog: Dialo
   const [mobileExpanded, setMobileExpanded] = useState(false);
   const isMobile = useSyncExternalStore(subscribeMobile, isMobileNow, () => false);
   const open = isMobile ? mobileExpanded : socialOpen;
+  // "Back to top" sits at the bottom of the rail and only shows once the visitor has scrolled down.
+  const [showTop, setShowTop] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 600);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const toTop = () => window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
 
   // Panel grows/shrinks smoothly; icons pop in one after another and leave in reverse.
   const panel: Variants = reduce
@@ -52,6 +61,13 @@ export default function SocialFollowRail({ onOpenDialog }: { onOpenDialog: Dialo
             {icons[i]}
           </motion.button>)}
         </motion.div>}
+      </AnimatePresence>
+      <AnimatePresence initial={false}>
+        {showTop && <motion.button key="top" type="button" className="follow-top" aria-label={t("กลับขึ้นด้านบน")} onClick={toTop}
+          initial={reduce ? { opacity: 0 } : { opacity: 0, height: 0, scale: 0.6 }} animate={reduce ? { opacity: 1 } : { opacity: 1, height: "auto", scale: 1 }} exit={reduce ? { opacity: 0 } : { opacity: 0, height: 0, scale: 0.6 }}
+          transition={reduce ? { duration: 0 } : spring} whileHover={reduce ? undefined : { y: -2 }} whileTap={reduce ? undefined : { scale: 0.9 }}>
+          <span className="follow-top-icon"><ArrowUpIcon aria-hidden="true" /></span>
+        </motion.button>}
       </AnimatePresence>
     </motion.aside>
   );

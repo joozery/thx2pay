@@ -17,7 +17,6 @@ const services = [
   { title: "เติมเกม", text: "เติมเกมยอดนิยมด้วย UID", href: "/topup" },
   { title: "บัตรเติมเงิน", text: "บัตรเติมเกมและบัตรของขวัญ", href: "/cards" },
   { title: "พรีเมียม", text: "แอพดูหนัง ฟังเพลง และทำงาน", href: "/premium" },
-  { title: "ตัวแทนจำหน่าย", text: "รับราคาพิเศษสำหรับตัวแทน", href: "/partner" },
 ];
 
 export default function AboutPage() {

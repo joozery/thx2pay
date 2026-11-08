@@ -59,7 +59,7 @@ export default function HeroSection({ slide, onSlideChange, onSelectGiftCards }:
         {Array.from({ length: banners }, (_, i) => <button aria-label={t("โปรโมชั่น {{number}}", { number: i + 1 })} aria-pressed={slide === i} className={slide === i ? "selected" : ""} onClick={() => changeSlide(i, i > slide ? 1 : -1)} key={i} />)}
       </div>
       <div className="quick-links">
-        <Link href="/wallet/topup">{t("เติมเงิน")}{" "}<span>
+        <Link href="/topup">{t("เติมเกม")}{" "}<span>
           <ChevronRightIcon />
         </span></Link>
         <button onClick={() => { onSelectGiftCards(); }}>{t("ซื้อพรีเมียม")}{" "}<span>

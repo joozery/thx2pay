@@ -7,7 +7,7 @@ import { useI18n } from "@/i18n/useI18n";
 import InfoShell from "./InfoShell";
 
 const supportEmail = "support@thx2pay.com";
-const topics = ["สอบถามคำสั่งซื้อ", "ปัญหาการเติมเกม", "บัญชีและการเข้าสู่ระบบ", "ตัวแทนจำหน่าย", "อื่น ๆ"];
+const topics = ["สอบถามคำสั่งซื้อ", "ปัญหาการเติมเกม", "บัญชีและการเข้าสู่ระบบ", "อื่น ๆ"];
 
 // No backend yet: the form opens the customer's email app with the message pre-filled.
 export default function ContactPage() {
@@ -29,7 +29,7 @@ export default function ContactPage() {
       <span className="info-hero-icon" aria-hidden="true"><EnvelopeClosedIcon /></span>
       <span className="info-eyebrow">CONTACT US</span>
       <h1>{t("ติดต่อเรา")}</h1>
-      <p>{t("มีคำถามเรื่องคำสั่งซื้อ การเติมเกม หรืออยากร่วมเป็นตัวแทน ทีมงาน THX2PAY พร้อมช่วยเหลือคุณ")}</p>
+      <p>{t("มีคำถามเรื่องคำสั่งซื้อ การเติมเกม หรือบัญชีของคุณ ทีมงาน THX2PAY พร้อมช่วยเหลือคุณ")}</p>
     </section>
 
     <div className="contact-layout">
@@ -38,7 +38,6 @@ export default function ContactPage() {
         <a className="info-card contact-channel" href={`mailto:${supportEmail}`}><span className="info-card-icon" aria-hidden="true"><EnvelopeClosedIcon /></span><div><h3>{t("อีเมล")}</h3><p>{supportEmail}</p></div></a>
         <div className="info-card contact-channel"><span className="info-card-icon" aria-hidden="true"><ClockIcon /></span><div><h3>{t("เวลาให้บริการ")}</h3><p>{t("ทุกวัน 09:00 – 24:00 น.")}</p></div></div>
         <Link className="info-card contact-channel" href="/help"><span className="info-card-icon" aria-hidden="true"><QuestionMarkCircledIcon /></span><div><h3>{t("ศูนย์ช่วยเหลือ")}</h3><p>{t("คำถามที่พบบ่อยและวิธีหา UID")}</p></div></Link>
-        <Link className="info-card contact-channel" href="/partner"><span className="info-card-icon" aria-hidden="true"><PersonIcon /></span><div><h3>{t("ตัวแทนจำหน่าย")}</h3><p>{t("สมัครและรับราคาพิเศษ")}</p></div></Link>
       </aside>
 
       <section className="info-card contact-form-card" aria-labelledby="contact-form-title">

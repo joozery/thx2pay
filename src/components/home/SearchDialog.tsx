@@ -31,7 +31,7 @@ type SearchDialogProps = {
   onSelect?: (category: Category) => void;
 };
 
-const pageIcons: Record<PageIcon, typeof DashboardIcon> = { topup: DashboardIcon, card: IdCardIcon, wallet: BackpackIcon, partner: PersonIcon, premium: LightningBoltIcon, promo: StarIcon, news: ReaderIcon, help: QuestionMarkCircledIcon, uid: IdCardIcon, contact: EnvelopeClosedIcon, history: ClockIcon, account: AvatarIcon, accounts: AvatarIcon, boxes: CubeIcon };
+const pageIcons: Record<PageIcon, typeof DashboardIcon> = { topup: DashboardIcon, card: IdCardIcon, wallet: BackpackIcon, premium: LightningBoltIcon, promo: StarIcon, news: ReaderIcon, help: QuestionMarkCircledIcon, uid: IdCardIcon, contact: EnvelopeClosedIcon, history: ClockIcon, account: AvatarIcon, accounts: AvatarIcon, boxes: CubeIcon };
 
 function Highlight({ text, query }: { text: string; query: string }) {
   const q = query.trim();

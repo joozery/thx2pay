@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Dialog } from "radix-ui";
-import { ArrowRightIcon, CheckIcon, ChevronRightIcon, CopyIcon, CalendarIcon, CubeIcon, SpeakerLoudIcon, ReaderIcon } from "@radix-ui/react-icons";
+import { ArrowRightIcon, CheckIcon, ChevronRightIcon, CopyIcon, CalendarIcon, SpeakerLoudIcon, ReaderIcon, ClockIcon } from "@radix-ui/react-icons";
 import { useI18n } from "@/i18n/useI18n";
 import Navbar from "@/components/home/Navbar";
 import Footer from "@/components/home/Footer";
@@ -29,8 +29,13 @@ function CouponCard({ coupon }: { coupon: Coupon }) {
     }
   }
   return <li className="promos-coupon">
-    <div className="promos-coupon-detail"><span className="promos-icon"><ReaderIcon /></span><div><h3>{t(coupon.title)}</h3><p>{t(coupon.text)}</p><small>{t(coupon.until)}</small></div></div>
-    <div className="promos-coupon-code"><code>{coupon.code}</code><button onClick={copy} className={status === "copied" ? "is-copied" : ""} aria-label={`${t("คัดลอกโค้ด")} ${coupon.code}`}>{status === "copied" ? <CheckIcon /> : <CopyIcon />}{t(status === "copied" ? "คัดลอกแล้ว" : "คัดลอก")}</button></div>
+    <div className="promos-coupon-stub" aria-hidden="true"><b>{coupon.value}</b><span>{t("ส่วนลด")}</span></div>
+    <div className="promos-coupon-main">
+      <h3>{t(coupon.title)}</h3>
+      <p>{t(coupon.text)}</p>
+      <small><ClockIcon aria-hidden="true" />{t(coupon.until)}</small>
+      <div className="promos-coupon-code"><code>{coupon.code}</code><button onClick={copy} className={status === "copied" ? "is-copied" : ""} aria-label={`${t("คัดลอกโค้ด")} ${coupon.code}`}>{status === "copied" ? <CheckIcon /> : <CopyIcon />}{t(status === "copied" ? "คัดลอกแล้ว" : "คัดลอก")}</button></div>
+    </div>
     <span className="promos-copy-status" role="status">{status === "error" ? t("คัดลอกไม่สำเร็จ กรุณาเลือกคัดลอกโค้ดด้วยตนเอง") : status === "copied" ? `${t("คัดลอกแล้ว")} ${coupon.code}` : ""}</span>
   </li>;
 }
@@ -65,7 +70,6 @@ export default function PromotionsPage() {
           <div className="promos-card-body"><span className="promos-card-category">{t(p.category)}</span><h3>{t(p.title)}</h3><p>{t(p.desc)}</p><small><CalendarIcon />{t(p.until)}</small><button className="promos-card-cta" onClick={() => setSelected(p)}>{t("ดูรายละเอียด")}<ArrowRightIcon /></button></div>
         </article></li>)}</ul>
       </section>
-      <aside className="promos-partner"><span className="promos-icon"><CubeIcon /></span><div><h2>{t("สมัครตัวแทน รับส่วนลดพิเศษ")}</h2><p>{t("ร่วมเป็นตัวแทนจำหน่าย THX2PAY เพื่อรับส่วนลดและสิทธิประโยชน์สำหรับการจำหน่ายต่อ")}</p></div><Link href="/partner" className="promos-partner-link">{t("ดูรายละเอียด")}<ArrowRightIcon /></Link></aside>
     </main>
     <Footer onOpenDialog={setModal} />
     <ContactDialog title={modal} onClose={() => setModal("")} />

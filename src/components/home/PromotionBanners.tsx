@@ -9,7 +9,6 @@ import "./promotion-banners.css";
 
 const banners = [
   { id: "offers", image: "/images/banners/offers-v1.webp", label: "SPECIAL OFFERS", title: "โปรโมชั่นและดีลพิเศษ", text: "รวมสิทธิพิเศษสำหรับเกมโปรดของคุณ", cta: "ดูโปรโมชั่น", href: "/promotions", tone: "blue" },
-  { id: "partner", image: "/images/banners/partner-v1.webp", label: "PARTNER BENEFITS", title: "สมัครตัวแทน รับส่วนลดพิเศษ", text: "ร่วมเติบโตไปกับ THX2PAY", cta: "สมัครเป็นตัวแทน", href: "/partner", tone: "violet" },
   { id: "topup", image: "/images/banners/topup-v1.webp", label: "PLAY MORE", title: "เติมเกมยอดฮิต", text: "เลือกเติมเกมโปรดของคุณได้ในที่เดียว", cta: "ดูเกมทั้งหมด", href: "/topup", tone: "teal" },
 ];
 

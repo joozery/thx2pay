@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -116,7 +117,7 @@ export default function HelpPage() {
       </section>
 
       <section className="help-faq-section" id="help-questions" aria-labelledby="help-faq-title">
-        <div className="help-faq-intro"><span className="help-section-kicker">02 / FAQ</span><h2 id="help-faq-title">{t("คำถามที่พบบ่อย")}</h2><p>{t("รวมคำตอบเกี่ยวกับการเติมเกม บัญชี และการติดต่อทีมงาน")}</p></div>
+        <div className="help-faq-intro"><span className="help-section-kicker">02 / FAQ</span><h2 id="help-faq-title">{t("คำถามที่พบบ่อย")}</h2><p>{t("รวมคำตอบเกี่ยวกับการเติมเกม บัญชี และการติดต่อทีมงาน")}</p><Image className="help-faq-mascot" src="/images/help-cat.png" alt="" width={205} height={133} /></div>
         <div className="help-faq-content">
           <label className="help-question-search"><MagnifyingGlassIcon /><span className="sr-only">{t("ค้นหาคำถาม")}</span><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder={t("ค้นหาคำถาม เช่น UID, ชำระเงิน, บัญชี")} /></label>
           <div className="help-question-list">{visibleQuestions.length ? visibleQuestions.map(item => <details id={item.id} key={item.id} className="help-question"><summary><span>{t(item.question)}</span><ChevronDownIcon /></summary><p>{t(item.answer)}</p></details>) : <div className="help-no-results"><strong>{t("ไม่พบคำตอบที่ค้นหา")}</strong><p>{t("ลองใช้คำค้นอื่น หรือส่งคำถามถึงทีมงาน")}</p></div>}</div>

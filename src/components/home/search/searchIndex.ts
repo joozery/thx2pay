@@ -13,7 +13,7 @@ export type SearchItem = {
   icon?: PageIcon;
   keywords: string;
 };
-export type PageIcon = "topup" | "card" | "wallet" | "partner" | "premium" | "promo" | "news" | "help" | "uid" | "contact" | "history" | "account" | "accounts" | "boxes";
+export type PageIcon = "topup" | "card" | "wallet" | "premium" | "promo" | "news" | "help" | "uid" | "contact" | "history" | "account" | "accounts" | "boxes";
 
 const pages: Omit<SearchItem, "kind" | "keywords">[] = [
   { id: "page-topup", title: "เติมเกม", subtitle: "เติมเกมด้วย UID", href: "/topup", icon: "topup" },
@@ -23,7 +23,6 @@ const pages: Omit<SearchItem, "kind" | "keywords">[] = [
   { id: "page-wallet", title: "เติมเงินเข้ากระเป๋า", subtitle: "เติมยอดเงินไว้ใช้บนเว็บ", href: "/wallet/topup", icon: "wallet" },
   { id: "page-premium", title: "แอพพรีเมียม", subtitle: "Netflix, Spotify, YouTube และอื่น ๆ", href: "/premium", icon: "premium" },
   { id: "page-promotions", title: "โปรโมชั่น", subtitle: "ดีลและคูปองล่าสุด", href: "/promotions", icon: "promo" },
-  { id: "page-partner", title: "สมัครตัวแทนจำหน่าย", subtitle: "รับราคาพิเศษสำหรับตัวแทน", href: "/partner", icon: "partner" },
   { id: "page-uid", title: "วิธีหา UID", subtitle: "ดูวิธีหา UID หรือ Player ID ในเกม", href: "/help", icon: "uid" },
   { id: "page-help", title: "ช่วยเหลือ", subtitle: "คำถามที่พบบ่อย", href: "/help", icon: "help" },
   { id: "page-history", title: "คำสั่งซื้อ", subtitle: "ประวัติการเติมและสถานะ", href: "/account/orders", icon: "history" },
@@ -35,7 +34,7 @@ const pages: Omit<SearchItem, "kind" | "keywords">[] = [
 const pageAliases: Record<string, string> = {
   "page-topup": "topup game เติม uid", "page-accounts": "account id ไอดี บัญชีเกม ขายไอดี ซื้อไอดี", "page-boxes": "mystery box loot random gacha กล่อง สุ่ม ลุ้น", "page-cards": "card gift code บัตร ของขวัญ โค้ด", "page-wallet": "wallet กระเป๋า ยอดเงิน balance",
   "page-premium": "premium netflix spotify youtube app แอป", "page-promotions": "promotion promo coupon คูปอง ส่วนลด ดีล",
-  "page-partner": "partner reseller ตัวแทน", "page-uid": "uid player id ไอดี", "page-help": "help faq ถาม", "page-history": "history order ออเดอร์ คำสั่งซื้อ ประวัติการเติม",
+  "page-uid": "uid player id ไอดี", "page-help": "help faq ถาม", "page-history": "history order ออเดอร์ คำสั่งซื้อ ประวัติการเติม",
   "page-account": "account profile โปรไฟล์ บัญชี ตั้งค่า", "page-news": "news ข่าว", "page-contact": "contact email อีเมล ติดต่อ",
 };
 

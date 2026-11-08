@@ -86,7 +86,7 @@ export default function AccountsPage() {
           {accountGames.map(item => <button type="button" key={item.id} aria-pressed={game === item.id} onClick={() => setGame(item.id)}><Image src={item.icon} alt="" width={24} height={24} />{item.name}<small>{gameAccounts.filter(account => account.game === item.id).length}</small></button>)}
         </div>
 
-        <div className="topup-finder">
+        <div className="topup-finder accounts-finder">
           <form className="topup-finder-search" role="search" onSubmit={event => { event.preventDefault(); resultsRef.current?.scrollIntoView({ behavior: "smooth" }); }}>
             <MagnifyingGlassIcon aria-hidden="true" />
             <input type="search" aria-label={t("ค้นหาไอดีเกม")} placeholder={t("ค้นหา เช่น Immortal, AR 60, สกินมีด…")} value={query} onChange={event => setQuery(event.target.value)} enterKeyHint="search" />

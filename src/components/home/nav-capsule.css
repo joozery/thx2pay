@@ -1,5 +1,5 @@
 /*
-  Navbar on tablet + desktop (761px and up): the main menu is always visible as a liquid-glass capsule.
+  Navbar on tablet + desktop (761px and up): the main menu is always visible, with no frame around the items.
   The current page sits on a raised glass "drop" (no underline); hover is a soft neutral tint.
   Replaces the old tablet layout that hid the menu behind a filter-style icon.
 */
@@ -10,8 +10,7 @@
   header.site-header .navbar-logo img{width:118px}
   header.site-header .mobile-menu{display:none!important}
 
-  header.site-header nav.desktop-navigation{display:flex!important;position:static;align-items:center;gap:2px;height:auto;padding:4px;margin:0 auto;border-radius:999px;background:var(--lg-soft);box-shadow:inset 0 1px 0 rgb(255 255 255 / .04);font-size:13.5px;font-weight:700;flex-wrap:nowrap;min-width:0}
-  html[data-theme="light"] header.site-header nav.desktop-navigation{background:rgb(16 40 64 / .045);box-shadow:inset 0 1px 0 rgb(255 255 255 / .8)}
+  header.site-header nav.desktop-navigation{display:flex!important;position:static;align-items:center;gap:2px;height:auto;padding:0;margin:0 auto;background:none;box-shadow:none;border:0;font-size:14px;font-weight:700;flex-wrap:nowrap;min-width:0}
   header.site-header nav.desktop-navigation>a,
   header.site-header nav.desktop-navigation>.nav-dropdown-trigger{display:flex;align-items:center;gap:4px;height:38px;padding:0 15px;border-radius:999px;white-space:nowrap;opacity:1;color:var(--foreground);transition:background .2s,color .2s,box-shadow .2s}
   header.site-header nav.desktop-navigation>a:not(.active),
@@ -35,7 +34,7 @@
 /* Narrow desktop / landscape tablet */
 @media(min-width:761px) and (max-width:1180px){
   header.site-header .nav-wrap{gap:10px;width:calc(100% - 32px)}
-  header.site-header nav.desktop-navigation{font-size:13px}
+  header.site-header nav.desktop-navigation{font-size:14px}
   header.site-header nav.desktop-navigation>a,
   header.site-header nav.desktop-navigation>.nav-dropdown-trigger{padding:0 12px}
 }
@@ -43,7 +42,7 @@
 /* Portrait tablet: keep every menu item visible; compact the tools (flag only, avatar only). */
 @media(min-width:761px) and (max-width:1000px){
   header.site-header .navbar-logo img{width:96px}
-  header.site-header nav.desktop-navigation{padding:3px;font-size:12.5px}
+  header.site-header nav.desktop-navigation{font-size:14px}
   header.site-header nav.desktop-navigation>a,
   header.site-header nav.desktop-navigation>.nav-dropdown-trigger{height:36px;padding:0 9px}
   header.site-header .nav-actions .locale-code,
@@ -51,7 +50,7 @@
   header.site-header .user-trigger-desktop>svg{display:none}
   header.site-header .nav-actions .locale-trigger{padding:0 7px}
   header.site-header .nav-actions .user-trigger-desktop{margin-left:6px;padding:2px}
-  header.site-header .nav-actions>.pill{margin-left:6px;padding:7px 12px;font-size:12px}
+  header.site-header .nav-actions>.pill{margin-left:6px;padding:7px 12px;font-size:14px}
 }
 
 /* Keep the menu capsule centred on the page, not between two items of different widths. */
@@ -62,3 +61,10 @@
   header.site-header .nav-actions{justify-self:end}
 }
 @media(min-width:761px) and (max-width:1180px){header.site-header .user-trigger-name,header.site-header .user-trigger-desktop>svg{display:none}header.site-header .nav-actions .user-trigger-desktop{padding:2px}}
+
+/* Auto-hide: slides up while scrolling down, back down on scroll up (state set in Navbar.tsx). */
+header.site-header{transition:transform .25s ease}
+header.site-header.is-hidden{transform:translateY(-100%)}
+/* Keep the bar reachable for keyboard users. */
+header.site-header.is-hidden:has(:focus-visible){transform:none}
+@media(prefers-reduced-motion:reduce){header.site-header{transition:none}}

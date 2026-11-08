@@ -23,6 +23,8 @@ const configs: BoxConfig[] = [
   { id: "rov-box", game: "rov", name: "กล่องคูปอง RoV", price: 39, packs: [0, 1, 2, 3], tag: "new" },
   { id: "pubg-box", game: "pubg-mobile", name: "กล่อง UC PUBG MOBILE", price: 49, packs: [0, 1, 2, 3] },
   { id: "mlbb-box", game: "mobile-legends", name: "กล่องเพชร MLBB", price: 59, packs: [0, 1, 2, 3], tag: "new" },
+  { id: "hsr-box", game: "honkai-star-rail", name: "กล่องชาร์ด Honkai: Star Rail", price: 99, packs: [0, 1, 2, 3], tag: "new" },
+  { id: "codm-box", game: "call-of-duty-mobile", name: "กล่อง CP Call of Duty: Mobile", price: 49, packs: [0, 1, 2, 3] },
 ];
 
 function build(config: BoxConfig): MysteryBox {

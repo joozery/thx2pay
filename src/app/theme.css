@@ -6,8 +6,8 @@ html[data-theme="light"] body{background:#f5f8fc;color:#18283b}
 html[data-theme="light"] p{color:#5c6b7e}
 html[data-theme="light"] .site-header{background:#fffffff5;border-bottom-color:#dce4ed;box-shadow:0 2px 12px #10284005}
 html[data-theme="light"] .brand-logo{position:relative}
-html[data-theme="light"] .brand-logo img{visibility:hidden;filter:none}
-html[data-theme="light"] .brand-logo::after{content:"";position:absolute;inset:0;background:var(--blue);mask:url("/logo/logo.png") center/contain no-repeat;pointer-events:none}
+html[data-theme="light"] .brand-logo:not(.has-light-logo) img{visibility:hidden;filter:none}
+html[data-theme="light"] .brand-logo:not(.has-light-logo)::after{content:"";position:absolute;inset:0;background:var(--blue);mask:url("/logo/logo.png") center/contain no-repeat;pointer-events:none}
 html[data-theme="light"] .icon-button{color:#22354c}
 html[data-theme="light"] .theme-toggle{border-color:#dce4ed;background:#edf4fa}
 html[data-theme="light"] .theme-toggle:hover{background:#dfedf8}
@@ -47,8 +47,8 @@ html[data-theme="light"] .dialog-overlay{background:#13263e66}
 html[data-theme="light"] .dialog{background:#fff;color:#18283b;border-color:#dde6ef;box-shadow:0 25px 100px #10284033}
 html[data-theme="light"] .uid-guide-dialog ol{color:#5c6b7e}
 @media(max-width:760px){html[data-theme="light"] .mobile-navigation{background:#fff;box-shadow:0 12px 20px #10284010}}
-@media(max-width:480px){.nav-wrap{gap:8px}.nav-actions{gap:5px}.navbar-logo img{width:98px}.theme-toggle{width:30px;height:30px}.nav-actions .pill{padding:5px 10px;font-size:11px}}
-@media(max-width:480px){.site-header .nav-wrap{gap:8px}.site-header .nav-actions{gap:5px}.site-header .navbar-logo img{width:94px}.site-header .nav-actions .pill{padding:5px 9px;font-size:11px}}
+@media(max-width:480px){.nav-wrap{gap:8px}.nav-actions{gap:5px}.navbar-logo img{width:98px}.theme-toggle{width:30px;height:30px}.nav-actions .pill{padding:5px 10px;font-size:14px}}
+@media(max-width:480px){.site-header .nav-wrap{gap:8px}.site-header .nav-actions{gap:5px}.site-header .navbar-logo img{width:94px}.site-header .nav-actions .pill{padding:5px 9px;font-size:14px}}
 
 @media(prefers-reduced-motion:reduce){section[style]{transform:none!important}}
 
@@ -57,6 +57,6 @@ html[data-theme="light"] .uid-guide-dialog ol{color:#5c6b7e}
 html[data-theme="light"] .follow-link{background:#1d1d1d;color:#fff}
 
 /* Light theme: white text + icons on blue buttons/badges */
-html[data-theme="light"] :is(.pill,.hx-btn.primary,.member-button,.promos-card-cta,.wallet-primary,.promotion-banner-cta,.promos-coupon-code button,.promos-filters button[aria-pressed="true"],.member-tabs a[aria-current],.hero .quick-links span,.payment-icon,.wallet-radio-mark){color:#fff}
+html[data-theme="light"] :is(.pill,.hx-btn.primary,.member-button,.promos-card-cta,.wallet-primary,.promotion-banner-cta,.promos-coupon-code button,.promos-filters button[aria-pressed="true"],.member-tabs a[aria-current],.hero .quick-links span,.payment-icon,.wallet-radio-mark,.checkout-step,.acc-tag.new,.acd-steps li>span,.box-card-foot span,.promos-coupon button){color:#fff}
 html[data-theme="light"] :is(.pill,.hx-btn.primary,.member-button,.promos-card-cta,.wallet-primary,.promotion-banner-cta,.promos-coupon-code button,.promos-filters button[aria-pressed="true"],.member-tabs a[aria-current],.hero .quick-links span,.payment-icon,.wallet-radio-mark) :is(svg,span){color:inherit}
 html[data-theme="light"] .member-card>.acct-form .pill,html[data-theme="light"] .cards-dialog form .pill{color:#fff}

@@ -4,9 +4,9 @@ import { useI18n } from "@/i18n/useI18n";
 
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { DropdownMenu } from "radix-ui";
-import { MixerHorizontalIcon, MagnifyingGlassIcon, ChevronRightIcon, ChevronDownIcon, Cross2Icon } from "@radix-ui/react-icons";
+import { HamburgerMenuIcon, MagnifyingGlassIcon, ChevronRightIcon, ChevronDownIcon, Cross2Icon } from "@radix-ui/react-icons";
 import LanguageSwitcher from "./LanguageSwitcher";
 import BrandLogo from "./BrandLogo";
 import UserMenu from "@/auth/UserMenu";
@@ -28,6 +28,22 @@ export default function Navbar({ onToggleSearch, searchOpen, activePage = "home"
   const { t } = useI18n();
   const [menu, setMenu] = useState(false);
   const { user } = useAuth();
+  // Hide the bar while scrolling down, bring it back as soon as the user scrolls up (always shown near the top).
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef(0);
+  useEffect(() => {
+    lastY.current = window.scrollY;
+    function onScroll() {
+      const y = window.scrollY;
+      const delta = y - lastY.current;
+      if (Math.abs(delta) < 6) return;
+      setHidden(delta > 0 && y > 80);
+      lastY.current = y;
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const navHidden = hidden && !menu && !searchOpen;
 
   function navigateToTop(event: MouseEvent<HTMLAnchorElement>) {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -35,11 +51,11 @@ export default function Navbar({ onToggleSearch, searchOpen, activePage = "home"
     window.scrollTo({ top: 0, behavior: "instant" });
   }
   return (
-    <header className="site-header">
+    <header className={`site-header${navHidden ? " is-hidden" : ""}`}>
       <div className="nav-wrap">
-        <BrandLogo eager className="navbar-logo" onClick={navigateToTop} />
-        <button className="mobile-menu icon-button" aria-label={t("เปิดเมนู")} aria-expanded={menu} aria-controls="mobile-navigation" onClick={() => setMenu(!menu)}>
-          <MixerHorizontalIcon />
+        <BrandLogo eager lightVariant className="navbar-logo" onClick={navigateToTop} />
+        <button className="mobile-menu icon-button" aria-label={t(menu ? "ปิดเมนู" : "เปิดเมนู")} aria-expanded={menu} aria-controls="mobile-navigation" onClick={() => setMenu(!menu)}>
+          {menu ? <Cross2Icon aria-hidden="true" /> : <HamburgerMenuIcon aria-hidden="true" />}
         </button>
         <nav id="primary-navigation" aria-label={t("เมนูหลัก")} className="desktop-navigation">
           {[homeLink].map(link => (

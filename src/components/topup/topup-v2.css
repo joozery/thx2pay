@@ -3,7 +3,7 @@
 .topup-featured-section+.topup-featured-section{padding-top:42px}
 .topup-featured-heading h2{display:flex;align-items:center;gap:10px;margin-top:7px;font-size:27px}
 .topup-featured-heading h2 svg{width:22px;height:22px;color:var(--blue)}
-.topup-featured-heading p{margin-top:5px;color:var(--topup-muted);font-size:13px}
+.topup-featured-heading p{margin-top:5px;color:var(--topup-muted);font-size:14px}
 .topup-featured-list{display:flex;gap:13px;overflow-x:auto;padding:20px 1px 12px;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:#4b87a5 transparent}
 .topup-featured-game{position:relative;isolation:isolate;flex:1 0 123px;max-width:162px;min-width:0;height:176px;display:flex;align-items:flex-end;padding:12px;border:1px solid var(--topup-border);border-radius:18px;background:var(--topup-surface);color:#fff;text-align:left;overflow:hidden;scroll-snap-align:start}
 .topup-featured-game:hover{border-color:#45baf1;transform:translateY(-3px);box-shadow:0 12px 25px #0003}
@@ -13,11 +13,11 @@
 .topup-featured-game:hover .topup-featured-icon img{transform:scale(1.05)}
 .topup-featured-icon::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,#050d19dd 100%)}
 .topup-featured-copy{display:flex;flex-direction:column;gap:3px;min-width:0;width:100%}
-.topup-featured-game strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25;font-size:13px;text-shadow:0 1px 4px #000}
-.topup-featured-game small{color:#d9e4f0;font-size:10px;text-shadow:0 1px 4px #000}
+.topup-featured-game strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25;font-size:14px;text-shadow:0 1px 4px #000}
+.topup-featured-game small{color:#d9e4f0;font-size:14px;text-shadow:0 1px 4px #000}
 
 /* Badges on game cards: brand blue, no off-palette colours */
-.topup-game-tag{position:absolute;top:12px;left:12px;z-index:1;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;font-size:11px;font-weight:800;box-shadow:0 4px 14px #0006}
+.topup-game-tag{position:absolute;top:12px;left:12px;z-index:1;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;font-size:14px;font-weight:800;box-shadow:0 4px 14px #0006}
 .topup-game-tag svg{width:13px;height:13px}
 .topup-game-tag.recommended{background:var(--blue);color:#fff;border:1px solid #5bc9f3}
 .topup-game-tag.new{background:#0b111ccc;color:#fff;border:1px solid #25adf5aa;backdrop-filter:blur(8px)}
@@ -35,3 +35,6 @@
 @media(max-width:380px){.topup-game-info h3{font-size:14px}}
 .topup-game-tag,.topup-game-tag svg{color:#fff}
 html[data-theme="light"] .topup-game-tag{color:#fff}
+/* Recommended and new-game rows share one card width, so a row with fewer games keeps the same layout (8 per row on desktop, 6 on tablet; extra cards scroll). */
+@media(min-width:761px){.topup-featured-game{flex:0 0 calc((100% - 5 * 13px) / 6);max-width:none}}
+@media(min-width:1101px){.topup-featured-game{flex-basis:calc((100% - 7 * 13px) / 8)}}

@@ -1,3 +1,7 @@
 .brand-logo{flex-shrink:0;line-height:1}
 .brand-logo img{display:block;width:125px;height:auto}
 @media(max-width:760px){.brand-logo img{width:110px}}
+/* Navbar: dark-text logo on the light theme, default logo on the dark theme. */
+.brand-logo.has-light-logo .brand-logo-light{display:none}
+html[data-theme="light"] .brand-logo.has-light-logo .brand-logo-dark{display:none}
+html[data-theme="light"] .brand-logo.has-light-logo .brand-logo-light{display:block}

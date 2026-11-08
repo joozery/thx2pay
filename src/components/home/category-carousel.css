@@ -4,6 +4,6 @@
  .categories .category-grid>article{flex:0 0 min(84%,340px);min-width:0;scroll-snap-align:start;scroll-snap-stop:always}
  .categories .category-caption{display:flex;flex-wrap:nowrap;align-items:center;gap:8px;margin-top:12px}
  .categories .category-caption h3{font-size:18px}
- .categories .category-caption .small{font-size:11px;padding:8px 11px;min-height:36px;flex-shrink:0}
+ .categories .category-caption .small{font-size:14px;padding:8px 11px;min-height:36px;flex-shrink:0}
 }
-@media(max-width:350px){.categories .category-caption h3{font-size:16px}.categories .category-caption .small{font-size:10px;padding:8px 9px}}
+@media(max-width:350px){.categories .category-caption h3{font-size:16px}.categories .category-caption .small{font-size:14px;padding:8px 9px}}

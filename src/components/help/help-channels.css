@@ -1,5 +1,5 @@
-/* Help page: other contact channels (LINE, Facebook, ...). Glass cards, brand-coloured icon chips. */
-.channel-icon{display:grid;place-items:center;flex-shrink:0;border-radius:14px;background:color-mix(in srgb,var(--channel) 14%,transparent);color:var(--channel)}
+/* Help page: other contact channels (LINE, Facebook, ...). Glass cards with bare brand logos. */
+.channel-icon{display:grid;place-items:center;flex-shrink:0;background:none;color:var(--channel)}
 .channel-icon img{object-fit:contain}
 
 .help-channels{margin-top:80px}
@@ -12,15 +12,16 @@ html[data-theme="light"] .help-channel>a:hover{box-shadow:0 16px 36px rgb(16 40 
 .help-channel>div[aria-disabled="true"]{opacity:.78}
 .help-channel.featured,.help-channel:last-child{grid-column:span 2}
 .help-channel.featured>a,.help-channel.featured>div{background:linear-gradient(120deg,color-mix(in srgb,var(--channel) 16%,transparent),transparent 70%),var(--lg-surface)}
-.help-channel.featured .channel-icon{width:56px!important;height:56px!important;border-radius:17px}
+.help-channel.featured .channel-icon{width:56px!important;height:56px!important}
+.help-channel.featured .channel-icon>*{width:56px!important;height:56px!important}
 .help-channel-copy{flex:1;min-width:0;display:grid;gap:2px}
 .help-channel-copy h3{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0;font-size:15.5px;letter-spacing:0}
-.help-channel-badge{padding:2px 8px;border-radius:999px;background:color-mix(in srgb,var(--channel) 18%,transparent);color:var(--channel);font-size:10.5px;font-weight:800}
-.help-channel-handle{font-size:12.5px;font-weight:700;color:var(--channel)}
+.help-channel-badge{padding:2px 8px;border-radius:999px;background:color-mix(in srgb,var(--channel) 18%,transparent);color:var(--channel);font-size:14px;font-weight:800}
+.help-channel-handle{font-size:14px;font-weight:700;color:var(--channel)}
 html[data-theme="light"] .help-channel-handle{filter:brightness(.85)}
-.help-channel-desc{font-size:12.5px;line-height:1.55;color:#94a3b6}
+.help-channel-desc{font-size:14px;line-height:1.55;color:#94a3b6}
 html[data-theme="light"] .help-channel-desc{color:#65768b}
-.help-channel-action{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;height:36px;padding:0 14px;border-radius:999px;background:var(--channel);color:#fff;font-size:12.5px;font-weight:800;white-space:nowrap}
+.help-channel-action{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;height:36px;padding:0 14px;border-radius:999px;background:var(--channel);color:#fff;font-size:14px;font-weight:800;white-space:nowrap}
 .help-channel-action svg{width:14px;height:14px}
 .help-channel-action.soon{background:var(--lg-soft);color:#94a3b6}
 html[data-theme="light"] .help-channel-action.soon{color:#65768b}

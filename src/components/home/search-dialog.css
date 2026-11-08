@@ -1,5 +1,5 @@
 /* Category filter note on the home page (kept from the old file). */
-.category-filter{display:flex;align-items:center;gap:15px;font-size:13px;margin:0 0 20px;color:#a6b6c8}
+.category-filter{display:flex;align-items:center;gap:15px;font-size:14px;margin:0 0 20px;color:#a6b6c8}
 .category-filter button{background:transparent;color:var(--blue);padding:5px}
 html[data-theme="light"] .category-filter{color:#62768e}
 
@@ -22,16 +22,16 @@ html[data-theme="light"] .sd-panel{box-shadow:0 30px 70px rgb(16 40 64 / .2),var
 .sd-clear{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--lg-soft);color:var(--sd-muted);flex-shrink:0}
 .sd-clear:hover{color:var(--foreground);filter:none}
 .sd-clear svg{width:14px;height:14px}
-.sd-esc{display:grid;place-items:center;height:30px;padding:0 9px;border-radius:9px;background:var(--lg-soft);color:var(--sd-muted);font-size:11px;font-weight:800;flex-shrink:0}
+.sd-esc{display:grid;place-items:center;height:30px;padding:0 9px;border-radius:9px;background:var(--lg-soft);color:var(--sd-muted);font-size:14px;font-weight:800;flex-shrink:0}
 .sd-esc:hover{color:var(--foreground);filter:none}
 .sd-esc-x{display:none;width:15px;height:15px}
 
 /* Body */
 .sd-body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:6px 10px 10px;scrollbar-width:thin;scrollbar-color:rgb(127 140 156 / .4) transparent;box-shadow:inset 0 1px 0 rgb(127 140 156 / .12)}
 .sd-group{padding:8px 0 4px}
-.sd-group-head{display:flex;align-items:center;justify-content:space-between;padding:6px 10px 8px;font-size:11px;font-weight:800;letter-spacing:.5px;color:var(--sd-muted)}
+.sd-group-head{display:flex;align-items:center;justify-content:space-between;padding:6px 10px 8px;font-size:14px;font-weight:800;letter-spacing:.5px;color:var(--sd-muted)}
 .sd-count{min-width:20px;padding:1px 7px;border-radius:999px;background:var(--lg-soft);text-align:center}
-.sd-text-btn{padding:0;background:transparent;color:var(--sd-muted);font-size:11px;font-weight:700}
+.sd-text-btn{padding:0;background:transparent;color:var(--sd-muted);font-size:14px;font-weight:700}
 .sd-text-btn:hover{color:var(--foreground);filter:none}
 
 .sd-option{display:flex;align-items:center;gap:13px;padding:9px 10px;border-radius:14px;cursor:pointer;transition:background .12s}
@@ -44,17 +44,17 @@ html[data-theme="light"] .sd-panel{box-shadow:0 30px 70px rgb(16 40 64 / .2),var
 .sd-art-icon svg{width:19px;height:19px}
 .sd-text{flex:1;min-width:0;display:grid;gap:2px}
 .sd-text strong{font-size:14.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sd-text small{font-size:12px;color:var(--sd-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sd-text small{font-size:14px;color:var(--sd-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sd-text mark{background:transparent;color:var(--blue)}
 .sd-go{width:16px;height:16px;flex-shrink:0;opacity:0;transform:translateX(-4px);transition:opacity .15s,transform .15s}
 
 .sd-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 6px}
-.sd-chip{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:999px;background:var(--lg-soft);color:var(--foreground);font-size:12.5px;font-weight:700;cursor:pointer;transition:background .12s}
+.sd-chip{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:999px;background:var(--lg-soft);color:var(--foreground);font-size:14px;font-weight:700;cursor:pointer;transition:background .12s}
 .sd-chip svg{width:13px;height:13px;color:var(--sd-muted)}
 .sd-chip.active,.sd-chip:hover{background:rgb(37 173 245 / .14);color:var(--blue);filter:none}
 
 .sd-tiles{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;padding:0 4px}
-.sd-tile{display:flex;flex-direction:column;align-items:center;gap:7px;padding:10px 4px 8px;border-radius:16px;cursor:pointer;text-align:center;font-size:11.5px;font-weight:700;line-height:1.3;transition:background .12s,transform .15s}
+.sd-tile{display:flex;flex-direction:column;align-items:center;gap:7px;padding:10px 4px 8px;border-radius:16px;cursor:pointer;text-align:center;font-size:14px;font-weight:700;line-height:1.3;transition:background .12s,transform .15s}
 .sd-tile .sd-art{width:52px;height:52px;border-radius:15px;box-shadow:0 6px 16px rgb(0 0 0 / .18)}
 .sd-tile>span:last-child{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:100%}
 .sd-tile.active{background:var(--sd-hover)}
@@ -65,17 +65,17 @@ html[data-theme="light"] .sd-panel{box-shadow:0 30px 70px rgb(16 40 64 / .2),var
 .sd-empty-icon{display:grid;place-items:center;width:52px;height:52px;margin-bottom:6px;border-radius:16px;background:var(--lg-soft);color:var(--sd-muted)}
 .sd-empty-icon svg{width:22px;height:22px}
 .sd-empty strong{font-size:16px}
-.sd-empty p{margin:0 0 10px;font-size:13px;color:var(--sd-muted)}
+.sd-empty p{margin:0 0 10px;font-size:14px;color:var(--sd-muted)}
 .sd-empty .sd-chips{justify-content:center}
 
 /* Footer */
-.sd-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;font-size:11px;color:var(--sd-muted);box-shadow:inset 0 1px 0 rgb(127 140 156 / .12)}
+.sd-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;font-size:14px;color:var(--sd-muted);box-shadow:inset 0 1px 0 rgb(127 140 156 / .12)}
 .sd-keys{display:flex;align-items:center;gap:5px}
-.sd-keys kbd{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;margin-left:5px;border-radius:6px;background:var(--lg-soft);font:inherit;font-size:10px;font-weight:800;color:var(--foreground)}
+.sd-keys kbd{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;margin-left:5px;border-radius:6px;background:var(--lg-soft);font:inherit;font-size:14px;font-weight:800;color:var(--foreground)}
 .sd-keys kbd:first-child{margin-left:0}
 .sd-variant{display:flex;align-items:center;gap:4px;padding:3px;border-radius:999px;background:rgb(244 183 60 / .12)}
 .sd-variant>span{padding:0 6px;color:#c98a12;font-weight:800}
-.sd-variant button{height:22px;padding:0 9px;border-radius:999px;background:transparent;color:var(--sd-muted);font-size:10.5px;font-weight:800}
+.sd-variant button{height:22px;padding:0 9px;border-radius:999px;background:transparent;color:var(--sd-muted);font-size:14px;font-weight:800}
 .sd-variant button[aria-pressed="true"]{background:var(--lg-surface-strong);color:var(--foreground);box-shadow:0 2px 8px rgb(0 0 0 / .15)}
 
 /* ===== Variant B: sheet that drops from the navbar ===== */

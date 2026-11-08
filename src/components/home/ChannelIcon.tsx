@@ -7,7 +7,8 @@ function MessengerMark() {
 }
 
 export default function ChannelIcon({ channel, size = 44 }: { channel: ContactChannel; size?: number }) {
-  const inner = Math.round(size * 0.5);
+  // Bare brand mark at full size (no tinted chip behind it).
+  const inner = size;
   return <span className="channel-icon" style={{ width: size, height: size, ["--channel" as string]: channel.color }} aria-hidden="true">
     {channel.icon === "email" ? <EnvelopeClosedIcon width={inner} height={inner} />
       : channel.icon === "messenger" ? <span style={{ width: inner, height: inner, display: "grid" }}><MessengerMark /></span>

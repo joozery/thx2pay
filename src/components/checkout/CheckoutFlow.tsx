@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Dialog } from "radix-ui";
-import { ArrowLeftIcon, ArrowRightIcon, CheckIcon, ChevronDownIcon, ChevronRightIcon, Cross2Icon, LightningBoltIcon, LockClosedIcon, PersonIcon, StarFilledIcon } from "@radix-ui/react-icons";
+import { ArrowLeftIcon, ArrowRightIcon, CheckCircledIcon, CheckIcon, ChevronDownIcon, ChevronRightIcon, Cross2Icon, LightningBoltIcon, LockClosedIcon, PersonIcon, StarFilledIcon } from "@radix-ui/react-icons";
 import { useI18n } from "@/i18n/useI18n";
 import { useAuth } from "@/auth/AuthProvider";
 import { useSavedUIDs } from "@/auth/accountData";
@@ -89,33 +89,29 @@ export default function CheckoutFlow({ product }: { product: CheckoutProduct }) 
     setStep("success");
   }
 
-  const backHref = product.kind === "game" ? "/topup" : "/premium";
-  const backLabel = product.kind === "game" ? "เติมเกม" : "พรีเมียม";
+  const backHref = product.kind === "game" ? "/topup" : product.kind === "card" ? "/cards" : "/premium";
+  const backLabel = product.kind === "game" ? "เติมเกม" : product.kind === "card" ? "บัตรเติมเงิน" : "พรีเมียม";
 
   return <>
-    <Navbar activePage={product.kind === "game" ? "games" : "premium"} onToggleSearch={() => setSearchOpen(open => !open)} searchOpen={searchOpen} />
+    <Navbar activePage={product.kind === "game" ? "games" : product.kind === "card" ? "cards" : "premium"} onToggleSearch={() => setSearchOpen(open => !open)} searchOpen={searchOpen} />
     <main className="container topup-page checkout-page" id="top">
       <div className="wallet-page">
         <nav className="topup-breadcrumb" aria-label={t("เส้นทางหน้าเว็บ")}><Link href="/">{t("หน้าแรก")}</Link><ChevronRightIcon /><Link href={backHref}>{t(backLabel)}</Link><ChevronRightIcon /><span>{product.name}</span></nav>
 
-        <section className="checkout-product" aria-labelledby="checkout-title">
-          <span className={`checkout-product-art${product.color ? " is-logo" : ""}`} style={product.color ? { background: product.color } : undefined}>
-            <Image src={product.image} alt="" {...(product.color ? { width: 64, height: 64, unoptimized: true } : { fill: true, sizes: "96px", style: { objectFit: "cover" } })} />
-          </span>
-          <div>
-            <span className="wallet-eyebrow">{product.kind === "game" ? "GAME TOP-UP" : "PREMIUM APP"}</span>
-            <h1 id="checkout-title">{product.kind === "game" ? t("เติม {{name}}", { name: product.name }) : t("ซื้อ {{name}}", { name: product.name })}</h1>
-            <p>{t(product.subtitle)}</p>
-            <ul className="checkout-perks">
-              <li><LightningBoltIcon />{t(product.kind === "game" ? "เติมด้วย UID ไม่ต้องใช้รหัสผ่าน" : "ส่งรหัสทางอีเมล")}</li>
-              <li><LockClosedIcon />{t("ชำระเงินปลอดภัย")}</li>
-            </ul>
-          </div>
-          <span className="wallet-test-badge">{t("โหมดทดสอบ")}</span>
-        </section>
-
-        <form className="checkout-layout" onSubmit={submit} noValidate>
+        <form className="acd-layout" onSubmit={submit} noValidate>
           <div className="wallet-column">
+            <section className="checkout-product" aria-labelledby="checkout-title">
+              <span className={`checkout-product-art${product.color ? " is-logo" : ""}`} style={product.color ? { background: product.color } : undefined}>
+                <Image src={product.image} alt="" {...(product.color ? { width: 64, height: 64, unoptimized: true } : { fill: true, sizes: "96px", style: { objectFit: "cover" } })} />
+              </span>
+              <div>
+                <span className="wallet-eyebrow">{product.kind === "game" ? "GAME TOP-UP" : product.kind === "card" ? "GAME CARD" : "PREMIUM APP"}</span>
+                <h1 id="checkout-title">{product.kind === "game" ? t("เติม {{name}}", { name: product.name }) : product.kind === "card" ? t("ซื้อ {{name}}", { name: t("บัตร {{name}}", { name: product.name }) }) : t("ซื้อ {{name}}", { name: product.name })}</h1>
+                <p>{t(product.subtitle)}</p>
+              </div>
+              <span className="wallet-test-badge">{t("โหมดทดสอบ")}</span>
+            </section>
+
             <section className="wallet-card" aria-labelledby="checkout-account-title">
               <div className="wallet-card-head"><span className="checkout-step">1</span><div><h2 id="checkout-account-title">{t(field.kind === "uid" ? "ข้อมูลบัญชีเกม" : "ข้อมูลผู้รับ")}</h2><p>{t(field.kind === "uid" ? "กรอกข้อมูลให้ถูกต้อง ไอเทมจะถูกส่งเข้าบัญชีนี้" : "เราจะส่งรหัสหรือลิงก์เปิดใช้งานไปที่อีเมลนี้")}</p></div></div>
               {savedForGame.length > 0 && <div className="checkout-saved" role="group" aria-label={t("UID ที่บันทึกไว้")}><span>{t("UID ที่บันทึกไว้")}</span>{savedForGame.map(item => <button type="button" key={item.id} aria-pressed={item.uid === value} onClick={() => setAccountId(item.uid)}><PersonIcon />{item.uid}</button>)}</div>}
@@ -134,37 +130,37 @@ export default function CheckoutFlow({ product }: { product: CheckoutProduct }) 
             </section>
 
             <section className="wallet-card" aria-labelledby="checkout-package-title">
-              <div className="wallet-card-head"><span className="checkout-step">2</span><div><h2 id="checkout-package-title">{t(product.kind === "game" ? "เลือกแพ็กเกจ" : "เลือกแพ็กเกจสมาชิก")}</h2><p>{t("ราคาตัวอย่าง อาจมีการเปลี่ยนแปลง")}</p></div></div>
+              <div className="wallet-card-head"><span className="checkout-step">2</span><div><h2 id="checkout-package-title">{t(product.kind === "game" ? "เลือกแพ็กเกจ" : product.kind === "card" ? "เลือกราคาบัตร" : "เลือกแพ็กเกจสมาชิก")}</h2><p>{t("ราคาตัวอย่าง อาจมีการเปลี่ยนแปลง")}</p></div></div>
               <div className={`checkout-packages ${product.kind}`} role="radiogroup" aria-labelledby="checkout-package-title">
                 {product.packages.map(item => <button type="button" role="radio" key={item.id} aria-checked={pack.id === item.id} onClick={() => setPack(item)}>
                   {item.popular && <span className="wallet-popular"><StarFilledIcon />{t("ยอดนิยม")}</span>}
                   {product.kind === "game"
                     ? <><b>{item.amount?.toLocaleString(locale)}</b><small>{product.unit}</small>{item.bonus ? <em>+{item.bonus.toLocaleString(locale)} {t("โบนัส")}</em> : null}</>
+                    : product.kind === "card" ? <><b>{item.label}</b><small>{t("บัตรเติมเงิน")}</small></>
                     : <><b>{item.label}</b><small>{t("{{count}} เดือน", { count: item.months ?? 1 })}</small></>}
                   <strong>{money(item.price)}</strong>
                 </button>)}
               </div>
             </section>
 
-            <section className="wallet-card" aria-labelledby="checkout-method-title">
-              <div className="wallet-card-head"><span className="checkout-step">3</span><div><h2 id="checkout-method-title">{t("ช่องทางการชำระเงิน")}</h2><p>{t("เลือกช่องทางการชำระเงินที่สะดวกสำหรับคุณ")}</p></div></div>
-              <div className="wallet-method-grid">{paymentMethods.map(item => <button type="button" key={item.id} aria-pressed={method.id === item.id} onClick={() => setMethod(item)}><MethodIcon method={item} /><span><b>{t(item.label)}</b><small>{t(item.detail)}</small></span><span className="wallet-radio-mark">{method.id === item.id && <CheckIcon />}</span></button>)}</div>
-            </section>
           </div>
 
-          <aside className="wallet-card checkout-summary" aria-labelledby="checkout-summary-title">
-            <h2 id="checkout-summary-title">{t("สรุปคำสั่งซื้อ")}</h2>
+          <aside className="wallet-card acd-buy" aria-labelledby="checkout-summary-title">
+            <h2 id="checkout-summary-title" className="sr-only">{t("สรุปคำสั่งซื้อ")}</h2>
             <div className="checkout-summary-item">
               <span className={`checkout-summary-art${product.color ? " is-logo" : ""}`} style={product.color ? { background: product.color } : undefined}><Image src={product.image} alt="" {...(product.color ? { width: 30, height: 30, unoptimized: true } : { fill: true, sizes: "48px", style: { objectFit: "cover" } })} /></span>
               <div><b>{product.name}</b><small>{packTitle(pack)}{pack.bonus ? ` + ${pack.bonus.toLocaleString(locale)} ${t("โบนัส")}` : ""}</small></div>
             </div>
-            <dl className="wallet-review">
-              <div><dt>{t(field.kind === "uid" ? "บัญชีเกม" : "อีเมล")}</dt><dd>{accountLabel || "—"}</dd></div>
-              <div><dt>{t("ช่องทาง")}</dt><dd>{t(method.label)}</dd></div>
-              <div><dt>{t("ราคา")}</dt><dd>{money(pack.price)}</dd></div>
-              <div><dt>{t("ค่าธรรมเนียม")}</dt><dd>{money(0)}</dd></div>
-            </dl>
-            <div className="wallet-form-total"><span>{t("ยอดชำระทั้งหมด")}</span><b>{money(pack.price)}</b></div>
+            <div className="acd-price"><strong>{money(pack.price)}</strong></div>
+            <ul className="acd-perks">
+              <li><LightningBoltIcon />{t(product.kind === "game" ? "เติมด้วย UID ไม่ต้องใช้รหัสผ่าน" : "ส่งรหัสทางอีเมล")}</li>
+              <li><LockClosedIcon />{t("ชำระเงินปลอดภัย")}</li>
+              <li><CheckCircledIcon />{t("ค่าธรรมเนียม")} {money(0)}</li>
+            </ul>
+            <dl className="wallet-review checkout-buy-account"><div><dt>{t(field.kind === "uid" ? "บัญชีเกม" : "อีเมล")}</dt><dd>{accountLabel || "—"}</dd></div></dl>
+            <fieldset className="acd-methods"><legend>{t("ช่องทางการชำระเงิน")}</legend>
+              {paymentMethods.map(item => <button type="button" key={item.id} aria-pressed={method.id === item.id} onClick={() => setMethod(item)}><MethodIcon method={item} /><b>{t(item.label)}</b><span className="wallet-radio-mark">{method.id === item.id && <CheckIcon />}</span></button>)}
+            </fieldset>
             <button className="wallet-primary wallet-submit" type="submit">{t("ชำระเงิน")} {money(pack.price)}<ArrowRightIcon /></button>
             <p className="wallet-form-note"><CheckIcon />{t("โหมดทดสอบ — ยังไม่เชื่อมต่อระบบชำระเงินจริง")}</p>
           </aside>
@@ -193,7 +189,7 @@ export default function CheckoutFlow({ product }: { product: CheckoutProduct }) 
       </dl>}
       {step === "review" && <button className="wallet-primary" onClick={() => setStep("payment")}>{t("ยืนยันและชำระเงิน")}<ArrowRightIcon /></button>}
       {step === "payment" && <div className="wallet-modal-actions"><button onClick={() => setStep("review")}><ArrowLeftIcon />{t("ย้อนกลับ")}</button><button className="wallet-primary" onClick={completeDemoPayment}>{t("จำลองการชำระสำเร็จ")}</button></div>}
-      {step === "success" && <div className="wallet-modal-actions checkout-success-actions"><Link href={backHref}>{t(product.kind === "game" ? "เลือกเกมอื่น" : "เลือกแอพอื่น")}</Link><Dialog.Close className="wallet-primary">{t("ซื้ออีกครั้ง")}</Dialog.Close></div>}
+      {step === "success" && <div className="wallet-modal-actions checkout-success-actions"><Link href={backHref}>{t(product.kind === "app" ? "เลือกแอพอื่น" : "เลือกเกมอื่น")}</Link><Dialog.Close className="wallet-primary">{t("ซื้ออีกครั้ง")}</Dialog.Close></div>}
     </Dialog.Content></Dialog.Portal></Dialog.Root>
   </>;
 }

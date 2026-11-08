@@ -10,7 +10,7 @@ export type AccountField =
   | { kind: "email"; label: string; placeholder: string };
 
 export type CheckoutProduct = {
-  kind: "game" | "app";
+  kind: "game" | "app" | "card";
   id: string;
   name: string;
   subtitle: string;
@@ -54,6 +54,8 @@ const appPlans: Record<string, Plan[]> = {
   "crunchyroll": [["Fan", 1, 119], ["Mega Fan", 1, 159], ["Mega Fan", 12, 1590]],
   "canva-pro": [["Pro", 1, 349], ["Pro", 12, 2990], ["Teams", 1, 599]],
   "chatgpt-plus": [["Plus", 1, 749], ["Plus", 3, 2190]],
+  "prime-video": [["Monthly", 1, 149], ["Monthly", 3, 429], ["Annual", 12, 1490]],
+  "apple-music": [["Individual", 1, 109], ["Family", 1, 169], ["Individual", 12, 1090]],
 };
 
 // Mark the middle package as the popular pick so every catalog gets a sensible default.
@@ -77,7 +79,19 @@ function fromApp(app: PremiumApp): CheckoutProduct {
   };
 }
 
+// Game gift cards: fixed face values, the code is sent by email. Sample prices until the real card catalog is connected.
+const cardValues = [100, 300, 500, 1000];
+function fromCard(game: Game): CheckoutProduct {
+  return {
+    kind: "card", id: game.id, name: game.name, subtitle: `${game.genre} · ${game.platforms.join(", ")}`, image: game.icon,
+    account: { kind: "email", label: "อีเมลสำหรับรับรหัส / เปิดใช้งาน", placeholder: "you@example.com" },
+    packages: cardValues.map(value => ({ id: `${value}`, label: `฿${value.toLocaleString("en-US")}`, price: value, popular: value === 300 })),
+  };
+}
+
 export const gameProducts = games.map(fromGame);
+export const cardProducts = games.map(fromCard);
+export const findCardProduct = (id: string) => cardProducts.find(product => product.id === id);
 export const appProducts = premiumApps.map(fromApp);
 export const findGameProduct = (id: string) => gameProducts.find(product => product.id === id);
 export const findAppProduct = (id: string) => appProducts.find(product => product.id === id);

@@ -14,7 +14,8 @@ export type Promotion = {
   hot?: boolean;
 };
 
-export type Coupon = { code: string; title: string; text: string; until: string };
+/** `value` is the headline shown on the coupon stub (e.g. "20%", "฿10"). */
+export type Coupon = { code: string; value: string; title: string; text: string; until: string };
 
 export const promoCategories: PromoCategory[] = ["เติมเกม", "ไอดีเกม", "แอปพรีเมียม", "กล่องสุ่ม"];
 
@@ -31,7 +32,7 @@ export const promotions: Promotion[] = [
 ];
 
 export const coupons: Coupon[] = [
-  { code: "PK20", title: "ลด 20% เมื่อเติมครบ ฿500", text: "สำหรับการเติมเกมทุกเกม", until: "ถึง 31 ต.ค. 2569" },
-  { code: "NEW5", title: "สมาชิกใหม่ ลด 5%", text: "ใช้ได้กับคำสั่งซื้อแรก", until: "ไม่มีวันหมดอายุ" },
-  { code: "PREMIUM10", title: "แอปพรีเมียม ลด ฿10", text: "เมื่อซื้อแอปพรีเมียมทุกแพ็กเกจ", until: "ถึง 30 พ.ย. 2569" },
+  { code: "PK20", value: "20%", title: "ลด 20% เมื่อเติมครบ ฿500", text: "สำหรับการเติมเกมทุกเกม", until: "ถึง 31 ต.ค. 2569" },
+  { code: "NEW5", value: "5%", title: "สมาชิกใหม่ ลด 5%", text: "ใช้ได้กับคำสั่งซื้อแรก", until: "ไม่มีวันหมดอายุ" },
+  { code: "PREMIUM10", value: "฿10", title: "แอปพรีเมียม ลด ฿10", text: "เมื่อซื้อแอปพรีเมียมทุกแพ็กเกจ", until: "ถึง 30 พ.ย. 2569" },
 ];

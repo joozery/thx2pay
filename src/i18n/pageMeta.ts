@@ -1,3 +1,4 @@
+import { findNewsArticle } from "@/components/news/data";
 import type { Metadata } from "next";
 import { games } from "@/components/topup/games";
 import { premiumApps } from "@/components/home/premiumApps";
@@ -23,8 +24,6 @@ export const pageMeta = {
   "/help": { name: "ช่วยเหลือ", description: "คำถามที่พบบ่อยและช่องทางติดต่อทีมงาน THX2PAY" },
   "/login": { name: "เข้าสู่ระบบ" },
   "/news": { name: "ข่าวสาร", description: "ข่าวสารและประกาศล่าสุดจาก THX2PAY" },
-  "/partner": { name: "พาร์ทเนอร์", description: "ร่วมเป็นตัวแทนจำหน่ายและพาร์ทเนอร์กับ THX2PAY" },
-  "/partner/apply": { name: "สมัครตัวแทนจำหน่าย" },
   "/premium": { name: "แอพพรีเมียม", description: "แอพพรีเมียมยอดนิยมสำหรับดูหนัง ฟังเพลง และทำงาน จาก THX2PAY" },
   "/privacy": { name: "นโยบายความเป็นส่วนตัว", description: "วิธีที่ THX2PAY เก็บ ใช้ และดูแลข้อมูลส่วนบุคคลของคุณ" },
   "/promotions": { name: "โปรโมชั่น", description: "ติดตามข่าวสารและสิทธิพิเศษจาก THX2PAY" },
@@ -45,10 +44,14 @@ export function pageMetadata(route: PageRoute): Metadata {
 // Product pages (/topup/<game>, /premium/<app>, /accounts/<id>, /boxes/<id>): name and description are keys with a {{name}} value.
 function findProductMeta(pathname: string): PageMeta | undefined {
   const [, section, id] = pathname.replace(/\/+$/, "").split("/");
+  const article = section === "news" && id ? findNewsArticle(id) : undefined;
+  if (article) return { name: article.title, description: article.excerpt };
   const game = section === "topup" ? games.find(item => item.id === id) : undefined;
   if (game) return { name: "เติม {{name}}", description: "เลือกแพ็กเกจ {{name}} กรอก UID และชำระเงินได้ในไม่กี่ขั้นตอนกับ THX2PAY", values: { name: game.name } };
   const app = section === "premium" ? premiumApps.find(item => item.id === id) : undefined;
   if (app) return { name: "ซื้อ {{name}}", description: "เลือกแพ็กเกจ {{name}} และรับรหัสทางอีเมลกับ THX2PAY", values: { name: app.name } };
+  const card = section === "cards" ? games.find(item => item.id === id) : undefined;
+  if (card) return { name: "บัตร {{name}}", description: "เลือกบัตรเติมเกมจากเกมที่คุณชอบ", values: { name: card.name } };
   const account = section === "accounts" && id ? findAccount(id) : undefined;
   if (account) return { name: "ไอดี {{name}}", description: "ไอดี {{name}} ผ่านการตรวจสอบ รับประกันทุกไอดี ส่งข้อมูลทางอีเมลกับ THX2PAY", values: { name: accountGame(account).name } };
   const box = section === "boxes" && id ? findBox(id) : undefined;

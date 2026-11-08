@@ -27,7 +27,7 @@ export const games: Game[] = [
   { id: "wuthering-waves", icon: "/images/games/icons/wuthering-waves.png", name: "Wuthering Waves", platforms: ["Mobile", "PC Games", "Console"], genre: "RPG", aliases: "วูเธอริงเวฟ วูวะ wuwa", tag: "new" },
   { id: "arena-breakout", icon: "/images/games/icons/arena-breakout.png", name: "Arena Breakout", platforms: ["Mobile", "PC Games"], genre: "Tactical FPS", aliases: "อารีนาเบรกเอาต์ arena breakout", tag: "new" },
   { id: "roblox", icon: "/images/games/icons/roblox.png", name: "Roblox", platforms: ["Mobile", "PC Games", "Console"], genre: "Sandbox", aliases: "โรบล็อกซ์ โรบัค robux", tag: "recommended" },
-  { id: "league-of-legends", icon: "/images/games/icons/league-of-legends.webp", name: "League of Legends", platforms: ["PC Games"], genre: "MOBA", aliases: "ลีกออฟเลเจนด์ lol riot" },
+  { id: "league-of-legends", icon: "/images/games/icons/league-of-legends.webp", name: "League of Legends", platforms: ["PC Games"], genre: "MOBA", aliases: "ลีกออฟเลเจนด์ lol riot", tag: "new" },
   { id: "fortnite", icon: "/images/games/icons/fortnite.png", name: "Fortnite", platforms: ["PC Games", "Console"], genre: "Battle Royale", aliases: "ฟอร์ทไนท์ fortnite v-bucks", tag: "new" },
 ];
 

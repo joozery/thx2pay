@@ -1,7 +1,7 @@
 // One source of truth for every account menu (sidebar, navbar dropdown, mobile sheet).
 // 6 main destinations; everything that used to be split across duplicate pages now lives in one of these.
 export type AccountIconName = "home" | "user" | "edit" | "lock" | "history" | "uid" | "wallet" | "card" | "bell" | "gear" | "agent" | "help" | "display";
-export type AccountItem = { key: AccountNavKey | "help" | "partner"; label: string; href: string; icon: AccountIconName; hint?: string };
+export type AccountItem = { key: AccountNavKey | "help"; label: string; href: string; icon: AccountIconName; hint?: string };
 export type AccountNavKey = "overview" | "orders" | "wallet" | "notifications" | "uids" | "settings";
 
 export const accountNav: (AccountItem & { key: AccountNavKey })[] = [
@@ -15,7 +15,6 @@ export const accountNav: (AccountItem & { key: AccountNavKey })[] = [
 
 export const accountExtras: AccountItem[] = [
   { key: "help", label: "ช่วยเหลือ", href: "/help", icon: "help" },
-  { key: "partner", label: "สมัครตัวแทนจำหน่าย", href: "/partner", icon: "agent" },
 ];
 
 // Pages under /account/[section]

@@ -8,7 +8,6 @@ export const topupLinks: (NavLink & { description: string })[] = [
   { label: "เติมเกม", target: "games", href: "/topup", description: "เติมเกมด้วย UID เข้าบัญชีทันที" },
   { label: "บัตรเติมเงิน", target: "cards", href: "/cards", description: "บัตรเติมเกม บัตรของขวัญ และโค้ดเกม" },
   { label: "เติมเงินเข้ากระเป๋า", target: "wallet", href: "/wallet/topup", description: "เติมยอดเงินไว้ใช้ซื้อสินค้าบนเว็บ" },
-  { label: "สมัครตัวแทนจำหน่าย", target: "partner", href: "/partner", description: "รับราคาพิเศษสำหรับตัวแทน" },
 ];
 export const topupTargets = new Set<NavTarget>(topupLinks.map(link => link.target));
 export const isTopupPath = (pathname: string) => topupLinks.some(link => pathname === link.href || pathname.startsWith(link.href + "/"));
@@ -27,4 +26,4 @@ export const afterTopupLinks: NavLink[] = [
   { label: "ช่วยเหลือ", target: "help", href: "/help" },
 ];
 
-export const navIcons: Record<NavTarget, typeof HomeIcon> = { home: HomeIcon, games: DashboardIcon, accounts: AvatarIcon, boxes: CubeIcon, cards: IdCardIcon, wallet: BackpackIcon, partner: PersonIcon, premium: LightningBoltIcon, promotions: StarIcon, news: ReaderIcon, help: QuestionMarkCircledIcon };
+export const navIcons: Record<NavTarget, typeof HomeIcon> = { home: HomeIcon, games: DashboardIcon, accounts: AvatarIcon, boxes: CubeIcon, cards: IdCardIcon, wallet: BackpackIcon, premium: LightningBoltIcon, promotions: StarIcon, news: ReaderIcon, help: QuestionMarkCircledIcon };

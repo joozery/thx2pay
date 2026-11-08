@@ -12,7 +12,6 @@ import PlatformTabs from "./PlatformTabs";
 import CategorySection from "./CategorySection";
 import HomeShowcase from "./HomeShowcase";
 import BenefitsSection from "./BenefitsSection";
-import PartnerSection from "./PartnerSection";
 import FAQSection from "./FAQSection";
 import Footer from "./Footer";
 import ContactDialog from "./ContactDialog";
@@ -67,8 +66,6 @@ export default function HomePage() {
         <HomeShowcase />
 
         <BenefitsSection />
-
-        <PartnerSection />
 
         <FAQSection />
 

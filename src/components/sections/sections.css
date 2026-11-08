@@ -1,5 +1,5 @@
 .section-page{padding-bottom:70px}
-.section-eyebrow{color:#57caff;font-size:12px;font-weight:800;letter-spacing:.14em}
+.section-eyebrow{color:#57caff;font-size:14px;font-weight:800;letter-spacing:.14em}
 .section-intro .topup-intro-art img{object-position:center}
 .section-intro-promotions .topup-intro-art img,.section-intro-partner .topup-intro-art img{filter:brightness(.72)}
 .section-content{padding:75px 0 0}.section-content .section-heading{margin-bottom:24px}.section-content h2{margin-top:8px}.section-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.section-card{background:#202527;border:1px solid #ffffff12;border-radius:22px;overflow:hidden;min-height:210px}.section-card-image{height:190px;position:relative}.section-card-image img{object-fit:cover}.section-card-copy{padding:26px}.section-card p{font-size:14px;margin-top:10px}.section-card a{display:inline-flex;align-items:center;gap:9px;margin-top:20px;color:#58c8f9;font-weight:800}.section-card a svg{width:16px}
