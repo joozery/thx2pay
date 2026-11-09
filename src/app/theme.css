@@ -60,3 +60,6 @@ html[data-theme="light"] .follow-link{background:#1d1d1d;color:#fff}
 html[data-theme="light"] :is(.pill,.hx-btn.primary,.member-button,.promos-card-cta,.wallet-primary,.promotion-banner-cta,.promos-coupon-code button,.promos-filters button[aria-pressed="true"],.member-tabs a[aria-current],.hero .quick-links span,.payment-icon,.wallet-radio-mark,.checkout-step,.acc-tag.new,.acd-steps li>span,.box-card-foot span,.promos-coupon button,.checkout-stages li.current>span,.checkout-pack-check){color:#fff}
 html[data-theme="light"] :is(.pill,.hx-btn.primary,.member-button,.promos-card-cta,.wallet-primary,.promotion-banner-cta,.promos-coupon-code button,.promos-filters button[aria-pressed="true"],.member-tabs a[aria-current],.hero .quick-links span,.payment-icon,.wallet-radio-mark) :is(svg,span){color:inherit}
 html[data-theme="light"] .member-card>.acct-form .pill,html[data-theme="light"] .cards-dialog form .pill{color:#fff}
+
+/* Dark theme: brand logo tiles get a thin light ring so near-black brands (Netflix #141414) don't melt into dark cards. */
+html[data-theme="dark"] :is(.gc-art.gc-logo,.sd-art.sd-art-logo,.checkout-product-art.is-logo,.checkout-summary-art.is-logo,.checkout-giftcard-logo.is-logo){box-shadow:inset 0 0 0 1px rgb(255 255 255 / .18)}
