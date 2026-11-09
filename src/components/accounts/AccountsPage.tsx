@@ -21,9 +21,9 @@ import "./accounts.css";
 type Sort = "recommended" | "price-asc" | "price-desc";
 const priceRanges = [
   { id: "all", label: "ทุกราคา", min: 0, max: Infinity },
-  { id: "under-1000", label: "ต่ำกว่า ฿1,000", min: 0, max: 999 },
-  { id: "1000-3000", label: "฿1,000 – ฿3,000", min: 1000, max: 3000 },
-  { id: "over-3000", label: "มากกว่า ฿3,000", min: 3001, max: Infinity },
+  { id: "under-1000", label: "ต่ำกว่า {{max}}", min: 0, max: 999 },
+  { id: "1000-3000", label: "{{min}} – {{max}}", min: 1000, max: 3000 },
+  { id: "over-3000", label: "มากกว่า {{min}}", min: 3001, max: Infinity },
 ] as const;
 
 const trust = [
@@ -33,7 +33,7 @@ const trust = [
 ];
 
 export default function AccountsPage() {
-  const { t, locale } = useI18n();
+  const { t, locale, money } = useI18n();
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [game, setGame] = useState("all");
@@ -53,6 +53,8 @@ export default function AccountsPage() {
   }, []);
 
   const range = priceRanges.find(item => item.id === price)!;
+  // Range labels are built from baht bounds so they follow the selected currency.
+  const rangeLabel = (item: (typeof priceRanges)[number]) => t(item.label, { min: money(item.id === "over-3000" ? 3000 : item.min), max: money(item.id === "under-1000" ? 1000 : item.max) });
   const words = query.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
   const results = gameAccounts.filter(account => {
     const info = accountGame(account);
@@ -94,7 +96,7 @@ export default function AccountsPage() {
           </form>
           <div className="topup-finder-row">
             <div className="topup-finder-selects">
-              <label className={`topup-chip-select${price !== "all" ? " is-set" : ""}`}><span>{t("ช่วงราคา")}</span><select value={price} onChange={event => setPrice(event.target.value as typeof price)}>{priceRanges.map(item => <option key={item.id} value={item.id}>{t(item.label)}</option>)}</select><ChevronDownIcon aria-hidden="true" /></label>
+              <label className={`topup-chip-select${price !== "all" ? " is-set" : ""}`}><span>{t("ช่วงราคา")}</span><select value={price} onChange={event => setPrice(event.target.value as typeof price)}>{priceRanges.map(item => <option key={item.id} value={item.id}>{rangeLabel(item)}</option>)}</select><ChevronDownIcon aria-hidden="true" /></label>
               <label className="topup-chip-select"><span>{t("เรียงตาม")}</span><select value={sort} onChange={event => setSort(event.target.value as Sort)}><option value="recommended">{t("แนะนำ")}</option><option value="price-asc">{t("ราคาต่ำไปสูง")}</option><option value="price-desc">{t("ราคาสูงไปต่ำ")}</option></select><ChevronDownIcon aria-hidden="true" /></label>
             </div>
           </div>
@@ -104,13 +106,13 @@ export default function AccountsPage() {
           <span className="topup-active-count">{t("พบ {{count}} ไอดี", { count: results.length })}</span>
           {query.trim() && <button type="button" className="topup-filter-chip" onClick={() => setQuery("")} aria-label={`${t("ลบตัวกรอง")} “${query.trim()}”`}>“{query.trim()}”<Cross2Icon aria-hidden="true" /></button>}
           {selectedGame && <button type="button" className="topup-filter-chip" onClick={() => setGame("all")} aria-label={`${t("ลบตัวกรอง")} ${selectedGame.name}`}>{selectedGame.name}<Cross2Icon aria-hidden="true" /></button>}
-          {price !== "all" && <button type="button" className="topup-filter-chip" onClick={() => setPrice("all")} aria-label={`${t("ลบตัวกรอง")} ${t(range.label)}`}>{t(range.label)}<Cross2Icon aria-hidden="true" /></button>}
+          {price !== "all" && <button type="button" className="topup-filter-chip" onClick={() => setPrice("all")} aria-label={`${t("ลบตัวกรอง")} ${rangeLabel(range)}`}>{rangeLabel(range)}<Cross2Icon aria-hidden="true" /></button>}
           <button type="button" className="topup-filter-clear-all" onClick={clearFilters}>{t("ล้างตัวกรอง")}</button>
         </div>}
 
         <div className="accounts-grid">{results.map(account => <AccountCard key={account.id} account={account} />)}</div>
         {!results.length && <div className="topup-empty"><MagnifyingGlassIcon /><h3>{t("ยังไม่พบไอดีที่ตรงกับตัวกรอง")}</h3><p>{t("ลองเปลี่ยนเกม ช่วงราคา หรือคำค้นหา")}</p><button className="pill" onClick={clearFilters}>{t("ล้างตัวกรอง")}</button></div>}
-        <p className="accounts-note">{t("รายการและราคาเป็นตัวอย่าง ยังไม่เปิดขายจริง")} · {t("ราคาเริ่มต้น")} ฿{Math.min(...gameAccounts.map(item => item.price)).toLocaleString(locale)}</p>
+        <p className="accounts-note">{t("รายการและราคาเป็นตัวอย่าง ยังไม่เปิดขายจริง")} · {t("ราคาเริ่มต้น")} {money(Math.min(...gameAccounts.map(item => item.price)))}</p>
       </section>
     </main>
     <Footer onOpenDialog={setModal} />

@@ -15,10 +15,10 @@ export function Avatar({ name, size = 36 }: { name: string; size?: number }) {
 }
 
 export function AccountSummary({ name, email }: { name: string; email: string }) {
-  const { t } = useI18n();
+  const { t, money } = useI18n();
   return <>
     <div className="account-head"><Avatar name={name} size={48} /><div><strong>{name}</strong><small>{email}</small></div></div>
-    <div className="account-balance"><span>{t("ยอดเงินคงเหลือ")}</span><b>฿0.00</b></div>
+    <div className="account-balance"><span>{t("ยอดเงินคงเหลือ")}</span><b>{money(0, { fixed: true })}</b></div>
   </>;
 }
 

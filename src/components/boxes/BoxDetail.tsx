@@ -51,10 +51,9 @@ function PrizeTile({ prize, box }: { prize: BoxPrize; box: MysteryBox }) {
 }
 
 export default function BoxDetail({ box }: { box: MysteryBox }) {
-  const { t, locale } = useI18n();
+  const { t, locale, money } = useI18n();
   const router = useRouter();
   const game = boxGame(box);
-  const money = (amount: number) => `฿${amount.toLocaleString(locale)}`;
   const others = mysteryBoxes.filter(item => item.id !== box.id).slice(0, 4);
 
   const viewport = useRef<HTMLDivElement>(null);

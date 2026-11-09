@@ -18,22 +18,22 @@ export function AccountCover({ account, sizes, eager = false }: { account: GameA
 }
 
 export default function AccountCard({ account }: { account: GameAccount }) {
-  const { t, locale } = useI18n();
+  const { t, locale, money } = useI18n();
   const game = accountGame(account);
   const discount = discountOf(account);
   return <article className="acc">
-    <Link href={`/accounts/${account.id}`} className="acc-link" aria-label={`${t(account.title)} · ${game.name} · ฿${account.price.toLocaleString(locale)}`}>
+    <Link href={`/accounts/${account.id}`} className="acc-link" aria-label={`${t(account.title)} · ${game.name} · ${money(account.price)}`}>
       <span className="acc-cover">
         <AccountCover account={account} sizes="(max-width: 760px) 80vw, 300px" />
         {account.tag && <span className={`acc-tag ${account.tag}`}>{t(account.tag === "hot" ? "ขายดี" : "มาใหม่")}</span>}
-        {discount > 0 && <span className="acc-discount">-฿{discount.toLocaleString(locale)}</span>}
+        {discount > 0 && <span className="acc-discount">-{money(discount)}</span>}
         <span className="acc-game"><Image src={game.icon} alt="" width={20} height={20} />{game.name}</span>
       </span>
       <span className="acc-body">
         <b className="acc-title">{t(account.title)}</b>
         <span className="acc-specs">{[account.rank, account.level].filter(value => value !== "—").map(value => <span key={value}>{value}</span>)}{account.stats.slice(0, 1).map(item => <span key={item.label}>{t(item.label)} {item.value}</span>)}</span>
         <span className="acc-foot">
-          <span className="acc-price"><strong>฿{account.price.toLocaleString(locale)}</strong>{account.was && <s>฿{account.was.toLocaleString(locale)}</s>}</span>
+          <span className="acc-price"><strong>{money(account.price)}</strong>{account.was && <s>{money(account.was)}</s>}</span>
           <span className="acc-warranty"><CheckCircledIcon aria-hidden="true" />{t("รับประกัน {{count}} วัน", { count: account.warrantyDays })}</span>
         </span>
       </span>

@@ -18,7 +18,7 @@ import "@/components/topup/game-card.css";
 import "./cards.css";
 
 export default function CardsPage() {
-  const { t } = useI18n();
+  const { t, money } = useI18n();
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [modal, setModal] = useState("");
@@ -44,7 +44,7 @@ export default function CardsPage() {
         <label className="cards-search"><MagnifyingGlassIcon aria-hidden="true" /><span className="sr-only">{t("ค้นหาชื่อเกม")}</span><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder={t("ค้นหาชื่อเกม")} />{query && <button type="button" aria-label={t("ล้างคำค้นหา")} onClick={() => setQuery("")}><Cross2Icon /></button>}</label>
         <div className="cards-game-grid">{filteredGames.map(game => <div className="gc" key={game.id}><Link className="gc-button" href={`/cards/${game.id}`} aria-label={`${t("เลือกซื้อบัตร")} ${game.name}`}>
           <span className="gc-art"><Image src={game.icon} alt="" fill sizes="(max-width: 600px) 44vw, (max-width: 1000px) 28vw, 220px" style={{ objectFit: "cover" }} />{game.tag && <span className={`gc-tag ${game.tag}`}>{t(game.tag === "new" ? "มาใหม่" : "เกมแนะนำ")}</span>}</span>
-          <span className="gc-info"><span className="gc-text"><b>{game.name}</b><span className="gc-price"><small>{t("เริ่มต้น")}</small><strong>฿{fromPrice(game.id)}</strong><em>{t("ตัวอย่าง")}</em></span></span><ChevronRightIcon aria-hidden="true" /></span>
+          <span className="gc-info"><span className="gc-text"><b>{game.name}</b><span className="gc-price"><small>{t("เริ่มต้น")}</small><strong>{money(fromPrice(game.id))}</strong><em>{t("ตัวอย่าง")}</em></span></span><ChevronRightIcon aria-hidden="true" /></span>
         </Link></div>)}</div>
         {!filteredGames.length && <p className="cards-empty">{t("ไม่พบเกมที่ค้นหา")}</p>}
       </section>

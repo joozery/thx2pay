@@ -12,8 +12,10 @@ import ko from "./locales/ko.json";
 import ar from "./locales/ar.json";
 import { isLanguage, languageCodes, languageInfo, type Language } from "./languages";
 import DocumentMeta from "./DocumentMeta";
+import { RatesContext } from "./ratesContext";
+import type { ExchangeRates } from "./currency";
 
-export default function I18nProvider({ children }: { children: ReactNode }) {
+export default function I18nProvider({ children, rates }: { children: ReactNode; rates: ExchangeRates }) {
   const [instance] = useState(() => {
     const i18n = createInstance().use(initReactI18next);
     void i18n.init({
@@ -55,5 +57,5 @@ export default function I18nProvider({ children }: { children: ReactNode }) {
     };
   }, [instance]);
 
-  return <I18nextProvider i18n={instance}><Suspense fallback={null}><DocumentMeta /></Suspense>{children}</I18nextProvider>;
+  return <I18nextProvider i18n={instance}><RatesContext value={rates}><Suspense fallback={null}><DocumentMeta /></Suspense>{children}</RatesContext></I18nextProvider>;
 }

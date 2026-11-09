@@ -16,11 +16,11 @@ export function AccountEmpty({ title, text, href, action, level = 3 }: { title: 
 }
 
 export function OrderList({ orders }: { orders: Order[] }) {
-  const { t, locale } = useI18n();
+  const { t, money } = useI18n();
   return <ul className="member-recent-list">{orders.map(order => <li key={order.id}>
     <div className="member-recent-art"><Image src={order.image} alt="" fill sizes="48px" /></div>
     <div className="member-recent-info"><h3>{order.game}</h3><p>{t(order.item)}</p><small>{order.id} · {order.date}</small></div>
-    <div className="member-recent-result"><strong>฿{order.amount.toLocaleString(locale, { minimumFractionDigits: 2 })}</strong><span className={`member-recent-status ${order.status}`}>{order.status === "complete" ? <CheckIcon /> : order.status === "pending" ? <ClockIcon /> : <Cross2Icon />}{t(statusLabels[order.status])}</span></div>
+    <div className="member-recent-result"><strong>{money(order.amount, { fixed: true })}</strong><span className={`member-recent-status ${order.status}`}>{order.status === "complete" ? <CheckIcon /> : order.status === "pending" ? <ClockIcon /> : <Cross2Icon />}{t(statusLabels[order.status])}</span></div>
   </li>)}</ul>;
 }
 
@@ -33,7 +33,7 @@ const quickActions = [
 
 // Overview: the few things customers check most, in priority order.
 export default function AccountDashboard({ user }: { user: User }) {
-  const { t } = useI18n();
+  const { t, money } = useI18n();
   const { items: uids } = useSavedUIDs(user.email);
   return <>
     <div className="ov-head">
@@ -45,7 +45,7 @@ export default function AccountDashboard({ user }: { user: User }) {
     <div className="ov-top">
       <section className="ov-wallet" aria-labelledby="ov-wallet-title">
         <div className="ov-wallet-row"><span className="ov-wallet-icon"><BackpackIcon /></span><h2 id="ov-wallet-title">{t("ยอดเงินคงเหลือ")}</h2></div>
-        <b className="ov-balance">฿0<span>.00</span></b>
+        <b className="ov-balance">{money(0, { fixed: true })}</b>
         <div className="ov-wallet-actions"><Link className="member-button" href="/wallet/topup"><PlusIcon />{t("เติมเงิน")}</Link><Link className="ov-ghost" href="/wallet/topup#wallet-transactions">{t("ดูรายการ")}</Link></div>
       </section>
       <nav className="ov-actions" aria-label={t("ทางลัด")}>

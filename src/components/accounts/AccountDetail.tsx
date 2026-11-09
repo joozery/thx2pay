@@ -31,12 +31,11 @@ const steps = [
 ];
 
 export default function AccountDetail({ account }: { account: GameAccount }) {
-  const { t, locale } = useI18n();
+  const { t, locale, money } = useI18n();
   const router = useRouter();
   const { user } = useAuth();
   const game = accountGame(account);
   const discount = discountOf(account);
-  const money = (amount: number) => `฿${amount.toLocaleString(locale)}`;
   // Same game first, then the rest of the catalog.
   const more = [...gameAccounts.filter(item => item.game === account.game), ...gameAccounts.filter(item => item.game !== account.game)].filter(item => item.id !== account.id).slice(0, 4);
 

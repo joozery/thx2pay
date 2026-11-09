@@ -62,11 +62,11 @@ function Slider({ children, label }: { children: ReactNode; label: string }) {
 }
 
 function GameGrid({ items, href, kind, label }: { items: Game[]; href: string; kind: "topup" | "card"; label: string }) {
-  const { t } = useI18n();
+  const { t, money } = useI18n();
   return <Slider label={label}>
     {items.map(game => <div className="gc" key={game.id}><Link href={kind === "topup" ? `/topup/${game.id}` : `/cards/${game.id}`} className="gc-button" aria-label={`${t(kind === "card" ? "บัตรเติมเงิน" : "เติมเกม")} ${game.name}`}>
       <span className="gc-art"><Image src={game.icon} alt="" fill sizes="(max-width: 760px) 40vw, 190px" style={{ objectFit: "cover" }} />{game.tag && <span className={`gc-tag ${game.tag}`}>{t(game.tag === "new" ? "มาใหม่" : "เกมแนะนำ")}</span>}</span>
-      <span className="gc-info"><span className="gc-text"><b>{game.name}</b>{kind === "card" ? <span className="gc-price"><small>{t("เริ่มต้น")}</small><strong>฿{samplePrice}</strong><em>{t("ตัวอย่าง")}</em></span> : <small>{game.genre} · {game.platforms.join(", ")}</small>}</span><ChevronRightIcon aria-hidden="true" /></span>
+      <span className="gc-info"><span className="gc-text"><b>{game.name}</b>{kind === "card" ? <span className="gc-price"><small>{t("เริ่มต้น")}</small><strong>{money(samplePrice)}</strong><em>{t("ตัวอย่าง")}</em></span> : <small>{game.genre} · {game.platforms.join(", ")}</small>}</span><ChevronRightIcon aria-hidden="true" /></span>
     </Link></div>)}
   </Slider>;
 }

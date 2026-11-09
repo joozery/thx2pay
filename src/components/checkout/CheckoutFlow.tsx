@@ -27,7 +27,7 @@ type Order = { pack: CheckoutPackage; method: PaymentMethod; account: string };
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function CheckoutFlow({ product }: { product: CheckoutProduct }) {
-  const { t, locale } = useI18n();
+  const { t, locale, money } = useI18n();
   const router = useRouter();
   const { user } = useAuth();
   const saved = useSavedUIDs(user?.email ?? "");
@@ -66,7 +66,6 @@ export default function CheckoutFlow({ product }: { product: CheckoutProduct }) 
     : value.length < 3 ? "กรุณากรอก {{label}}" : field.zone && !/^\d{2,6}$/.test(zone.trim()) ? "กรุณากรอก Zone ID เป็นตัวเลข" : field.servers && !server ? "กรุณาเลือกเซิร์ฟเวอร์" : "";
   const accountLabel = field.kind === "uid" ? [value, field.zone && zone.trim() ? `(${zone.trim()})` : "", server ? `· ${server}` : ""].filter(Boolean).join(" ") : value;
   const alreadySaved = savedForGame.some(item => item.uid === value);
-  const money = (amount: number) => `฿${amount.toLocaleString(locale)}`;
   // Purchase stages shown above the form; each turns green once its input is valid, the first open one is "current".
   const stages = [
     { label: field.kind === "uid" ? "กรอกบัญชีเกม" : "กรอกอีเมล", done: !accountError },
