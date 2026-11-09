@@ -32,10 +32,10 @@
 .acd-heading h1{font-size:26px;letter-spacing:-.4px;margin-top:10px;line-height:1.35}
 .acd-code{font-size:14px;margin-top:6px}
 
-.acd-specs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0}
-.acd-specs>div{padding:13px 14px;border-radius:12px;background:var(--w-soft);min-width:0}
-.acd-specs dt{font-size:14px;color:var(--w-muted)}
-.acd-specs dd{margin:4px 0 0;font-size:16px;font-weight:800;overflow-wrap:anywhere}
+
+
+
+
 
 .acd-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;list-style:none;padding:0;margin:0}
 .acd-steps li{display:flex;gap:11px;align-items:flex-start}
@@ -55,7 +55,6 @@
   .acd-heading{padding:16px}
   .acd-heading>.wallet-test-badge{position:static;margin-top:10px}
   .acd-heading h1{font-size:21px}
-  .acd-specs{grid-template-columns:repeat(2,minmax(0,1fr))}
   .acd-steps{grid-template-columns:1fr}
 }
 /* Search box, price range and sort on one line (desktop / tablet); stacked on phones. */
@@ -63,4 +62,26 @@
   .accounts-finder{display:flex;align-items:center;gap:8px}
   .accounts-finder .topup-finder-search{flex:1;min-width:0;height:46px;border-radius:14px}
   .accounts-finder .topup-finder-row{flex:0 0 auto}
+}
+
+/* Account specs: verified chip, headline stat tiles, then an icon list of account facts. */
+.acd-specs-head{flex-wrap:wrap}
+.acd-verified{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;padding:6px 11px;border-radius:999px;background:rgb(31 174 138 / .12);color:#1fae8a;font-size:13px;font-weight:700;white-space:nowrap}
+.acd-verified svg{width:15px;height:15px}
+.acd-highlights{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:0}
+.acd-highlights>div{display:flex;flex-direction:column;gap:2px;min-width:0;padding:16px;border-radius:14px;background:radial-gradient(circle at 100% 100%,color-mix(in srgb,var(--blue) 12%,transparent) 0 42px,transparent 43px),linear-gradient(140deg,color-mix(in srgb,var(--blue) 14%,transparent),color-mix(in srgb,var(--blue) 3%,transparent) 70%)}
+.acd-highlights dd{margin:0;font-size:28px;font-weight:800;letter-spacing:-.6px;line-height:1.15;color:var(--blue);overflow-wrap:anywhere}
+.acd-highlights dt{font-size:14px;color:var(--w-muted)}
+.acd-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px;margin:14px 0 0}
+.acd-facts>div{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;min-width:0;padding:12px 2px;border-bottom:1px solid color-mix(in srgb,var(--foreground) 8%,transparent)}
+.acd-facts>div>span{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:var(--lg-soft);color:var(--blue)}
+.acd-facts svg{width:15px;height:15px}
+.acd-facts dt{min-width:0;font-size:14px;color:var(--w-muted)}
+.acd-facts dd{margin:0;font-size:15px;font-weight:800;text-align:right;overflow-wrap:anywhere}
+@media(max-width:600px){
+  .acd-highlights{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .acd-highlights>div{padding:12px 10px}
+  .acd-highlights dd{font-size:21px}
+  .acd-highlights dt{font-size:12px;line-height:1.4}
+  .acd-facts{grid-template-columns:1fr}
 }

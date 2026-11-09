@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Dialog } from "radix-ui";
-import { ArrowLeftIcon, ArrowRightIcon, CheckCircledIcon, CheckIcon, ChevronRightIcon, Cross2Icon, EnvelopeClosedIcon, LockClosedIcon, ReloadIcon } from "@radix-ui/react-icons";
+import { ArrowLeftIcon, ArrowRightIcon, BarChartIcon, CheckCircledIcon, CheckIcon, ChevronRightIcon, Cross2Icon, EnvelopeClosedIcon, GlobeIcon, LockClosedIcon, ReloadIcon, StarIcon } from "@radix-ui/react-icons";
 import { useI18n } from "@/i18n/useI18n";
 import { useAuth } from "@/auth/AuthProvider";
 import Navbar from "@/components/home/Navbar";
@@ -55,12 +55,13 @@ export default function AccountDetail({ account }: { account: GameAccount }) {
   }, [user?.email]);
 
   const emailError = emailPattern.test(email.trim()) ? "" : "กรุณากรอกอีเมลให้ถูกต้อง";
-  const specs = [
-    { label: "แรงก์", value: account.rank },
-    { label: "เลเวล", value: account.level },
-    ...account.stats.map(item => ({ label: item.label, value: item.value })),
-    { label: "ประเภทการเข้าสู่ระบบ", value: account.login },
-    { label: "ภูมิภาค", value: account.region },
+  // Game-specific stats are the headline numbers; rank/level/login/region are the account facts below them.
+  const highlights = account.stats.filter(item => item.value !== "—");
+  const facts = [
+    { icon: StarIcon, label: "แรงก์", value: account.rank },
+    { icon: BarChartIcon, label: "เลเวล", value: account.level },
+    { icon: LockClosedIcon, label: "ประเภทการเข้าสู่ระบบ", value: account.login },
+    { icon: GlobeIcon, label: "ภูมิภาค", value: account.region },
   ].filter(item => item.value !== "—");
 
   function submit(event: FormEvent) {
@@ -101,8 +102,12 @@ export default function AccountDetail({ account }: { account: GameAccount }) {
             </section>
 
             <section className="wallet-card" aria-labelledby="account-specs-title">
-              <div className="wallet-card-head"><div><h2 id="account-specs-title">{t("สเปกไอดี")}</h2><p>{t("ข้อมูลจากการตรวจสอบของทีมงาน")}</p></div></div>
-              <dl className="acd-specs">{specs.map(item => <div key={item.label}><dt>{t(item.label)}</dt><dd>{item.value}</dd></div>)}</dl>
+              <div className="wallet-card-head acd-specs-head">
+                <div><h2 id="account-specs-title">{t("สเปกไอดี")}</h2><p>{t("ข้อมูลจากการตรวจสอบของทีมงาน")}</p></div>
+                <span className="acd-verified"><CheckCircledIcon />{t("ทีมงานตรวจสอบแล้ว")}</span>
+              </div>
+              {highlights.length > 0 && <dl className="acd-highlights">{highlights.map(item => <div key={item.label}><dt>{t(item.label)}</dt><dd>{item.value}</dd></div>)}</dl>}
+              <dl className="acd-facts">{facts.map(({ icon: Icon, label, value }) => <div key={label}><span aria-hidden="true"><Icon /></span><dt>{t(label)}</dt><dd>{value}</dd></div>)}</dl>
             </section>
 
             <section className="wallet-card" aria-labelledby="account-steps-title">
