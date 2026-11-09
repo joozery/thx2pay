@@ -52,7 +52,9 @@
 .ov-wallet h2{font-size:14px;font-weight:700;letter-spacing:0;color:rgb(255 255 255 / .9)}
 .ov-balance{font-size:38px;line-height:1.1;font-weight:800;letter-spacing:-.5px}
 .ov-balance span{font-size:22px;opacity:.8}
-.ov-wallet-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ov-wallet-actions{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px}
+/* Paired actions share the row equally and match height and corners. */
+.ov-wallet-actions>:is(.member-button,.ov-ghost){justify-content:center;height:40px;min-height:40px;padding:0 14px;border-radius:10px;white-space:nowrap}
 .ov-wallet .member-button{background:#fff;color:#0b5fa8;box-shadow:none}
 .ov-wallet .member-button svg{width:14px;height:14px}
 .ov-ghost{display:inline-flex;align-items:center;height:38px;padding:0 14px;border-radius:12px;background:rgb(255 255 255 / .16);color:#fff;font-size:14px;font-weight:700}
@@ -151,8 +153,21 @@
   .acct-shell{grid-template-columns:minmax(0,1fr);gap:14px;padding-top:6px}
   .acct-side{position:sticky;top:58px;z-index:20;display:block;padding:5px;margin:0 -16px;border-radius:0;background:var(--lg-surface-strong);-webkit-backdrop-filter:var(--lg-blur);backdrop-filter:var(--lg-blur);box-shadow:0 8px 20px rgb(0 0 0 / .12)}
   .acct-side-user,.acct-side-extra{display:none}
-  .acct-side-nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:0 11px;scroll-snap-type:x proximity}
+  .acct-side-nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:0 11px;scroll-padding-inline:11px;scroll-snap-type:x proximity}
   .acct-side-nav::-webkit-scrollbar{display:none}
+  /* Swipe hints: edge fade + arrow on each side that still has hidden tabs. */
+  .acct-side-scroll{position:relative}
+  .acct-side-scroll::before,.acct-side-scroll::after{content:"";position:absolute;top:0;bottom:0;width:56px;z-index:1;pointer-events:none;opacity:0;transition:opacity .2s}
+  .acct-side-scroll::before{left:0;background:linear-gradient(90deg,var(--lg-surface-strong) 35%,transparent)}
+  .acct-side-scroll::after{right:0;background:linear-gradient(270deg,var(--lg-surface-strong) 35%,transparent)}
+  .acct-side-scroll[data-more-left]::before,.acct-side-scroll[data-more-right]::after{opacity:1}
+  .acct-side-arrow{position:absolute;top:50%;z-index:2;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;box-shadow:0 2px 8px rgb(0 0 0 / .2);transform:translateY(-50%) scale(.6);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+  .acct-side-arrow svg{width:16px;height:16px}
+  .acct-side-arrow.left{left:4px}
+  .acct-side-arrow.right{right:4px}
+  .acct-side-scroll[data-more-left] .acct-side-arrow.left,.acct-side-scroll[data-more-right] .acct-side-arrow.right{opacity:1;pointer-events:auto;transform:translateY(-50%) scale(1)}
+  .acct-side-scroll[data-more-right] .acct-side-arrow.right{animation:acct-nudge 1.4s ease-in-out 2 .6s}
+  @keyframes acct-nudge{0%,100%{translate:0}50%{translate:4px}}
   .acct-side-nav a{flex-shrink:0;gap:7px;padding:7px 12px 7px 8px;border-radius:999px;scroll-snap-align:start}
   .acct-side-icon{width:28px;height:28px;border-radius:50%}
   .acct-side-icon svg{width:14px;height:14px}
@@ -183,3 +198,5 @@ nav.acct-side-nav,nav.ov-actions{background:none;box-shadow:none;padding:0}
   nav.ov-actions{display:grid}
   nav.settings-jump{display:flex;position:sticky;top:118px;z-index:5;padding:5px}
 }
+@media(min-width:761px){.acct-side-arrow{display:none}}
+@media(prefers-reduced-motion:reduce){.acct-side-arrow{animation:none!important}}
