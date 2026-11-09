@@ -85,7 +85,7 @@ function fromCard(game: Game): CheckoutProduct {
   return {
     kind: "card", id: game.id, name: game.name, subtitle: `${game.genre} · ${game.platforms.join(", ")}`, image: game.icon,
     account: { kind: "email", label: "อีเมลสำหรับรับรหัส / เปิดใช้งาน", placeholder: "you@example.com" },
-    packages: cardValues.map(value => ({ id: `${value}`, label: `฿${value.toLocaleString("en-US")}`, price: value, popular: value === 300 })),
+    packages: cardValues.map(value => ({ id: `${value}`, label: `฿${value.toLocaleString("en-US")}`, amount: value, price: value, popular: value === 300 })),
   };
 }
 

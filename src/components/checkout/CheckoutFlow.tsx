@@ -149,16 +149,25 @@ export default function CheckoutFlow({ product }: { product: CheckoutProduct }) 
                 {product.packages.map(item => <button type="button" role="radio" key={item.id} aria-checked={pack.id === item.id} onClick={() => setPack(item)}>
                   {item.popular && <span className="wallet-popular"><StarFilledIcon />{t("ยอดนิยม")}</span>}
                   {pack.id === item.id && <span className="checkout-pack-check" aria-hidden="true"><CheckIcon /></span>}
-                  {product.kind === "game"
-                    ? <><b>{item.amount?.toLocaleString(locale)}</b><small>{product.unit}</small>{item.bonus ? <em>+{item.bonus.toLocaleString(locale)} {t("โบนัส")}</em> : null}</>
-                    : product.kind === "card" ? <><b>{item.label}</b><small>{t("บัตรเติมเงิน")}</small></>
-                    : <><b>{item.label}</b><small>{t("{{count}} เดือน", { count: item.months ?? 1 })}</small></>}
-                  <strong>{money(item.price)}</strong>
+                  <span className="checkout-giftcard-brand">
+                    <span className={`checkout-giftcard-logo${product.color ? " is-logo" : ""}`} style={product.color ? { background: product.color } : undefined}><Image src={product.image} alt="" width={22} height={22} unoptimized={!!product.color} /></span>
+                    {product.name}
+                  </span>
+                  {product.kind === "game" ? <>
+                    <b>{item.amount?.toLocaleString(locale)}</b>
+                    <span className="checkout-giftcard-sub">{product.unit}{item.bonus ? <em>+{item.bonus.toLocaleString(locale)} {t("โบนัส")}</em> : null}</span>
+                  </> : product.kind === "card" ? <b>{item.label}</b> : <>
+                    <b>{item.label}</b>
+                    <span className="checkout-giftcard-sub">{t("{{count}} เดือน", { count: item.months ?? 1 })}{(item.months ?? 1) > 1 && <em className="is-muted">≈ {money(Math.round(item.price / item.months!))}/{t("เดือน")}</em>}</span>
+                  </>}
+                  <span className="checkout-giftcard-foot">{product.kind === "card"
+                    ? (item.price < item.amount! ? <>{t("จ่าย")} <s>{money(item.amount!)}</s> <strong>{money(item.price)}</strong></> : t("บัตรเติมเงิน · ส่งรหัสทางอีเมล"))
+                    : <strong>{money(item.price)}</strong>}</span>
                 </button>)}
               </div>
               <div className="checkout-pack-picked" aria-live="polite">
                 <span><CheckCircledIcon />{t("เลือกแล้ว")}</span>
-                <b>{packTitle(pack)}{pack.bonus ? ` + ${pack.bonus.toLocaleString(locale)} ${t("โบนัส")}` : ""}</b>
+                <b>{product.kind === "card" ? `${t("บัตร {{name}}", { name: product.name })} ${pack.label}` : packTitle(pack)}{pack.bonus ? ` + ${pack.bonus.toLocaleString(locale)} ${t("โบนัส")}` : ""}</b>
                 <strong>{money(pack.price)}</strong>
               </div>
               <p className="checkout-pack-note"><InfoCircledIcon />{t("ราคาตัวอย่าง อาจมีการเปลี่ยนแปลง")} · {t("ยอดที่ต้องชำระจริงแสดงก่อนยืนยันคำสั่งซื้อ")}</p>

@@ -32,13 +32,8 @@
 .checkout-saved svg{width:13px;height:13px}
 
 .checkout-packages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.checkout-packages>button{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:112px;padding:18px 8px 12px;border-radius:12px;border:1px solid var(--w-border);background:transparent;color:var(--foreground);text-align:center;min-width:0}
-.checkout-packages>button[aria-checked="true"]{border-color:var(--blue);background:var(--w-soft);box-shadow:0 0 0 1px var(--blue)}
-.checkout-packages b{font-size:18px;line-height:1.3;overflow-wrap:anywhere}
-.checkout-packages.app b{font-size:15px}
-.checkout-packages small{font-size:14px;color:var(--w-muted)}
-.checkout-packages em{font-style:normal;font-size:14px;font-weight:700;color:#32c5a1}
-.checkout-packages strong{margin-top:auto;padding-top:8px;font-size:14px;color:var(--blue)}
+.checkout-packages>button{position:relative;display:flex;flex-direction:column;min-width:0;border-radius:16px;border:1px solid var(--w-border);color:var(--foreground)}
+.checkout-packages>button[aria-checked="true"]{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
 .checkout-packages .wallet-popular{display:inline-flex;align-items:center;gap:3px}
 .checkout-packages .wallet-popular svg{width:9px;height:9px}
 
@@ -114,3 +109,28 @@
 @media(max-width:760px){
   .checkout-stages{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
+/* Unselected options need a visible surface: the glass theme makes --w-border transparent. */
+
+/* Every option (top-up pack, gift card value, app plan) looks like a small card:
+   brand row, main value, detail line, price/delivery footer. */
+.checkout-packages.card{grid-template-columns:repeat(4,minmax(0,1fr))}
+.checkout-packages>button{--gc-tint:16%;align-items:flex-start;justify-content:space-between;gap:8px;min-height:138px;padding:16px 14px 12px;text-align:left;background:radial-gradient(circle at 100% 100%,color-mix(in srgb,var(--blue) 14%,transparent) 0 52px,transparent 53px),linear-gradient(140deg,color-mix(in srgb,var(--blue) var(--gc-tint),transparent),color-mix(in srgb,var(--blue) 3%,transparent) 70%)}
+.checkout-packages.card>button{min-height:0;aspect-ratio:1.55}
+.checkout-packages>button>:not(.wallet-popular,.checkout-pack-check){position:relative;flex-shrink:0;max-width:100%}
+.checkout-packages>button:hover{--gc-tint:22%;filter:none}
+.checkout-packages>button[aria-checked="true"]{--gc-tint:28%}
+.checkout-giftcard-brand{display:flex;align-items:center;gap:7px;min-width:0;max-width:calc(100% - 22px)!important;font-size:13px;font-weight:700;color:var(--w-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.checkout-giftcard-logo{position:relative;display:grid;place-items:center;flex-shrink:0;width:22px;height:22px;border-radius:6px;overflow:hidden}
+.checkout-giftcard-logo img{width:100%;height:100%;object-fit:cover}
+.checkout-giftcard-logo.is-logo img{width:70%;height:70%;object-fit:contain}
+.checkout-packages b{font-size:26px;font-weight:800;letter-spacing:-.6px;line-height:1.15;overflow-wrap:anywhere}
+.checkout-packages.app b{font-size:19px;letter-spacing:-.3px}
+.checkout-giftcard-sub{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;margin-top:-4px;font-size:13px;color:var(--w-muted)}
+.checkout-giftcard-sub em{font-style:normal;font-weight:700;color:#1fae8a}
+.checkout-giftcard-sub em.is-muted{font-weight:500;color:var(--w-muted)}
+.checkout-giftcard-foot{margin-top:auto;font-size:12px;color:var(--w-muted);line-height:1.4}
+.checkout-giftcard-foot strong{font-size:16px;font-weight:800;color:var(--blue)}
+.checkout-giftcard-foot s{opacity:.7}
+.checkout-packages .wallet-popular{left:50%;transform:translateX(-50%);font-size:12px}
+@media(max-width:600px){.checkout-packages.card{grid-template-columns:repeat(2,minmax(0,1fr))}.checkout-packages>button{min-height:124px;padding:14px 12px 11px}.checkout-packages.card>button{aspect-ratio:auto;min-height:118px}.checkout-packages b{font-size:22px}.checkout-packages.app b{font-size:17px}}
