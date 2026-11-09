@@ -1106,5 +1106,7 @@
   "จ่าย": "Pay",
   "บัตรเติมเงิน · ส่งรหัสทางอีเมล": "Gift card · code sent by email",
   "เดือน": "mo",
-  "ทีมงานตรวจสอบแล้ว": "Verified by our team"
+  "ทีมงานตรวจสอบแล้ว": "Verified by our team",
+  "กรุณาชำระเงินภายใน": "Please pay within",
+  "หมดเวลาชำระเงิน กรุณาย้อนกลับเพื่อเริ่มใหม่": "Payment time expired. Go back to start again"
 }

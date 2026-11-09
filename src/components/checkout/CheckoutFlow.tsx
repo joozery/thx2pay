@@ -16,6 +16,7 @@ import SearchDialog from "@/components/home/SearchDialog";
 import UIDGuideDialog from "@/components/home/UIDGuideDialog";
 import type { Category } from "@/components/home/categories";
 import { MethodIcon, paymentMethods, type PaymentMethod } from "@/components/flows/paymentMethods";
+import PaymentCountdown from "@/components/flows/PaymentCountdown";
 import type { CheckoutPackage, CheckoutProduct } from "./catalog";
 import "@/components/topup/topup.css";
 import "@/components/flows/wallet.css";
@@ -43,6 +44,7 @@ export default function CheckoutFlow({ product }: { product: CheckoutProduct }) 
   const [touched, setTouched] = useState(false);
   const [order, setOrder] = useState<Order | null>(null);
   const [step, setStep] = useState<Step>("review");
+  const [expired, setExpired] = useState(false);
   const [result, setResult] = useState<{ id: string; at: string } | null>(null);
   const [modal, setModal] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
@@ -208,6 +210,7 @@ export default function CheckoutFlow({ product }: { product: CheckoutProduct }) 
       <Dialog.Close className="wallet-modal-close" aria-label={t("ปิด")}><Cross2Icon /></Dialog.Close>
       <ol className="wallet-dialog-steps">{["ตรวจสอบ", "ชำระเงิน", "สำเร็จ"].map((label, index) => <li key={label} className={index <= ["review", "payment", "success"].indexOf(step) ? "current" : ""}><span>{index + 1}</span>{t(label)}</li>)}</ol>
       {step === "success" && <div className="wallet-demo-success"><span><CheckIcon /></span><h3>{t("ขั้นตอนตัวอย่างเสร็จสมบูรณ์")}</h3><p>{t("ไม่มีการเรียกเก็บเงินหรือส่งสินค้าจริง")}</p></div>}
+      {step === "payment" && <PaymentCountdown onExpire={() => setExpired(true)} />}
       {step === "payment" && order && <div className="wallet-payment-preview"><MethodIcon method={order.method} /><div><b>{t(order.method.label)}</b><p>{t("ยังไม่เปิดรับชำระเงิน")}</p></div><p>{t("ไม่มี QR บัญชีรับโอน หรือลิงก์ชำระเงินจริงในโหมดทดสอบ")}</p></div>}
       {order && <dl className="wallet-review">
         {result && <div><dt>{t("หมายเลขคำสั่งซื้อ")}</dt><dd>{result.id}</dd></div>}
@@ -217,8 +220,8 @@ export default function CheckoutFlow({ product }: { product: CheckoutProduct }) 
         <div><dt>{t("ยอดชำระ")}</dt><dd>{money(order.pack.price)}</dd></div>
         {result && <div><dt>{t("เวลา")}</dt><dd>{result.at}</dd></div>}
       </dl>}
-      {step === "review" && <button className="wallet-primary" onClick={() => setStep("payment")}>{t("ยืนยันและชำระเงิน")}<ArrowRightIcon /></button>}
-      {step === "payment" && <div className="wallet-modal-actions"><button onClick={() => setStep("review")}><ArrowLeftIcon />{t("ย้อนกลับ")}</button><button className="wallet-primary" onClick={completeDemoPayment}>{t("จำลองการชำระสำเร็จ")}</button></div>}
+      {step === "review" && <button className="wallet-primary" onClick={() => { setExpired(false); setStep("payment"); }}>{t("ยืนยันและชำระเงิน")}<ArrowRightIcon /></button>}
+      {step === "payment" && <div className="wallet-modal-actions"><button onClick={() => setStep("review")}><ArrowLeftIcon />{t("ย้อนกลับ")}</button><button className="wallet-primary" disabled={expired} onClick={completeDemoPayment}>{t("จำลองการชำระสำเร็จ")}</button></div>}
       {step === "success" && <div className="wallet-modal-actions checkout-success-actions"><Link href={backHref}>{t(product.kind === "app" ? "เลือกแอพอื่น" : "เลือกเกมอื่น")}</Link><Dialog.Close className="wallet-primary">{t("ซื้ออีกครั้ง")}</Dialog.Close></div>}
     </Dialog.Content></Dialog.Portal></Dialog.Root>
   </>;

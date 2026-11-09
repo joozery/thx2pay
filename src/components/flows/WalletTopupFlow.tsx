@@ -8,6 +8,7 @@ import { ArrowLeftIcon, ArrowRightIcon, BackpackIcon, CheckIcon, ChevronRightIco
 import { useI18n } from "@/i18n/useI18n";
 import AccountShell from "@/auth/AccountShell";
 import { MethodIcon, paymentMethods, type PaymentMethod } from "./paymentMethods";
+import PaymentCountdown from "./PaymentCountdown";
 import "./wallet.css";
 
 const amounts = [50, 100, 300, 500, 1000];
@@ -24,6 +25,7 @@ export default function WalletTopupFlow() {
   const [method, setMethod] = useState<Method>(methods[0]);
   const [topup, setTopup] = useState<Topup | null>(null);
   const [step, setStep] = useState<Step>("review");
+  const [expired, setExpired] = useState(false);
   const [completedAt, setCompletedAt] = useState("");
   const [showExamples, setShowExamples] = useState(false);
   const selectedAmount = custom ? Number(customAmount) : amount;
@@ -70,10 +72,11 @@ export default function WalletTopupFlow() {
       <span className="wallet-test-badge">{t("โหมดทดสอบ · ไม่มีการเรียกเก็บเงินจริง")}</span><Dialog.Title>{t(step === "review" ? "ตรวจสอบรายการเติมเงิน" : step === "payment" ? "ขั้นตอนชำระเงิน" : "เติมเงินสำเร็จ (ตัวอย่าง)")}</Dialog.Title><Dialog.Description>{t("ทดลองขั้นตอนเติมเงิน ไม่มีการเพิ่มยอดเงินจริง")}</Dialog.Description><Dialog.Close className="wallet-modal-close" aria-label={t("ปิด")}><Cross2Icon /></Dialog.Close>
       <ol className="wallet-dialog-steps">{["ตรวจสอบ", "ชำระเงิน", "สำเร็จ"].map((label,index) => <li key={label} className={index <= ["review","payment","success"].indexOf(step) ? "current" : ""}><span>{index+1}</span>{t(label)}</li>)}</ol>
       {step === "success" && <div className="wallet-demo-success"><span><CheckIcon /></span><h3>{t("ขั้นตอนตัวอย่างเสร็จสมบูรณ์")}</h3><p>{t("ไม่มีการเรียกเก็บเงินหรือเพิ่มยอดเงินจริง")}</p></div>}
+      {step === "payment" && <PaymentCountdown onExpire={() => setExpired(true)} />}
       {step === "payment" && <div className="wallet-payment-preview"><MethodIcon method={topup?.method ?? methods[0]} /><div><b>{t(topup?.method.label ?? "")}</b><p>{t("ยังไม่เปิดรับชำระเงิน")}</p></div><p>{t("ไม่มี QR บัญชีรับโอน หรือลิงก์ชำระเงินจริงในโหมดทดสอบ")}</p></div>}
       {topup && <dl className="wallet-review"><div><dt>{t("ช่องทาง")}</dt><dd>{t(topup.method.label)}</dd></div><div><dt>{t("จำนวนเงิน")}</dt><dd>{cash(topup.amount)}</dd></div><div><dt>{t("สถานะ")}</dt><dd>{t(step === "success" ? "สำเร็จ (ตัวอย่าง)" : step === "payment" ? "รอจำลองการชำระเงิน" : "รอตรวจสอบ")}</dd></div>{completedAt && <div><dt>{t("เวลา")}</dt><dd>{completedAt}</dd></div>}</dl>}
-      {step === "review" && <button className="wallet-primary" onClick={() => setStep("payment")}>{t("ดำเนินการต่อ")}<ArrowRightIcon /></button>}
-      {step === "payment" && <div className="wallet-modal-actions"><button onClick={() => setStep("review")}><ArrowLeftIcon />{t("ย้อนกลับ")}</button><button className="wallet-primary" onClick={() => {setCompletedAt(new Date().toLocaleString(locale));setStep("success");}}>{t("จำลองการชำระสำเร็จ")}</button></div>}
+      {step === "review" && <button className="wallet-primary" onClick={() => {setExpired(false);setStep("payment");}}>{t("ดำเนินการต่อ")}<ArrowRightIcon /></button>}
+      {step === "payment" && <div className="wallet-modal-actions"><button onClick={() => setStep("review")}><ArrowLeftIcon />{t("ย้อนกลับ")}</button><button className="wallet-primary" disabled={expired} onClick={() => {setCompletedAt(new Date().toLocaleString(locale));setStep("success");}}>{t("จำลองการชำระสำเร็จ")}</button></div>}
       {step === "success" && <Dialog.Close className="wallet-primary">{t("กลับไปหน้ากระเป๋าเงิน")}</Dialog.Close>}
     </Dialog.Content></Dialog.Portal></Dialog.Root>
   </div></AccountShell>;

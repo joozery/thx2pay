@@ -1106,5 +1106,7 @@
   "จ่าย": "Bayad",
   "บัตรเติมเงิน · ส่งรหัสทางอีเมล": "Gift card · ipapadala ang code sa email",
   "เดือน": "buwan",
-  "ทีมงานตรวจสอบแล้ว": "Na-verify ng team"
+  "ทีมงานตรวจสอบแล้ว": "Na-verify ng team",
+  "กรุณาชำระเงินภายใน": "Magbayad sa loob ng",
+  "หมดเวลาชำระเงิน กรุณาย้อนกลับเพื่อเริ่มใหม่": "Nag-expire na ang oras ng pagbabayad. Bumalik para magsimulang muli"
 }

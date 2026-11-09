@@ -1106,5 +1106,7 @@
   "จ่าย": "Bayar",
   "บัตรเติมเงิน · ส่งรหัสทางอีเมล": "Kartu voucher · kode dikirim lewat email",
   "เดือน": "bln",
-  "ทีมงานตรวจสอบแล้ว": "Diverifikasi tim"
+  "ทีมงานตรวจสอบแล้ว": "Diverifikasi tim",
+  "กรุณาชำระเงินภายใน": "Selesaikan pembayaran dalam",
+  "หมดเวลาชำระเงิน กรุณาย้อนกลับเพื่อเริ่มใหม่": "Waktu pembayaran habis. Kembali untuk memulai lagi"
 }
