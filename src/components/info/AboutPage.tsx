@@ -29,7 +29,7 @@ export default function AboutPage() {
         <p>{t("THX2PAY คือแพลตฟอร์มเติมเกมและสินค้าดิจิทัลที่ออกแบบมาให้ง่าย เร็ว และปลอดภัย เพื่อให้คุณใช้เวลากับการเล่นมากกว่าการรอ")}</p>
         <div className="about-hero-actions"><Link className="pill" href="/topup">{t("เริ่มเติมเกม")}<ArrowRightIcon /></Link><Link className="info-ghost-button" href="/contact">{t("ติดต่อเรา")}</Link></div>
       </div>
-      <div className="about-hero-art"><Image src="/images/mascot-lion.webp" alt={t("มาสคอตสิงโต THX2PAY")} fill sizes="(max-width: 760px) 60vw, 380px" style={{ objectFit: "cover" }} priority /></div>
+      <div className="about-hero-art"><Image src="/images/mascot-lion.webp" alt={t("มาสคอตสิงโต THX2PAY")} fill sizes="(max-width: 760px) 60vw, 380px" style={{ objectFit: "cover" }} loading="eager" fetchPriority="high" /></div>
     </section>
 
     <section className="info-section" aria-labelledby="about-values-title">

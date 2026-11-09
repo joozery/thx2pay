@@ -8,11 +8,13 @@ import { accountGame, discountOf, type GameAccount } from "./accounts";
 import "./account-card.css";
 
 /** Cover art for an account: the game's key art when we have it, otherwise its icon on a soft backdrop. */
-export function AccountCover({ account, sizes }: { account: GameAccount; sizes: string }) {
+// `eager` for the detail page, where the cover is the above-the-fold LCP image; grid cards stay lazy.
+export function AccountCover({ account, sizes, eager = false }: { account: GameAccount; sizes: string; eager?: boolean }) {
   const game = accountGame(account);
+  const loading = eager ? "eager" : "lazy";
   return account.cover
-    ? <Image src={account.cover} alt="" fill sizes={sizes} style={{ objectFit: "cover" }} />
-    : <span className="acc-cover-fallback"><Image src={game.icon} alt="" fill sizes="40px" className="acc-cover-blur" /><Image src={game.icon} alt="" width={84} height={84} className="acc-cover-icon" /></span>;
+    ? <Image src={account.cover} alt="" fill sizes={sizes} style={{ objectFit: "cover" }} loading={loading} />
+    : <span className="acc-cover-fallback"><Image src={game.icon} alt="" fill sizes="40px" className="acc-cover-blur" loading={loading} /><Image src={game.icon} alt="" width={84} height={84} className="acc-cover-icon" loading={loading} /></span>;
 }
 
 export default function AccountCard({ account }: { account: GameAccount }) {

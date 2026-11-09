@@ -39,7 +39,7 @@ export default function NotFoundPage() {
       <section className="nf-hero" aria-labelledby="nf-title">
         <div className="nf-art" aria-hidden="true">
           <span className="nf-digit">4</span>
-          <span className="nf-cat"><Image src="/images/404-cat.png" alt="" width={205} height={133} priority /></span>
+          <span className="nf-cat"><Image src="/images/404-cat.png" alt="" width={205} height={133} loading="eager" /></span>
           <span className="nf-digit">4</span>
         </div>
         <span className="info-eyebrow">ERROR 404</span>

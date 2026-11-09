@@ -38,7 +38,7 @@ export default function NewsPage({ article }: { article?: NewsArticle }) {
           <p className="news-intro">{t(article.excerpt)}</p>
           <ArticleMeta article={article} /><p className="news-author">THX2PAY Editorial</p>
         </header>
-        <div className="news-cover"><Image src={article.image} alt={t(article.title)} fill sizes="(max-width: 900px) 100vw, 860px" priority /></div>
+        <div className="news-cover"><Image src={article.image} alt={t(article.title)} fill sizes="(max-width: 900px) 100vw, 860px" loading="eager" fetchPriority="high" /></div>
         <div className="news-prose">{article.sections.map(section => <section key={section.title}><h2>{t(section.title)}</h2><p>{t(section.body)}</p></section>)}</div>
         <div className="news-detail-footer"><Link href="/news" className="pill">{t("กลับไปหน้าข่าวสาร")}</Link><Link href="/help">{t("ต้องการความช่วยเหลือ")}<ArrowRightIcon /></Link></div>
       </article> : <PageHero id="news-title" eyebrow="THX2PAY NEWS" title="ข่าวสาร" accent="อัปเดตล่าสุดจาก THX2PAY" description="รวมบทความ คู่มือเติมเกม และเคล็ดลับการใช้งานจาก THX2PAY" image="/images/hero-lion.webp" imageAlt="มาสคอต THX2PAY พร้อมของขวัญ" cta={{ label: "อ่านบทความ", href: "#news-articles" }} />}

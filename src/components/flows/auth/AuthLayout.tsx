@@ -15,7 +15,7 @@ export default function AuthLayout({ crumb, kicker = "THX2PAY ACCOUNT", title, i
   return <FlowShell>
     <nav className="flow-breadcrumb" aria-label={t("เส้นทางหน้าเว็บ")}><Link href="/">{t("หน้าแรก")}</Link><ChevronRightIcon /><span>{t(crumb)}</span></nav>
     <div className="flow-layout flow-login-layout auth-layout">
-      <section className="flow-intro" aria-hidden="true"><Image className="flow-intro-image" src="/images/login-portal.png" alt="" fill priority sizes="(max-width: 760px) 100vw, 550px" /><div className="flow-intro-copy"><span className="flow-kicker">{kicker}</span><p className="auth-intro-title">{t(title)}</p><p>{t(intro)}</p></div></section>
+      <section className="flow-intro" aria-hidden="true"><Image className="flow-intro-image" src="/images/login-portal.png" alt="" fill loading="eager" fetchPriority="high" sizes="(max-width: 760px) 100vw, 550px" /><div className="flow-intro-copy"><span className="flow-kicker">{kicker}</span><p className="auth-intro-title">{t(title)}</p><p>{t(intro)}</p></div></section>
       <section className="auth-panel">{children}</section>
     </div>
   </FlowShell>;

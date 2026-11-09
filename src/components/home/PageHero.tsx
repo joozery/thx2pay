@@ -24,7 +24,7 @@ export default function PageHero({ id, eyebrow, title, accent, description, imag
   return (
     <section className="hx hx-page" aria-labelledby={id}>
       <div className="hx-banner">
-        <div className="hx-media"><Image src={image} alt={t(imageAlt)} fill priority sizes="(max-width: 760px) 100vw, 1180px" style={imagePosition ? { objectPosition: imagePosition } : undefined} /></div>
+        <div className="hx-media"><Image src={image} alt={t(imageAlt)} fill loading="eager" fetchPriority="high" sizes="(max-width: 760px) 100vw, 1180px" style={imagePosition ? { objectPosition: imagePosition } : undefined} /></div>
         <div className="hx-shade" aria-hidden="true" />
         <motion.div className="hx-copy" initial={reduceMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: "easeOut" }}>
           <span className="hx-eyebrow">{eyebrow}</span>

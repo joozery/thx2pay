@@ -92,7 +92,7 @@ export default function AccountDetail({ account }: { account: GameAccount }) {
         <div className="acd-layout">
           <div className="wallet-column">
             <section className="acd-hero" aria-labelledby="account-title">
-              <div className="acd-cover"><AccountCover account={account} sizes="(max-width: 1000px) 100vw, 860px" />{account.tag && <span className={`acc-tag ${account.tag}`}>{t(account.tag === "hot" ? "ขายดี" : "มาใหม่")}</span>}</div>
+              <div className="acd-cover"><AccountCover account={account} sizes="(max-width: 1000px) 100vw, 860px" eager />{account.tag && <span className={`acc-tag ${account.tag}`}>{t(account.tag === "hot" ? "ขายดี" : "มาใหม่")}</span>}</div>
               <div className="acd-heading">
                 <Link href={`/accounts?game=${game.id}`} className="acd-game"><Image src={game.icon} alt="" width={28} height={28} />{game.name}</Link>
                 <h1 id="account-title">{t(account.title)}</h1>
