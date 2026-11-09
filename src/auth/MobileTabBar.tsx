@@ -67,7 +67,7 @@ export default function MobileTabBar() {
     <TabLink link={premiumLink} pathname={pathname} />
     <TabLink link={promotionsLink} pathname={pathname} />
     {user
-      ? <button type="button" className={accountActive ? "active" : ""} aria-current={accountActive ? "page" : undefined} onClick={() => window.dispatchEvent(new Event("thx2pay-open-account"))}><span className="app-tab-icon"><Avatar name={user.name} size={24} /></span><span className="app-tab-label">{t("บัญชี")}</span></button>
+      ? <button type="button" className={accountActive ? "active" : ""} aria-current={accountActive ? "page" : undefined} onClick={() => window.dispatchEvent(new Event("thx2pay-open-account"))}><span className="app-tab-icon"><Avatar name={user.name} size={24} photo /></span><span className="app-tab-label">{t("บัญชี")}</span></button>
       : <Link href="/login" className={accountActive ? "active" : ""} aria-current={accountActive ? "page" : undefined}><span className="app-tab-icon"><PersonIcon /></span><span className="app-tab-label">{t("บัญชี")}</span></Link>}
   </nav>;
 }

@@ -93,3 +93,4 @@ html[data-theme="light"] .account-item:not(.danger) .account-icon{background:rgb
    Classes are repeated on purpose: liquid-glass.css styles these through a long :is() list whose specificity is (0,3,0). */
 html .account-dropdown.account-dropdown.account-dropdown,html .account-sheet.account-sheet.account-sheet{background:#1c2023!important;-webkit-backdrop-filter:none;backdrop-filter:none}
 html[data-theme="light"] .account-dropdown.account-dropdown.account-dropdown,html[data-theme="light"] .account-sheet.account-sheet.account-sheet{background:#fff!important;box-shadow:0 20px 50px rgb(16 40 64 / .16),0 0 0 1px rgb(16 40 64 / .06)!important}
+.avatar-photo{overflow:hidden;background:#cfe8fb;box-shadow:inset 0 0 0 1px #ffffff26}.avatar-photo img{width:100%;height:100%;object-fit:cover;display:block}

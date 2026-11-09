@@ -34,7 +34,7 @@ export default function AccountSheet() {
       <Dialog.Content className="account-sheet" aria-describedby={undefined}>
         <div className="sheet-top"><Dialog.Title>{t("บัญชีของฉัน")}</Dialog.Title><Dialog.Close className="icon-button" aria-label={t("ปิด")}><Cross2Icon /></Dialog.Close></div>
         <div className="sheet-body">
-          <AccountSummary name={user.name} email={user.email} />
+          <AccountSummary name={user.name} email={user.email} photo />
           <div className="account-sep" />
           {accountNav.map(item => <Link key={item.key} href={item.href} className="account-item" onClick={() => setOpen(false)}><span className="account-icon"><AccountIcon name={item.icon} /></span>{t(item.label)}<ChevronRightIcon /></Link>)}
           <div className="account-sep" />
